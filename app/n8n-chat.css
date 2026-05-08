@@ -1,0 +1,48 @@
+/* Oculta el ícono de burbuja rosado por defecto */
+.chat-window-toggle svg {
+  display: none;
+}
+
+/* Botón del chat con avatar personalizado */
+.chat-window-toggle {
+  background-color: #1a3a6b !important;
+  background-image: url('/images/avatar1.png') !important;
+  background-size: 88% !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  border: 2.5px solid #00b4d8 !important;
+  border-radius: 50% !important;
+  width: 66px !important;
+  height: 66px !important;
+  box-shadow: 0 4px 20px rgba(0, 180, 216, 0.35) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  overflow: hidden !important;
+}
+
+/* Efecto hover en el botón */
+.chat-window-toggle:hover {
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 28px rgba(0, 180, 216, 0.5) !important;
+}
+
+/* Estilo del header del chat */
+.chat-window-header {
+  background-color: #1a3a6b !important;
+}
+
+/* Color del botón de enviar */
+.chat-window-send-button {
+  background-color: #00b4d8 !important;
+}
+
+/* Color de los mensajes del bot */
+.chat-message.bot .chat-message-bubble {
+  background-color: #e8f4fc !important;
+  color: #1a3a6b !important;
+}
+
+/* Color de los mensajes del usuario */
+.chat-message.user .chat-message-bubble {
+  background-color: #1a3a6b !important;
+  color: white !important;
+}
