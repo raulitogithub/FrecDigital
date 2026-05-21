@@ -1,7 +1,8 @@
-import { gmail } from '@/lib/gmail';
+import { getGmail } from '@/lib/gmail';
 
 export async function GET() {
   try {
+    const gmail = getGmail();
     const response = await gmail.users.messages.list({
       userId: 'me',
       maxResults: 10,

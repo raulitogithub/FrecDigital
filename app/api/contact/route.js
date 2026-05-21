@@ -1,4 +1,4 @@
-import { gmail } from '@/lib/gmail';
+import { getGmail } from '@/lib/gmail';
 
 export async function POST(request) {
   try {
@@ -64,6 +64,7 @@ export async function POST(request) {
       .replace(/\//g, '_')
       .replace(/=+$/, '');
 
+    const gmail = getGmail();
     await gmail.users.messages.send({
       userId: 'me',
       requestBody: { raw: encoded },

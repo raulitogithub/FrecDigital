@@ -1,6 +1,7 @@
-import { oauth2Client } from '@/lib/gmail';
+import { getOAuth2Client } from '@/lib/gmail';
 
 export async function GET() {
+  const oauth2Client = getOAuth2Client();
   const url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: [
