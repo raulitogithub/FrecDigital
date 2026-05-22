@@ -4,7 +4,13 @@ import { motion } from 'framer-motion';
 import {
   Fingerprint,
   CircuitBoard,
-  HandHeart
+  HandHeart,
+  Smartphone,
+  Users,
+  Lightbulb,
+  Network,
+  MessageCircle,
+  Globe
 } from 'lucide-react';
 
 export default function WhyUsSection() {
@@ -26,6 +32,15 @@ export default function WhyUsSection() {
     },
   ];
 
+  const decorativeIcons = [
+    { Icon: Smartphone, delay: 0 },
+    { Icon: Users, delay: 0.1 },
+    { Icon: Lightbulb, delay: 0.2 },
+    { Icon: Network, delay: 0.3 },
+    { Icon: MessageCircle, delay: 0.4 },
+    { Icon: Globe, delay: 0.5 },
+  ];
+
   return (
     <section
       id="why-us"
@@ -38,7 +53,7 @@ export default function WhyUsSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/fondo3.png)',
+          backgroundImage: 'url(/images/fondo7.png)',
         }}
       />
 
@@ -50,13 +65,135 @@ export default function WhyUsSection() {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00b4d8] to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
+        
+        {/* SECCIÓN: SOBRE NOSOTROS / NUESTRA HISTORIA */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-20"
+        >
+          {/* Título principal */}
+          <div className="text-center mb-12">
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="text-5xl md:text-6xl font-bold text-white mb-2 font-display"
+            >
+              Sobre <span className="text-[#00b4d8]">nosotros</span>
+            </motion.h1>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="w-24 h-1 bg-[#00b4d8] rounded-full mx-auto mt-4 mb-8"
+            />
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-3xl md:text-4xl font-bold text-[#00b4d8]"
+            >
+              Nuestra historia
+            </motion.h2>
+          </div>
+
+          {/* Contenido Centrado */}
+          <div className="max-w-4xl mx-auto space-y-6">
+            
+            {/* Párrafo 1 principal */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-center"
+            >
+              <p className="text-lg text-white/80 leading-relaxed">
+                FREC Digital nació del deseo de <span className="text-[#00b4d8] font-semibold">cerrar la brecha entre la tecnología y las personas</span>. Con más de <span className="font-semibold">20 años de experiencia</span> en proyectos tecnológicos dentro del sector público y privado, decidimos emprender un nuevo camino: <span className="text-[#00b4d8] font-semibold">uno donde la innovación tuviera sentido, propósito y cercanía</span>.
+              </p>
+            </motion.div>
+
+            {/* Línea decorativa */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="h-px bg-gradient-to-r from-transparent via-[#00b4d8] to-transparent"
+            />
+
+            {/* Párrafo 2 - Introducción a problemas */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="text-lg text-white/80 leading-relaxed text-center"
+            >
+              Reconocemos que muchas empresas, startups y profesionales cuentan con grandes ideas, pero se enfrentan a:
+            </motion.p>
+
+            {/* Lista de problemas */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="space-y-3 max-w-2xl mx-auto"
+            >
+              {[
+                'Soluciones genéricas que no se adaptan a sus necesidades específicas',
+                'Procesos lentos y complejos que ralentizan la innovación',
+                'Tecnologías mal adaptadas que generan más problemas que soluciones'
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                  className="flex items-start gap-4 text-white/80"
+                >
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#00b4d8] mt-2" />
+                  <p className="text-base leading-relaxed">{item}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Línea decorativa */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 }}
+              className="h-px bg-gradient-to-r from-transparent via-[#00b4d8] to-transparent"
+            />
+
+            {/* Párrafo final */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 }}
+              className="text-lg text-white/80 leading-relaxed text-center"
+            >
+              Por eso, en FREC Digital nos comprometemos a <span className="text-[#00b4d8] font-semibold">crear soluciones personalizadas</span> y <span className="text-[#00b4d8] font-semibold">soluciones que realmente funcionen</span> para tu negocio. Somos más que proveedores: somos tu aliado en la transformación digital.
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* SECCIÓN: POR QUÉ FREC DIGITAL (Features) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 pt-12 border-t border-white/10"
         >
           <motion.div
             className="inline-block mb-4"
