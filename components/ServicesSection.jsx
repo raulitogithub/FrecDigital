@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageSquareMore, Blocks, CircuitBoard} from 'lucide-react';
+import { MessageSquareMore, Blocks, CircuitBoard, Calendar, BarChart3 } from 'lucide-react';
 import ServiceCard from './ui/ServiceCard';
 
 export default function ServicesSection() {
@@ -23,6 +23,26 @@ export default function ServicesSection() {
       title: 'Integración de Sistemas con IA',
       description: 'Integramos tus plataformas empresariales para centralizar la información y permitir una gestión más ágil y conectada.',
       image: '/images/Integración.png',
+    },
+    {
+      icon: Calendar,
+      title: 'Agendamiento Inteligente',
+      description: 'Automatiza tus reservas con un asistente virtual que agenda, confirma y recuerda citas sin intervención humana.',
+      image: '/images/agendamiento.png',
+      adMessage: '¿Cansado de gestionar citas manualmente?',
+      adDescription: 'Nuestro chatbot atiende 24/7, sincroniza con tu calendario y envía recordatorios automáticos. Reduce el 80% de las ausencias y no-shows.',
+      adBadges: ['⚡ Disponible 24/7'],
+      adBorderColor: '#06b6d4',
+    },
+    {
+      icon: BarChart3,
+      title: 'Consultas Gerenciales IA',
+      description: 'Consulta tus datos de ventas en lenguaje natural. Pregunta por períodos específicos y obtén reportes instantáneos desde tu base de datos.',
+      image: '/images/gerencial.png',
+      adMessage: 'Tus datos hablan, ¿los estás escuchando?',
+      adDescription: 'Pregunta: "¿Cuáles fueron mis ventas de enero y febrero?" y obtén un reporte completo al instante. Conectamos tu base de datos con IA para decisiones más rápidas.',
+      adBadges: ['📊 Ventas del último mes', '📈 Comparar 2 períodos', '🏆 Producto más vendido'],
+      adBorderColor: '#818cf8',
     },
   ];
 
