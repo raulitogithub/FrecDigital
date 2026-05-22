@@ -6,25 +6,7 @@ import ServiceCard from './ui/ServiceCard';
 
 export default function ServicesSection() {
   const services = [
-    {
-      icon: MessageSquareMore,
-      title: 'Chatbots Inteligentes',
-      description: 'Asistentes virtuales que brindan atención continua, resuelven consultas y mejoran la comunicación con tus clientes de forma eficiente.',
-      image: '/images/Chatbots.png',
-    },
-    {
-      icon: Blocks,
-      title: 'Automatización de Procesos',
-      description: 'Reduce tareas manuales y mejora la eficiencia operativa mediante flujos automatizados adaptados a tu negocio.',
-      image: '/images/Automatización.png',
-    },
-    {
-      icon: CircuitBoard,
-      title: 'Integración de Sistemas con IA',
-      description: 'Integramos tus plataformas empresariales para centralizar la información y permitir una gestión más ágil y conectada.',
-      image: '/images/Integración.png',
-    },
-    {
+        {
       icon: Calendar,
       title: 'Agendamiento Inteligente',
       description: 'Automatiza tus reservas con un asistente virtual que agenda, confirma y recuerda citas sin intervención humana.',
@@ -37,13 +19,44 @@ export default function ServicesSection() {
     {
       icon: BarChart3,
       title: 'Consultas Gerenciales IA',
-      description: 'Consulta tus datos de ventas en lenguaje natural. Pregunta por períodos específicos y obtén reportes instantáneos desde tu base de datos.',
+      description: 'Consulta tus datos de ventas en lenguaje natural. Pregunta por períodos específicos y obtén reportes instantáneos.',
       image: '/images/gerencial.png',
       adMessage: 'Tus datos hablan, ¿los estás escuchando?',
       adDescription: 'Pregunta: "¿Cuáles fueron mis ventas de enero y febrero?" y obtén un reporte completo al instante. Conectamos tu base de datos con IA para decisiones más rápidas.',
       adBadges: ['📊 Ventas del último mes', '📈 Comparar 2 períodos', '🏆 Producto más vendido'],
       adBorderColor: '#818cf8',
     },
+    {
+      icon: MessageSquareMore,
+      title: 'Chatbots Inteligentes',
+      description: 'Asistentes virtuales con IA que responden consultas, automatizan la atención y mejoran la experiencia.',
+      image: '/images/Chatbots.png',
+      adMessage: '¿Pierdes clientes por responder tarde los mensajes?',
+      adDescription: 'Nuestros chatbots atienden automáticamente WhatsApp, aplicaciones web, resolviendo preguntas frecuentes y guiando a tus clientes en tiempo real sin descanso.',
+      adBadges: ['🤖 Atención automática 24/7'],
+      adBorderColor: '#10b981',
+    },
+    {
+      icon: Blocks,
+      title: 'Automatización Inteligente de Procesos',
+      description: 'Digitaliza y automatiza tareas repetitivas para optimizar tiempos, reducir errores y aumentar la productividad.',
+      image: '/images/Automatización.png',
+      adMessage: '¿Tu equipo pierde tiempo en tareas manuales repetitivas?',
+      adDescription: 'Creamos flujos automatizados adaptados a tu empresa para gestionar procesos de manera más rápida, eficiente y organizada, reduciendo costos operativos.',
+      adBadges: ['⚙️ Procesos más rápidos y eficientes'],
+      adBorderColor: '#f59e0b',
+    },
+    {
+      icon: CircuitBoard,
+      title: 'Integración Inteligente de Sistemas',
+      description: 'Conectamos tus plataformas empresariales para centralizar procesos, automatizar tareas y mejorar la comunicación.',
+      image: '/images/Integración.png',
+      adMessage: '¿Tu información está dispersa en diferentes plataformas?',
+      adDescription: 'Integramos tus sistemas, aplicaciones y bases de datos para que trabajen en conjunto en tiempo real. Optimiza procesos, evita errores manuales y mejora la productividad de tu empresa.',
+      adBadges: ['🔗 Integración en tiempo real'],
+      adBorderColor: '#8b5cf6',
+    },
+
   ];
 
   const containerVariants = {
@@ -111,7 +124,7 @@ export default function ServicesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
         >
           {services.map((service, index) => (
             <motion.div 
@@ -120,6 +133,7 @@ export default function ServicesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="h-full"
             >
               <ServiceCard {...service} />
             </motion.div>

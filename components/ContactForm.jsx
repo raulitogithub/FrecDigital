@@ -81,7 +81,7 @@ export default function ContactForm() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/fondo6.png)',
+          backgroundImage: 'url(/images/fondo7.png)', // Asegúrate de que esta ruta sea correcta y la imagen esté en la carpeta public/images
         }}
       />
       

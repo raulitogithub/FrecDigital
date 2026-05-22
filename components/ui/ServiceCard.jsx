@@ -12,18 +12,15 @@ export default function ServiceCard({
   adBorderColor = '#06b6d4'
 }) {
   const hasAdMessage = adMessage && adDescription;
-  const cardHeight = hasAdMessage ? 'auto' : 'h-80';
 
   return (
     <motion.div
-      className={`relative overflow-hidden rounded-2xl group cursor-pointer border border-white/10 hover:border-[#00b4d8]/50 transition-all duration-500 ${
-        hasAdMessage ? 'flex flex-col' : cardHeight
-      }`}
+      className="relative overflow-hidden rounded-2xl group cursor-pointer border border-white/10 hover:border-[#00b4d8]/50 transition-all duration-500 h-full flex flex-col"
     >
       {/* Contenedor de imagen */}
       {hasAdMessage ? (
         // Para cards con mensaje publicitario
-        <div className="relative h-64 overflow-hidden">
+        <div className="relative h-48 overflow-hidden flex-shrink-0">
           {/* Imagen de fondo */}
           {image ? (
             <Image
@@ -48,26 +45,26 @@ export default function ServiceCard({
           <div className="absolute left-0 top-0 w-0.5 h-full bg-[#00b4d8] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
 
           {/* Contenido de imagen */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col">
+          <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col">
             {/* Ícono */}
-            <div className="w-10 h-10 rounded-xl bg-[#00b4d8]/20 border border-[#00b4d8]/40 flex items-center justify-center mb-3">
+            <div className="w-10 h-10 rounded-xl bg-[#00b4d8]/20 border border-[#00b4d8]/40 flex items-center justify-center mb-2">
               <Icon className="text-[#00b4d8] w-5 h-5" />
             </div>
 
             {/* Título */}
-            <h3 className="text-white font-bold text-lg uppercase tracking-wider">
+            <h3 className="text-white font-bold text-base uppercase tracking-wider">
               {title}
             </h3>
 
             {/* Descripción */}
-            <p className="text-white/70 text-sm leading-relaxed mt-2">
+            <p className="text-white/70 text-xs leading-relaxed mt-1 line-clamp-2">
               {description}
             </p>
           </div>
         </div>
       ) : (
         // Para cards originales sin mensaje publicitario
-        <>
+        <div className="relative h-64 overflow-hidden flex-shrink-0">
           {/* Imagen de fondo */}
           {image && (
             <Image
@@ -109,7 +106,7 @@ export default function ServiceCard({
              
             </button>
           </div>
-        </>
+        </div>
       )}
 
       {/* Mensaje Publicitario - Solo si hasAdMessage */}
@@ -119,28 +116,28 @@ export default function ServiceCard({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="flex-1 p-6 flex flex-col justify-between"
+          className="flex-1 p-4 flex flex-col justify-between"
         >
           {/* Separador línea cian */}
-          <div className="w-full h-0.5 bg-[#06b6d4]/30 mb-4" />
+          <div className="w-full h-0.5 bg-[#06b6d4]/30 mb-3" />
 
           {/* Contenedor del mensaje */}
-          <div className={`bg-slate-800/50 rounded-lg p-4 border-l-4 transition-all duration-300`}
+          <div className={`bg-slate-800/50 rounded-lg p-3 border-l-4 transition-all duration-300 flex-1 flex flex-col`}
                style={{ borderLeftColor: adBorderColor }}>
             
             {/* Texto principal */}
-            <h4 className="text-white font-semibold text-sm mb-2">
+            <h4 className="text-white font-semibold text-xs mb-1.5 line-clamp-2">
               {adMessage}
             </h4>
 
             {/* Texto secundario */}
-            <p className="text-gray-400 text-xs leading-relaxed mb-4">
+            <p className="text-gray-400 text-xs leading-relaxed mb-3 flex-1 line-clamp-3">
               {adDescription}
             </p>
 
             {/* Badges */}
             {adBadges.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1">
                 {adBadges.map((badge, idx) => (
                   <span
                     key={idx}
