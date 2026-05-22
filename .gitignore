@@ -40,8 +40,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-.env
-node_modules/.env
-node_modules/
-.env
+
+# Large files and videos
 *.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+*.webm
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Temporary directories
+temp-frec-digital/
+.turbo/
+.next/dev/cache/
+
+# Turbopack cache
+.turbopack/
