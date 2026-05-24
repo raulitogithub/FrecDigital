@@ -7,8 +7,8 @@ export default function StatsSection() {
   const stats = [
     { endValue: 50, label: 'Proyectos completados', prefix: '+' },
     { endValue: 30, label: 'Clientes satisfechos', prefix: '+' },
-    { endValue: 99, label: 'Satisfacción del cliente', prefix: '' },
-    { endValue: 3, label: 'Años de experiencia', prefix: '+' },
+    { endValue: 98, label: 'Satisfacción del cliente', prefix: '' },
+    { endValue: 20, label: 'Años de experiencia', prefix: '+' },
   ];
 
   return (
