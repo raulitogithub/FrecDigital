@@ -14,8 +14,8 @@
     "test:email": "node lib/test-send-email.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.98.0",
     "@hookform/resolvers": "^5.2.2",
-    "@n8n/chat": "^1.14.0",
     "framer-motion": "^12.38.0",
     "google-auth-library": "^10.6.2",
     "googleapis": "^171.4.0",

@@ -121,7 +121,7 @@ export default function HeroSection() {
               className="flex flex-wrap justify-center gap-10 sm:gap-12 mt-14 pt-10 border-t border-white/20"
             >
               <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-black text-cyan-500 mb-2">500+</p>
+                <p className="text-3xl sm:text-4xl font-black text-cyan-500 mb-2">50+</p>
                 <p className="text-sm sm:text-base text-gray-300">Empresas confían en nosotros</p>
               </div>
               <div className="text-center">
