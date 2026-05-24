@@ -13,7 +13,7 @@ export default function ServicesSection() {
       image: '/images/agendamiento.webp',
       adMessage: '¿Cansado de gestionar citas manualmente?',
       adDescription: 'Nuestro chatbot atiende 24/7, sincroniza con tu calendario y envía recordatorios automáticos. Reduce el 80% de las ausencias y no-shows.',
-      adBadges: ['⚡ Disponible 24/7'],
+      adBadges: [' Disponible 24/7'],
       adBorderColor: '#06b6d4',
     },
     {
@@ -23,7 +23,7 @@ export default function ServicesSection() {
       image: '/images/gerencial.webp',
       adMessage: 'Tus datos hablan, ¿los estás escuchando?',
       adDescription: 'Pregunta: "¿Cuáles fueron mis ventas de enero y febrero?" y obtén un reporte completo al instante. Conectamos tu base de datos con IA para decisiones más rápidas.',
-      adBadges: ['📊 Ventas del último mes', '📈 Comparar 2 períodos', '🏆 Producto más vendido'],
+      adBadges: [' Ventas del último mes', ' Comparar 2 períodos', ' Producto más vendido'],
       adBorderColor: '#818cf8',
     },
     {
@@ -33,7 +33,7 @@ export default function ServicesSection() {
       image: '/images/Chatbots.webp',
       adMessage: '¿Pierdes clientes por responder tarde los mensajes?',
       adDescription: 'Nuestros chatbots atienden automáticamente WhatsApp, aplicaciones web, resolviendo preguntas frecuentes y guiando a tus clientes en tiempo real sin descanso.',
-      adBadges: ['🤖 Atención automática 24/7'],
+      adBadges: [' Atención automática 24/7'],
       adBorderColor: '#10b981',
     },
     {
@@ -43,7 +43,7 @@ export default function ServicesSection() {
       image: '/images/Automatización.webp',
       adMessage: '¿Tu equipo pierde tiempo en tareas manuales repetitivas?',
       adDescription: 'Creamos flujos automatizados adaptados a tu empresa para gestionar procesos de manera más rápida, eficiente y organizada, reduciendo costos operativos.',
-      adBadges: ['⚙️ Procesos más rápidos y eficientes'],
+      adBadges: [' Procesos más rápidos y eficientes'],
       adBorderColor: '#f59e0b',
     },
     {
@@ -53,7 +53,7 @@ export default function ServicesSection() {
       image: '/images/Integración.webp',
       adMessage: '¿Tu información está dispersa en diferentes plataformas?',
       adDescription: 'Integramos tus sistemas, aplicaciones y bases de datos para que trabajen en conjunto en tiempo real. Optimiza procesos, evita errores manuales y mejora la productividad de tu empresa.',
-      adBadges: ['🔗 Integración en tiempo real'],
+      adBadges: [' Integración en tiempo real'],
       adBorderColor: '#8b5cf6',
     },
 
