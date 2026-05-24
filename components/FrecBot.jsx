@@ -3,89 +3,93 @@
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import {
+  X, Wrench, DollarSign, Phone, CalendarDays,
+  Bot, Settings, GitMerge, BarChart2, ArrowLeft,
+  Home, ClipboardList, BadgeDollarSign, MessageCircle
+} from 'lucide-react';
 
 const FLOW = {
   welcome: {
     text: '¡Hola! Soy FrecBot, asistente de FrecDigital. ¿En qué te puedo ayudar?',
     buttons: [
-      { label: '🛠 Ver servicios', next: 'servicios' },
-      { label: '💰 Precios', next: 'precios' },
-      { label: '📞 Contactar', next: 'contacto' },
-      { label: '📅 Agendar consulta', next: 'agendar' },
+      { icon: Wrench,        label: 'Ver servicios',    next: 'servicios' },
+      { icon: DollarSign,    label: 'Precios',          next: 'precios' },
+      { icon: Phone,         label: 'Contactar',        next: 'contacto' },
+      { icon: CalendarDays,  label: 'Agendar consulta', next: 'agendar' },
     ],
   },
   servicios: {
     text: 'Ofrecemos estas soluciones con IA. ¿Cuál te interesa?',
     buttons: [
-      { label: '🤖 Chatbots Inteligentes', next: 'chatbots' },
-      { label: '⚙️ Automatización', next: 'automatizacion' },
-      { label: '🔗 Integración de Sistemas', next: 'integracion' },
-      { label: '📅 Agendamiento', next: 'agendamiento' },
-      { label: '📊 Consultas Gerenciales', next: 'consultas' },
+      { icon: Bot,           label: 'Chatbots Inteligentes',  next: 'chatbots' },
+      { icon: Settings,      label: 'Automatización',         next: 'automatizacion' },
+      { icon: GitMerge,      label: 'Integración de Sistemas', next: 'integracion' },
+      { icon: CalendarDays,  label: 'Agendamiento',           next: 'agendamiento' },
+      { icon: BarChart2,     label: 'Consultas Gerenciales',  next: 'consultas' },
     ],
   },
   chatbots: {
     text: 'Nuestros Chatbots Inteligentes:\n✓ Atienden clientes 24/7\n✓ WhatsApp, Instagram, Facebook y web\n✓ Califican leads automáticamente\n✓ Responden preguntas frecuentes',
     buttons: [
-      { label: '💰 Quiero cotizar', next: 'cotizar' },
-      { label: '← Otros servicios', next: 'servicios' },
+      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
+      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
     ],
   },
   automatizacion: {
     text: 'Automatización de Procesos:\n✓ Elimina tareas repetitivas\n✓ Envío automático de correos\n✓ Generación de reportes\n✓ Gestión de bases de datos',
     buttons: [
-      { label: '💰 Quiero cotizar', next: 'cotizar' },
-      { label: '← Otros servicios', next: 'servicios' },
+      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
+      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
     ],
   },
   integracion: {
     text: 'Integración de Sistemas con IA:\n✓ Conecta CRM, ERP y apps\n✓ Datos centralizados en tiempo real\n✓ Elimina errores manuales',
     buttons: [
-      { label: '💰 Quiero cotizar', next: 'cotizar' },
-      { label: '← Otros servicios', next: 'servicios' },
+      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
+      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
     ],
   },
   agendamiento: {
     text: 'Agendamiento Inteligente:\n✓ Chatbot agenda citas automáticamente\n✓ Confirmaciones y recordatorios\n✓ Disponibilidad en tiempo real 24/7',
     buttons: [
-      { label: '💰 Quiero cotizar', next: 'cotizar' },
-      { label: '← Otros servicios', next: 'servicios' },
+      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
+      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
     ],
   },
   consultas: {
     text: 'Consultas Gerenciales con IA:\n✓ Pregunta tus datos en lenguaje natural\n✓ Reportes automáticos al instante\n✓ Análisis de ventas por período',
     buttons: [
-      { label: '💰 Quiero cotizar', next: 'cotizar' },
-      { label: '← Otros servicios', next: 'servicios' },
+      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
+      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
     ],
   },
   precios: {
     text: 'Nuestros precios son personalizados según tu proyecto. Un asesor te dará una cotización adaptada a tu negocio.',
     buttons: [
-      { label: '📞 Hablar con un asesor', next: 'contacto' },
-      { label: '🏠 Inicio', next: 'welcome' },
+      { icon: Phone,  label: 'Hablar con un asesor', next: 'contacto' },
+      { icon: Home,   label: 'Inicio',               next: 'welcome' },
     ],
   },
   contacto: {
-    text: 'Puedes contactarnos en:\n📧 fespinoza@frecdigital.com\n🕐 Lun - Vie, 08:00 a 16:00 (Ecuador)',
+    text: 'Puedes contactarnos en:\n✉ fespinoza@frecdigital.com\n🕐 Lun - Vie, 08:00 a 16:00 (Ecuador)',
     buttons: [
-      { label: '📝 Ir al formulario', action: 'scroll-contact' },
-      { label: '🏠 Inicio', next: 'welcome' },
+      { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
+      { icon: Home,          label: 'Inicio',           next: 'welcome' },
     ],
   },
   agendar: {
     text: '¡Perfecto! Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas.',
     buttons: [
-      { label: '📝 Ir al formulario', action: 'scroll-contact' },
-      { label: '🏠 Inicio', next: 'welcome' },
+      { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
+      { icon: Home,          label: 'Inicio',           next: 'welcome' },
     ],
   },
   cotizar: {
     text: '¡Excelente decisión! Completa el formulario y nuestro equipo preparará una cotización personalizada para ti.',
     buttons: [
-      { label: '📝 Ir al formulario', action: 'scroll-contact' },
-      { label: '🏠 Inicio', next: 'welcome' },
+      { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
+      { icon: Home,          label: 'Inicio',           next: 'welcome' },
     ],
   },
 };
@@ -162,7 +166,7 @@ export default function FrecBot() {
                 </motion.div>
               ) : (
                 <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} className="w-full h-full flex items-center justify-center">
-                  <Image src="/images/avatar1.webp" alt="FrecBot" width={56} height={56} className="w-full h-full object-cover rounded-full" />
+                  <Image src="/images/avatar1.webp" alt="FrecBot" width={56} height={56} className="w-full h-full object-cover rounded-full" loading="eager" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -217,20 +221,24 @@ export default function FrecBot() {
 
                   {msg.type === 'bot' && msg.buttons && (
                     <div className="mt-2 ml-8 flex flex-wrap gap-2">
-                      {msg.buttons.map((btn, i) => (
-                        <button
-                          key={i}
-                          onClick={() => !msg.buttonsDisabled && handleButton(btn)}
-                          disabled={msg.buttonsDisabled}
-                          className={`text-xs px-3 py-1.5 rounded-full border transition-all duration-200 ${
-                            msg.buttonsDisabled
-                              ? 'border-slate-700 text-slate-600 cursor-default'
-                              : 'border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white'
-                          }`}
-                        >
-                          {btn.label}
-                        </button>
-                      ))}
+                      {msg.buttons.map((btn, i) => {
+                        const Icon = btn.icon;
+                        return (
+                          <button
+                            key={i}
+                            onClick={() => !msg.buttonsDisabled && handleButton(btn)}
+                            disabled={msg.buttonsDisabled}
+                            className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                              msg.buttonsDisabled
+                                ? 'border-slate-700 text-slate-600 cursor-default'
+                                : 'border-cyan-500/60 text-cyan-400 hover:bg-cyan-500 hover:text-white hover:border-cyan-500'
+                            }`}
+                          >
+                            {Icon && <Icon className="w-3 h-3 flex-shrink-0" />}
+                            {btn.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   )}
                 </motion.div>

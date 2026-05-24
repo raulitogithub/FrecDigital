@@ -61,11 +61,9 @@ export default function HeroSection() {
           >
             {/* Main Title */}
             <motion.div variants={itemVariants} className="mb-8">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-3 text-center">
-                Potencia tu negocio con
-              </h1>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-cyan-500 leading-tight mb-3 text-center">
-                Inteligencia Artificial
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-3 text-center">
+                <span className="text-white">Potencia tu negocio con </span>
+                <span className="text-cyan-500">Inteligencia Artificial</span>
               </h1>
             </motion.div>
 

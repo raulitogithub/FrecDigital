@@ -8,7 +8,7 @@ export default function sitemap() {
   const routes = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: new Date('2025-05-21'),
       changeFrequency: 'weekly',
       priority: 1,
     },

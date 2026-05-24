@@ -76,14 +76,14 @@ export default function WhyUsSection() {
         >
           {/* Título principal */}
           <div className="text-center mb-12">
-            <motion.h1
+            <motion.h2
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               className="text-5xl md:text-6xl font-bold text-white mb-2 font-display"
             >
               Sobre <span className="text-[#00b4d8]">nosotros</span>
-            </motion.h1>
+            </motion.h2>
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}

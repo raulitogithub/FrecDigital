@@ -2,50 +2,33 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ChatWrapper from "./ChatWrapper";
 import WhatsAppButton from "@/components/WhatsAppButtonWrapper";
-import { siteMetadata, generateSchemaMarkup, generateOpenGraphMetadata, generateTwitterCardMetadata } from "@/lib/seo-metadata";
+import { siteMetadata, generateSchemaMarkup } from "@/lib/seo-metadata";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
-// Structured Data (JSON-LD)
-const schemaMarkup = generateSchemaMarkup('Organization');
-
-// Open Graph
-const ogMetadata = generateOpenGraphMetadata({
-  title: "FrecDigital - Inteligencia Artificial para tu Negocio",
-  description: siteMetadata.description,
-  image: siteMetadata.organization.logo.url,
-  url: siteMetadata.siteUrl,
-  type: "website"
-});
-
-// Twitter Card
-const twitterMetadata = generateTwitterCardMetadata({
-  title: "FrecDigital - Inteligencia Artificial para tu Negocio",
-  description: siteMetadata.description,
-  image: siteMetadata.organization.logo.url
-});
+const schemaOrganization = generateSchemaMarkup('Organization');
+const schemaFAQ = generateSchemaMarkup('FAQPage');
 
 export const viewport = {
   themeColor: "#1a3a6b",
   colorScheme: "light dark",
 };
 
+const BASE_URL = 'https://frecdigital.com';
+
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://frecdigital.com'),
+  metadataBase: new URL(BASE_URL),
 
   title: "FrecDigital - Inteligencia Artificial para tu Negocio",
   description: siteMetadata.description,
-  keywords: siteMetadata.keywords,
-  author: siteMetadata.author,
+  authors: [{ name: siteMetadata.author, url: BASE_URL }],
 
   alternates: {
-    canonical: siteMetadata.siteUrl,
-    languages: {
-      es: siteMetadata.siteUrl,
-    },
+    canonical: '/',
+    languages: { es: '/' },
   },
 
   icons: {
@@ -55,37 +38,33 @@ export const metadata = {
   },
 
   openGraph: {
-    title: ogMetadata['og:title'],
-    description: ogMetadata['og:description'],
-    url: ogMetadata['og:url'],
-    type: ogMetadata['og:type'],
-    siteName: ogMetadata['og:site_name'],
+    title: "FrecDigital - Inteligencia Artificial para tu Negocio",
+    description: siteMetadata.description,
+    url: BASE_URL,
+    type: 'website',
+    siteName: 'FrecDigital',
     images: [
       {
-        url: ogMetadata['og:image'],
-        width: siteMetadata.organization.logo.width,
-        height: siteMetadata.organization.logo.height,
-        alt: ogMetadata['og:image:alt'],
+        url: '/images/logo1.webp',
+        width: 200,
+        height: 200,
+        alt: 'FrecDigital - Inteligencia Artificial',
         type: 'image/webp',
       },
     ],
-    locale: ogMetadata['og:locale'],
+    locale: 'es_ES',
   },
 
   twitter: {
-    card: twitterMetadata['twitter:card'],
-    site: twitterMetadata['twitter:site'],
-    creator: twitterMetadata['twitter:creator'],
-    title: twitterMetadata['twitter:title'],
-    description: twitterMetadata['twitter:description'],
-    images: [twitterMetadata['twitter:image']],
+    card: 'summary_large_image',
+    site: '@frecdigital',
+    creator: '@frecdigital',
+    title: "FrecDigital - Inteligencia Artificial para tu Negocio",
+    description: siteMetadata.description,
+    images: ['/images/logo1.webp'],
   },
 
   robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
-  verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
-    yandex: process.env.YANDEX_VERIFICATION,
-  },
 
   appleWebApp: {
     capable: true,
@@ -103,11 +82,8 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="utf-8" />
 
-        {/* Structured Data (JSON-LD) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrganization) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }} />
 
         {/* Google Analytics (opcional) */}
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
