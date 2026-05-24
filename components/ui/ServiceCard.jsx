@@ -19,17 +19,17 @@ export default function ServiceCard({
   const hasAdMessage = adMessage && adDescription;
 
   return (
-    <motion.div className="relative overflow-hidden rounded-2xl group border border-white/10 hover:border-[#00b4d8]/50 transition-all duration-500 flex flex-col">
+    <div className="rounded-2xl border border-white/10 hover:border-[#00b4d8]/50 transition-all duration-500 overflow-hidden group bg-[#0a1628]">
 
-      {/* Imagen */}
-      <div className="relative h-48 overflow-hidden flex-shrink-0">
+      {/* Imagen — contenida en su propio bloque con overflow-hidden */}
+      <div className="relative h-64 w-full overflow-hidden">
         {image ? (
           <Image
             src={image}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-slate-700 to-cyan-900" />
@@ -39,7 +39,7 @@ export default function ServiceCard({
         <div className="absolute inset-0 bg-[#00b4d8]/0 group-hover:bg-[#00b4d8]/5 transition-all duration-500" />
         <div className="absolute left-0 top-0 w-0.5 h-full bg-[#00b4d8] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom" />
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col">
+        <div className="absolute bottom-0 left-0 right-0 p-4">
           <div className="w-10 h-10 rounded-xl bg-[#00b4d8]/20 border border-[#00b4d8]/40 flex items-center justify-center mb-2">
             <Icon className="text-[#00b4d8] w-5 h-5" />
           </div>
@@ -54,10 +54,10 @@ export default function ServiceCard({
 
       {/* Botón ver detalles */}
       {hasAdMessage && (
-        <div className="bg-[#0a1628] px-4 py-2.5 border-t border-white/5">
+        <div className="px-4 py-2.5 border-t border-white/5">
           <button
             onClick={() => setOpen(!open)}
-            className="w-full flex items-center justify-between text-xs font-semibold text-[#00b4d8] hover:text-white transition-colors duration-200 group/btn"
+            className="w-full flex items-center justify-between text-xs font-semibold text-[#00b4d8] hover:text-white transition-colors duration-200"
           >
             <span>{open ? 'Ocultar detalles' : 'Ver detalles'}</span>
             <motion.div
@@ -70,7 +70,7 @@ export default function ServiceCard({
         </div>
       )}
 
-      {/* Panel expandible */}
+      {/* Panel expandible — inline, empuja hacia abajo solo esta tarjeta */}
       <AnimatePresence initial={false}>
         {hasAdMessage && open && (
           <motion.div
@@ -79,7 +79,7 @@ export default function ServiceCard({
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden bg-[#0a1628]"
+            className="overflow-hidden"
           >
             <div className="px-4 pb-4">
               <div
@@ -109,7 +109,6 @@ export default function ServiceCard({
           </motion.div>
         )}
       </AnimatePresence>
-
-    </motion.div>
+    </div>
   );
 }
