@@ -4,3 +4,4 @@ node_modules
 .env*
 *.md
 .github
+package-lock.json
