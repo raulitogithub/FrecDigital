@@ -6,7 +6,7 @@
 /* Botón del chat con avatar personalizado */
 .chat-window-toggle {
   background-color: #1a3a6b !important;
-  background-image: url('/images/avatar1.png') !important;
+  background-image: url('/images/avatar1.webp') !important;
   background-size: 88% !important;
   background-repeat: no-repeat !important;
   background-position: center !important;

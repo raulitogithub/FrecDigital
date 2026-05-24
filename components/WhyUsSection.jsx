@@ -53,7 +53,7 @@ export default function WhyUsSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/fondo7.png)',
+          backgroundImage: 'url(/images/fondo7.webp)',
         }}
       />
 
