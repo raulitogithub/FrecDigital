@@ -34,7 +34,7 @@ export default function ContactForm() {
   });
 
   const services = [
-    'Chatbots Inteligentes',
+    'Asistentes de IA Especializados',
     'Automatización de Procesos',
     'Integración de Sistemas con IA',
   ];

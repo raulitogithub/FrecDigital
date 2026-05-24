@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Wrench, DollarSign, Phone, CalendarDays,
   Bot, Settings, GitMerge, BarChart2, ArrowLeft,
-  Home, ClipboardList, BadgeDollarSign, MessageCircle
+  Home, ClipboardList, BadgeDollarSign
 } from 'lucide-react';
 
 const FLOW = {
@@ -22,7 +22,7 @@ const FLOW = {
   servicios: {
     text: 'Ofrecemos estas soluciones con IA. ¿Cuál te interesa?',
     buttons: [
-      { icon: Bot,           label: 'Chatbots Inteligentes',  next: 'chatbots' },
+      { icon: Bot,           label: 'Asistentes de IA',       next: 'chatbots' },
       { icon: Settings,      label: 'Automatización',         next: 'automatizacion' },
       { icon: GitMerge,      label: 'Integración de Sistemas', next: 'integracion' },
       { icon: CalendarDays,  label: 'Agendamiento',           next: 'agendamiento' },
@@ -30,7 +30,7 @@ const FLOW = {
     ],
   },
   chatbots: {
-    text: 'Nuestros Chatbots Inteligentes:\n✓ Atienden clientes 24/7\n✓ WhatsApp, Instagram, Facebook y web\n✓ Califican leads automáticamente\n✓ Responden preguntas frecuentes',
+    text: 'Nuestros Asistentes de IA Especializados:\n✓ Atienden consultas 24/7 sin intervención humana\n✓ WhatsApp, Instagram, Facebook y web\n✓ Personalizados para tu industria y procesos\n✓ Califican leads y guían al cliente automáticamente',
     buttons: [
       { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
       { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
@@ -51,7 +51,7 @@ const FLOW = {
     ],
   },
   agendamiento: {
-    text: 'Agendamiento Inteligente:\n✓ Chatbot agenda citas automáticamente\n✓ Confirmaciones y recordatorios\n✓ Disponibilidad en tiempo real 24/7',
+    text: 'Agendamiento Inteligente:\n✓ Asistente de IA agenda citas automáticamente\n✓ Confirmaciones y recordatorios\n✓ Disponibilidad en tiempo real 24/7',
     buttons: [
       { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
       { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },

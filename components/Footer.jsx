@@ -103,7 +103,7 @@ export default function Footer() {
               <li className="group">
                 <Link href="#" className="text-white/55 hover:text-[#00b4d8] transition-colors duration-300 hover:translate-x-2 inline-flex items-center gap-2">
                   <span className="text-[#00b4d8] opacity-0 group-hover:opacity-100 transition-all duration-300">›</span>
-                  Chatbots
+                  Asistentes IA
                 </Link>
               </li>
               <li className="group">
