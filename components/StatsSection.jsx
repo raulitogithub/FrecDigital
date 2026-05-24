@@ -23,7 +23,7 @@ export default function StatsSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{
-          backgroundImage: 'url(/images/fondo6.jfif)',
+          backgroundImage: 'url(/images/fondo2.webp)',
         }}
       />
 

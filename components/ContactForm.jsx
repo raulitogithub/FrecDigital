@@ -35,8 +35,11 @@ export default function ContactForm() {
 
   const services = [
     'Asistentes de IA Especializados',
-    'Automatización de Procesos',
-    'Integración de Sistemas con IA',
+    'Agendamiento Inteligente',
+    'Automatización Inteligente de Procesos',
+    'Consultas Gerenciales IA',
+    'Integración Inteligente de Sistemas',
+    'Otros',
   ];
 
   const contactInfo = [

@@ -114,8 +114,9 @@ export default function FrecBot() {
   }, [isOpen, hasOpened]);
 
   useEffect(() => {
+    if (!isOpen) return;
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, isOpen]);
 
   const handleButton = (button) => {
     if (button.action === 'scroll-contact') {
