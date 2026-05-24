@@ -36,25 +36,24 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://frecdigital.com'),
 
-  // Basic SEO
   title: "FrecDigital - Inteligencia Artificial para tu Negocio",
   description: siteMetadata.description,
   keywords: siteMetadata.keywords,
   author: siteMetadata.author,
-  
-  // Canonical URL
+
   alternates: {
     canonical: siteMetadata.siteUrl,
+    languages: {
+      es: siteMetadata.siteUrl,
+    },
   },
 
-  // Icons
   icons: {
     icon: "/images/logo1.webp",
     apple: "/images/logo1.webp",
     shortcut: "/images/logo1.webp",
   },
 
-  // Open Graph
   openGraph: {
     title: ogMetadata['og:title'],
     description: ogMetadata['og:description'],
@@ -67,13 +66,12 @@ export const metadata = {
         width: siteMetadata.organization.logo.width,
         height: siteMetadata.organization.logo.height,
         alt: ogMetadata['og:image:alt'],
-        type: 'image/jpeg',
+        type: 'image/webp',
       },
     ],
     locale: ogMetadata['og:locale'],
   },
 
-  // Twitter Card
   twitter: {
     card: twitterMetadata['twitter:card'],
     site: twitterMetadata['twitter:site'],
@@ -83,34 +81,17 @@ export const metadata = {
     images: [twitterMetadata['twitter:image']],
   },
 
-  // Additional SEO
   robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
-  googleSiteVerification: process.env.GOOGLE_SITE_VERIFICATION,
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
     yandex: process.env.YANDEX_VERIFICATION,
   },
 
-  // Localization
-  alternates: {
-    languages: {
-      es: `${siteMetadata.siteUrl}`,
-    },
-  },
-
-  // Mobile Web App
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "FrecDigital",
   },
-
-  // Microsoft specific
-  msapplication: {
-    TileColor: "#1a3a6b",
-    config: "/browserconfig.xml",
-  },
-
 };
 
 export default function RootLayout({ children }) {
@@ -121,11 +102,7 @@ export default function RootLayout({ children }) {
     >
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href={siteMetadata.siteUrl} />
-        
+
         {/* Structured Data (JSON-LD) */}
         <script
           type="application/ld+json"
