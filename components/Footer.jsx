@@ -12,7 +12,7 @@ export default function Footer() {
   const socialLinks = [
     { icon: Share2, href: 'https://linkedin.com', label: 'LinkedIn' },
     { icon: Heart, href: 'https://instagram.com', label: 'Instagram' },
-    { icon: FaWhatsapp, href: 'https://wa.me/593983018678?text=Estimado%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.%20Gracias.', label: 'WhatsApp' },
+    { icon: FaWhatsapp, href: 'https://wa.me/34624636628?text=Estimado%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.%20Gracias.', label: 'WhatsApp' },
     { icon: Mail, href: 'mailto:fespinoza@frecdigital.com?subject=Información%20sobre%20servicios&body=Hola,%20buen%20día.%20Me%20gustaría%20conocer%20más%20sobre%20sus%20servicios.%20Quedo%20atento.%20Gracias.', label: 'Email' },
   ];
   const footerLinks = [
