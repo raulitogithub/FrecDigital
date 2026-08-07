@@ -42,6 +42,32 @@ export default function CortripPage() {
   return (
     <div style={{ background: navy, minHeight: '100vh', color: '#fff', fontFamily: "'Arial', sans-serif" }}>
 
+      {/* ── BOTÓN FLOTANTE PLAN MAESTRO ── */}
+      <Link href="/cortrip/plan" style={{
+        position: 'fixed',
+        bottom: 28,
+        left: 24,
+        zIndex: 50,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        background: gold,
+        color: navy,
+        fontWeight: 700,
+        fontSize: '0.8rem',
+        letterSpacing: '0.04em',
+        padding: '0.65rem 1.25rem',
+        borderRadius: 999,
+        textDecoration: 'none',
+        boxShadow: `0 4px 20px rgba(201,162,39,0.5)`,
+        whiteSpace: 'nowrap',
+      }}>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke={navy} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        Ver Plan Maestro
+      </Link>
+
       {/* ── HERO ── */}
       <section style={{
         background: `linear-gradient(160deg, #0d2060 0%, #081539 50%, #050e25 100%)`,
