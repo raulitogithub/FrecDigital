@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 const gold = '#c9a227';
 const navy = '#081539';
@@ -242,6 +243,25 @@ export default function CortripPage() {
               </ol>
             </div>
           </div>
+
+          {/* Imagen justicia */}
+          <div style={{ marginTop: '2.5rem', position: 'relative', borderRadius: 16, overflow: 'hidden', height: 260 }}>
+            <Image
+              src="/images/justicia.png"
+              alt="Justicia y transparencia"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+            />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(8,21,57,0.85) 0%, rgba(8,21,57,0.4) 50%, rgba(8,21,57,0.85) 100%)' }} />
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.5rem', textAlign: 'center' }}>
+              <div>
+                <p style={{ color: gold, fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Cero Impunidad</p>
+                <p style={{ color: '#fff', fontStyle: 'italic', fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', fontWeight: 700, lineHeight: 1.4, maxWidth: 500, margin: '0 auto' }}>
+                  "Con tu dinero no se juega. El que le falló al socio, tendrá que responder."
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -250,6 +270,17 @@ export default function CortripPage() {
         <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
           <SectionTitle center>Compromisos</SectionTitle>
           <Divider center />
+
+          {/* Imagen manos */}
+          <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', height: 220, marginBottom: '2rem' }}>
+            <Image
+              src="/images/manos.png"
+              alt="Compromiso y unidad"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center 40%' }}
+            />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,21,57,0.2) 0%, rgba(10,30,80,0.7) 100%)' }} />
+          </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '0.5rem' }}>
             {[
@@ -297,6 +328,21 @@ export default function CortripPage() {
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <SectionTitle center>Beneficios para los Socios</SectionTitle>
           <Divider center />
+
+          {/* Imagen complejo */}
+          <div style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', height: 260, marginBottom: '2rem' }}>
+            <Image
+              src="/images/complejo.png"
+              alt="Complejo recreacional CORTRIP"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+            />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,21,57,0.1) 0%, rgba(8,21,57,0.75) 100%)' }} />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.25rem 1.5rem' }}>
+              <p style={{ color: gold, fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', margin: '0 0 0.25rem' }}>Club Campestre CORTRIP</p>
+              <p style={{ color: '#fff', fontWeight: 600, fontSize: '1rem', margin: 0 }}>Instalaciones que volverán a ser tu orgullo</p>
+            </div>
+          </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
             {[
