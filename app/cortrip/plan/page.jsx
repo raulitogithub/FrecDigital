@@ -40,7 +40,7 @@ const pillars = [
   },
   {
     number: 2,
-    image: '/images/cortrip-pilar2.png?v=2',
+    image: null,
     title: 'Sostenibilidad Financiera',
     tags: ['Reingeniería Económica', 'Autogestión Responsable', 'Crecimiento Sostenible'],
     objetivo: 'Optimizar integralmente los recursos económicos y diversificar las fuentes de ingreso, garantizando la solvencia a largo plazo sin incrementar un solo centavo en la cuota mensual del socio.',
@@ -226,17 +226,19 @@ export default function PlanMaestroPage() {
           {pillars.map((pilar) => (
             <div key={pilar.number} style={{ border: `1px solid ${gold}30`, borderRadius: 16, overflow: 'hidden' }}>
 
-              {/* Banner con imagen */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', minHeight: 140 }}>
-                <div style={{ position: 'relative', minHeight: 140 }}>
-                  <Image
-                    src={pilar.image}
-                    alt={`Pilar ${pilar.number} - ${pilar.title}`}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 70%, #0d2060 100%)' }} />
-                </div>
+              {/* Banner */}
+              <div style={{ display: 'grid', gridTemplateColumns: pilar.image ? '1fr 1.4fr' : '1fr', minHeight: 140 }}>
+                {pilar.image && (
+                  <div style={{ position: 'relative', minHeight: 140 }}>
+                    <Image
+                      src={pilar.image}
+                      alt={`Pilar ${pilar.number} - ${pilar.title}`}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 70%, #0d2060 100%)' }} />
+                  </div>
+                )}
                 <div style={{ background: 'linear-gradient(135deg, #0d2060, #0a1845)', padding: '1.25rem 1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
                     <div style={{ width: 38, height: 38, borderRadius: '50%', background: gold, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
