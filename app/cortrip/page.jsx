@@ -452,35 +452,20 @@ export default function CortripPage() {
           </p>
 
           {/* QR Code */}
-          <div style={{
-            background: '#fff',
-            borderRadius: 16,
-            padding: 12,
-            display: 'inline-block',
-            margin: '0 auto 2rem',
-            boxShadow: `0 0 30px ${gold}30`,
-          }}>
-            <img
-              src="/images/codigo-QR.jpeg"
-              alt="Código QR - Escanea e interactúa"
-              style={{ width: 160, height: 160, display: 'block' }}
-            />
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+            <div style={{
+              background: '#fff',
+              borderRadius: 16,
+              padding: 12,
+              boxShadow: `0 0 30px ${gold}30`,
+            }}>
+              <img
+                src="/images/codigo-QR.jpeg"
+                alt="Código QR - Escanea e interactúa"
+                style={{ width: 160, height: 160, display: 'block' }}
+              />
+            </div>
           </div>
-
-          <Link href="/cortrip/plan" style={{
-            display: 'inline-block',
-            background: gold,
-            color: navy,
-            fontWeight: 700,
-            fontSize: '0.9rem',
-            letterSpacing: '0.05em',
-            padding: '0.75rem 2rem',
-            borderRadius: 999,
-            textDecoration: 'none',
-            marginBottom: '1.5rem',
-          }}>
-            Ver Plan Maestro Completo →
-          </Link>
 
           <p style={{ color: '#8090a8', fontSize: '0.8rem' }}>
             frecdigital.com/cortrip
