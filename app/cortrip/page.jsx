@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 const gold = '#c9a227';
 const navy = '#081539';
 
@@ -390,6 +392,21 @@ export default function CortripPage() {
               style={{ width: 160, height: 160, display: 'block' }}
             />
           </div>
+
+          <Link href="/cortrip/plan" style={{
+            display: 'inline-block',
+            background: gold,
+            color: navy,
+            fontWeight: 700,
+            fontSize: '0.9rem',
+            letterSpacing: '0.05em',
+            padding: '0.75rem 2rem',
+            borderRadius: 999,
+            textDecoration: 'none',
+            marginBottom: '1.5rem',
+          }}>
+            Ver Plan Maestro Completo →
+          </Link>
 
           <p style={{ color: '#8090a8', fontSize: '0.8rem' }}>
             frecdigital.com/cortrip
