@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 import { Target, Compass } from 'lucide-react';
 
 const gold = '#c9a227';
@@ -95,8 +96,48 @@ const pillars = [
 ];
 
 export default function PlanMaestroPage() {
+  const ctaRef = useRef(null);
+  const [showFloatingBtn, setShowFloatingBtn] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowFloatingBtn(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (ctaRef.current) observer.observe(ctaRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div style={{ background: navy, minHeight: '100vh', color: '#fff', fontFamily: "'Arial', sans-serif" }}>
+
+      {/* BOTÓN FLOTANTE VOLVER */}
+      {showFloatingBtn && (
+        <Link href="/cortrip" style={{
+          position: 'fixed',
+          bottom: 28,
+          left: 24,
+          zIndex: 50,
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          background: gold,
+          color: navy,
+          fontWeight: 700,
+          fontSize: '0.8rem',
+          letterSpacing: '0.04em',
+          padding: '0.65rem 1.25rem',
+          borderRadius: 999,
+          textDecoration: 'none',
+          boxShadow: `0 4px 20px rgba(201,162,39,0.5)`,
+          whiteSpace: 'nowrap',
+        }}>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M12 7H2M6 3L2 7l4 4" stroke={navy} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Volver al resumen
+        </Link>
+      )}
 
       {/* NAV */}
       <div style={{ background: '#050e25', borderBottom: `1px solid ${gold}20`, padding: '0.75rem 1.5rem' }}>
@@ -307,7 +348,7 @@ export default function PlanMaestroPage() {
               </p>
             </div>
 
-            <div style={{ textAlign: 'center' }}>
+            <div ref={ctaRef} style={{ textAlign: 'center' }}>
               <Link href="/cortrip" style={{
                 display: 'inline-flex',
                 alignItems: 'center',
