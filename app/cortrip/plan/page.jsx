@@ -308,8 +308,25 @@ export default function PlanMaestroPage() {
             </div>
 
             <div style={{ textAlign: 'center' }}>
-              <Link href="/cortrip" style={{ display: 'inline-block', border: `1px solid ${gold}50`, borderRadius: 999, padding: '0.6rem 1.5rem', color: gold, textDecoration: 'none', fontSize: '0.85rem', letterSpacing: '0.1em' }}>
-                ← Volver al resumen
+              <Link href="/cortrip" style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: gold,
+                color: navy,
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                letterSpacing: '0.04em',
+                padding: '0.65rem 1.25rem',
+                borderRadius: 999,
+                textDecoration: 'none',
+                boxShadow: `0 4px 20px rgba(201,162,39,0.5)`,
+                whiteSpace: 'nowrap',
+              }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M12 7H2M6 3L2 7l4 4" stroke={navy} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Volver al resumen
               </Link>
             </div>
           </div>
