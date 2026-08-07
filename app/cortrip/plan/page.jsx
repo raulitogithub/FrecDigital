@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { Target, Compass } from 'lucide-react';
 
 const gold = '#c9a227';
 const navy = '#081539';
@@ -177,11 +178,13 @@ export default function PlanMaestroPage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
             {[
-              { title: 'Misión', icon: '🎯', text: 'Garantizar una gestión transparente y eficiente que asegure el desarrollo financiero y operativo de la Corporación, priorizando el bienestar de sus socios mediante servicios exclusivos, la restitución de derechos adquiridos y el fortalecimiento del sentido de pertenencia de la familia CORTRIP.' },
-              { title: 'Visión', icon: '🔭', text: 'Posicionarnos como el modelo de Corporación militar más sólido, moderno y transparente del país y la región, reconocido por su integridad institucional y su capacidad de expansión continua.' },
+              { title: 'Misión', Icon: Target, text: 'Garantizar una gestión transparente y eficiente que asegure el desarrollo financiero y operativo de la Corporación, priorizando el bienestar de sus socios mediante servicios exclusivos, la restitución de derechos adquiridos y el fortalecimiento del sentido de pertenencia de la familia CORTRIP.' },
+              { title: 'Visión', Icon: Compass, text: 'Posicionarnos como el modelo de Corporación militar más sólido, moderno y transparente del país y la región, reconocido por su integridad institucional y su capacidad de expansión continua.' },
             ].map((item) => (
               <div key={item.title} style={{ background: '#0d2060', border: `1px solid ${gold}30`, borderRadius: 14, padding: '1.75rem' }}>
-                <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{item.icon}</div>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: `${gold}18`, border: `1px solid ${gold}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                  <item.Icon size={24} color={gold} strokeWidth={1.5} />
+                </div>
                 <h3 style={{ color: gold, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', fontSize: '1.1rem' }}>{item.title}</h3>
                 <p style={{ color: '#c0d0e8', lineHeight: 1.8, margin: 0 }}>{item.text}</p>
               </div>

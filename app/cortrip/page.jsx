@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { HeartHandshake, Unlock, CreditCard, Bot } from 'lucide-react';
 
 const gold = '#c9a227';
 const navy = '#081539';
@@ -349,22 +350,22 @@ export default function CortripPage() {
               {
                 title: 'Reactivación de beneficios sociales',
                 desc: 'Reactivaremos inmediatamente el pago de los beneficios sociales mediante un cronograma efectivo, progresivo y responsable.',
-                icon: '🏥',
+                Icon: HeartHandshake,
               },
               {
                 title: 'Fin a los bloqueos injustificados',
                 desc: 'Levantaremos el bloqueo de los socios impedidos de ingresar a las instalaciones por deudas injustificadas.',
-                icon: '🔓',
+                Icon: Unlock,
               },
               {
                 title: 'Vuelve tu crédito de consumo',
                 desc: 'Reactivaremos los créditos de consumo interno y te aumentaremos el cupo progresivamente.',
-                icon: '💳',
+                Icon: CreditCard,
               },
               {
                 title: 'Agente virtual CORTRITO',
                 desc: 'Presentaremos el Agente virtual CORTRITO para que los socios tengan la información de CORTRIP en sus manos desde el celular.',
-                icon: '🤖',
+                Icon: Bot,
               },
             ].map((benefit) => (
               <div key={benefit.title} style={{
@@ -372,9 +373,10 @@ export default function CortripPage() {
                 border: `1px solid ${gold}30`,
                 borderRadius: 16,
                 padding: '1.75rem',
-                transition: 'border-color 0.3s',
               }}>
-                <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>{benefit.icon}</div>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: `${gold}18`, border: `1px solid ${gold}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                  <benefit.Icon size={22} color={gold} strokeWidth={1.5} />
+                </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.75rem' }}>
                   <CheckIcon />
                   <h3 style={{ color: gold, fontWeight: 700, fontSize: '1rem', margin: 0, lineHeight: 1.4 }}>
