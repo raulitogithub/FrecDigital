@@ -107,28 +107,27 @@ export default function PlanMaestroPage() {
         </div>
       </div>
 
-      {/* HERO con cabecera.png */}
-      <section style={{ position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'relative', width: '100%', height: 'clamp(220px, 35vw, 400px)' }}>
-          <Image
-            src="/images/cabecera.png"
-            alt="Plan Maestro Horizonte 180"
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            priority
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,21,57,0.4) 0%, rgba(8,21,57,0.7) 60%, rgba(8,21,57,1) 100%)' }} />
-        </div>
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.5rem', textAlign: 'center' }}>
-          <div style={{ display: 'inline-block', border: `1px solid ${gold}60`, borderRadius: 999, padding: '0.3rem 1.2rem', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: gold, marginBottom: '1rem' }}>
+      {/* HERO */}
+      <section style={{
+        background: `linear-gradient(160deg, #0d2060 0%, #081539 60%, #050e25 100%)`,
+        padding: '4rem 1.5rem 3.5rem',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
+        <div style={{ position: 'absolute', top: -80, right: -80, width: 320, height: 320, borderRadius: '50%', border: `2px solid ${gold}22`, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: -60, left: -60, width: 240, height: 240, borderRadius: '50%', border: `2px solid ${gold}15`, pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', maxWidth: 800, margin: '0 auto' }}>
+          <div style={{ display: 'inline-block', border: `1px solid ${gold}60`, borderRadius: 999, padding: '0.3rem 1.2rem', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: gold, marginBottom: '1.5rem' }}>
             Estrategia integral de recuperación, modernización y expansión
           </div>
           <h1 style={{ fontFamily: "'Georgia', serif", fontStyle: 'italic', fontWeight: 700, fontSize: 'clamp(2rem, 6vw, 3.5rem)', color: gold, textTransform: 'uppercase', lineHeight: 1.1, marginBottom: '0.4rem' }}>
             Plan Maestro
           </h1>
-          <h2 style={{ fontFamily: "'Georgia', serif", fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(1.1rem, 3vw, 1.6rem)', color: '#e8d5a0', marginBottom: '0.4rem' }}>
+          <h2 style={{ fontFamily: "'Georgia', serif", fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(1.1rem, 3vw, 1.6rem)', color: '#e8d5a0', marginBottom: '1rem' }}>
             "Horizonte 180"
           </h2>
+          <div style={{ width: 80, height: 3, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: '0 auto 1.25rem' }} />
           <p style={{ color: '#8090a8', fontSize: '0.85rem' }}>Presentado por el equipo de trabajo <strong style={{ color: gold }}>Sangre Nueva</strong></p>
         </div>
       </section>
