@@ -193,11 +193,11 @@ export default function CortritoBot() {
   return (
     <>
       {/* Toggle button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 60 }}>
         <div className="relative">
           <div
             className="absolute inset-0 rounded-full animate-ping opacity-30"
-            style={{ background: GOLD }}
+            style={{ background: GOLD, pointerEvents: 'none' }}
           />
           <button
             onClick={() => setIsOpen(!isOpen)}
