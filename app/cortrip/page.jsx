@@ -137,20 +137,24 @@ export default function CortripPage() {
 
           {/* Emblem */}
           <div style={{
-            width: 180,
-            height: 180,
+            width: 200,
+            height: 200,
             borderRadius: '50%',
             border: `4px solid ${gold}`,
             margin: '0 auto 2rem',
             overflow: 'hidden',
             boxShadow: `0 0 50px ${gold}50`,
+            background: '#0a1845',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
             <Image
               src="/images/sangrenueva.jpeg"
               alt="Sangre Nueva - Horizonte 180"
-              width={180}
-              height={180}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              width={200}
+              height={200}
+              style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
               priority
             />
           </div>
