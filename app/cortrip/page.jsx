@@ -93,7 +93,7 @@ export default function CortripPage() {
             color: gold,
             marginBottom: '1.5rem',
           }}>
-            Corporación de Tripulantes del Ecuador
+            Corporación de Tripulantes de la Armada del Ecuador
           </div>
 
           <h1 style={{
