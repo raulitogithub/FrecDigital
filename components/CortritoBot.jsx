@@ -114,7 +114,7 @@ const FLOW = {
   },
 };
 
-const WHATSAPP_NUMBER = '593983018678';
+const WHATSAPP_NUMBER = '34643466617';
 const WHATSAPP_MSG = 'Hola, me comunico desde la página de CORTRIP y deseo más información.';
 
 export default function CortritoBot() {
