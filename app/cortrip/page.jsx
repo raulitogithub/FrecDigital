@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import { HeartHandshake, Unlock, CreditCard, Bot } from 'lucide-react';
 
 const gold = '#c9a227';
@@ -39,11 +40,23 @@ const Divider = ({ center }) => (
 );
 
 export default function CortripPage() {
+  const ctaRef = useRef(null);
+  const [showFloatingBtn, setShowFloatingBtn] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowFloatingBtn(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (ctaRef.current) observer.observe(ctaRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div style={{ background: navy, minHeight: '100vh', color: '#fff', fontFamily: "'Arial', sans-serif" }}>
 
       {/* ── BOTÓN FLOTANTE PLAN MAESTRO ── */}
-      <Link href="/cortrip/plan" style={{
+      {showFloatingBtn && <Link href="/cortrip/plan" style={{
         position: 'fixed',
         bottom: 28,
         left: 24,
@@ -66,7 +79,7 @@ export default function CortripPage() {
           <path d="M2 7h10M8 3l4 4-4 4" stroke={navy} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
         Ver Plan Maestro
-      </Link>
+      </Link>}
 
       {/* ── HERO ── */}
       <section style={{
@@ -419,7 +432,7 @@ export default function CortripPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{
+      <section ref={ctaRef} style={{
         padding: '4rem 1.5rem',
         background: `linear-gradient(160deg, #0d2060 0%, #050e25 100%)`,
         textAlign: 'center',
@@ -447,24 +460,33 @@ export default function CortripPage() {
             Conoce nuestro plan completo
           </h2>
           <p style={{ color: '#c0d0e8', lineHeight: 1.8, marginBottom: '2rem' }}>
-            Escanea el código QR o comparte este enlace con tus compañeros socios.
+            Accede al plan completo y comparte este enlace con tus compañeros socios.
             La CORTRIP merece un cambio real, con liderazgo, transparencia y resultados.
           </p>
 
-          {/* QR Code */}
+          {/* Link al Plan Completo */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-            <div style={{
-              background: '#fff',
-              borderRadius: 16,
-              padding: 12,
-              boxShadow: `0 0 30px ${gold}30`,
+            <Link href="/cortrip/plan" style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              background: `linear-gradient(135deg, #0d2060, #0a1845)`,
+              border: `2px solid ${gold}`,
+              color: gold,
+              fontWeight: 700,
+              fontSize: '1.05rem',
+              padding: '1.1rem 2.2rem',
+              borderRadius: 999,
+              textDecoration: 'none',
+              boxShadow: `0 4px 24px rgba(201,162,39,0.3)`,
+              letterSpacing: '0.04em',
+              textTransform: 'uppercase',
             }}>
-              <img
-                src="/images/codigo-QR.jpeg"
-                alt="Código QR - Escanea e interactúa"
-                style={{ width: 160, height: 160, display: 'block' }}
-              />
-            </div>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M3 9h12M10 4l5 5-5 5" stroke={gold} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Ver Plan Maestro Completo
+            </Link>
           </div>
 
           <p style={{ color: '#8090a8', fontSize: '0.8rem', marginBottom: '2rem' }}>
