@@ -96,24 +96,24 @@ export default function CortripPage() {
 
           <div style={{ width: 120, height: 2, background: gold, margin: '0 auto 2rem' }} />
 
-          {/* Emblem placeholder */}
+          {/* Emblem */}
           <div style={{
-            width: 160,
-            height: 160,
+            width: 180,
+            height: 180,
             borderRadius: '50%',
             border: `4px solid ${gold}`,
-            background: 'radial-gradient(circle at 40% 35%, #1a3a7a, #050e25)',
             margin: '0 auto 2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: `0 0 40px ${gold}40`,
+            overflow: 'hidden',
+            boxShadow: `0 0 50px ${gold}50`,
           }}>
-            <span style={{ fontSize: '2.5rem' }}>⚓</span>
-            <p style={{ fontSize: '0.55rem', letterSpacing: '0.2em', color: gold, textTransform: 'uppercase', marginTop: 4, textAlign: 'center', lineHeight: 1.4 }}>
-              SANGRE NUEVA<br />HORIZONTE 180
-            </p>
+            <Image
+              src="/images/sangrenueva.jpeg"
+              alt="Sangre Nueva - Horizonte 180"
+              width={180}
+              height={180}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              priority
+            />
           </div>
 
           <h2 style={{
