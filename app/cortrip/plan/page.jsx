@@ -273,23 +273,14 @@ export default function PlanMaestroPage() {
         </div>
       </section>
 
-      {/* PACTO FINAL con nuestropacto.png */}
-      <section style={{ position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'relative', width: '100%', height: 'clamp(180px, 25vw, 300px)' }}>
-          <Image
-            src="/images/nuestropacto.png"
-            alt="Nuestro Pacto de Cumplimiento"
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(8,21,57,0.5) 0%, rgba(8,21,57,0.85) 100%)' }} />
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1.5rem', textAlign: 'center' }}>
-            <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: gold, marginBottom: '0.5rem' }}>Nuestro Pacto de Cumplimiento</p>
-            <h2 style={{ fontFamily: "'Georgia', serif", fontStyle: 'italic', fontWeight: 700, fontSize: 'clamp(1.2rem, 3.5vw, 2rem)', color: '#fff', margin: 0, lineHeight: 1.3, textTransform: 'uppercase' }}>
-              El Compromiso con el Socio
-            </h2>
-            <div style={{ width: 80, height: 2, background: gold, margin: '1rem auto 0' }} />
-          </div>
+      {/* PACTO FINAL */}
+      <section style={{ overflow: 'hidden' }}>
+        <div style={{ background: `linear-gradient(160deg, #0d2060 0%, #081539 100%)`, padding: '3rem 1.5rem 2rem', textAlign: 'center', borderTop: `1px solid ${gold}30` }}>
+          <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: gold, marginBottom: '0.5rem' }}>Nuestro Pacto de Cumplimiento</p>
+          <h2 style={{ fontFamily: "'Georgia', serif", fontStyle: 'italic', fontWeight: 700, fontSize: 'clamp(1.2rem, 3.5vw, 2rem)', color: '#fff', margin: 0, lineHeight: 1.3, textTransform: 'uppercase' }}>
+            El Compromiso con el Socio
+          </h2>
+          <div style={{ width: 80, height: 2, background: gold, margin: '1rem auto 0' }} />
         </div>
 
         <div style={{ background: `linear-gradient(160deg, #0d2060, #050e25)`, padding: '3rem 1.5rem 4rem', borderTop: `1px solid ${gold}30` }}>
