@@ -18,6 +18,7 @@ jobs:
           script: |
             cd /home/deploy/apps/frecdigital
             git pull origin main
-            docker build -t frecdigital:latest .
-            docker service update --image frecdigital:latest frecdigital_web --force
+            IMAGE_TAG=$(git rev-parse --short HEAD)
+            docker build -t frecdigital:$IMAGE_TAG .
+            docker service update --image frecdigital:$IMAGE_TAG frecdigital_web --force
             docker image prune -f
