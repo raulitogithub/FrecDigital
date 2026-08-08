@@ -533,7 +533,7 @@ export default function CortripPage() {
       }}>
         <p style={{ color: '#5a6a82', fontSize: '0.75rem', margin: 0 }}>
           Horizonte 180 · Sangre Nueva · CORTRIP &nbsp;|&nbsp;
-          <span style={{ color: gold }}>Hecho con ❤ por FrecDigital</span>
+          <span style={{ color: gold }}>Hecho por FrecDigital</span>
         </p>
       </footer>
     </div>
