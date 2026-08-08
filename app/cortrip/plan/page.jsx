@@ -29,7 +29,7 @@ const BulletItem = ({ title, children }) => (
 const pillars = [
   {
     number: 1,
-    image: '/images/cortrip-pilar.png?v=2',
+    image: '/images/cortrip-pilar.png',
     title: 'Gobernanza Institucional',
     tags: ['Administración Gerencial', 'Gestión Transparente', 'Seguridad Jurídica'],
     objetivo: 'Acabar con los secretos a puerta cerrada y proteger el patrimonio del socio con reglas claras. Nadie estará por encima de la Corporación.',
@@ -41,7 +41,7 @@ const pillars = [
   },
   {
     number: 2,
-    image: null,
+    image: '/images/cortrip-pilar2.png',
     title: 'Sostenibilidad Financiera',
     tags: ['Reingeniería Económica', 'Autogestión Responsable', 'Crecimiento Sostenible'],
     objetivo: 'Optimizar integralmente los recursos económicos y diversificar las fuentes de ingreso, garantizando la solvencia a largo plazo sin incrementar un solo centavo en la cuota mensual del socio.',
@@ -54,7 +54,7 @@ const pillars = [
   },
   {
     number: 3,
-    image: '/images/cortrip-pilar3.png?v=2',
+    image: '/images/cortrip-pilar3.png',
     title: 'Bienestar del Socio',
     tags: ['Bienestar Integral', 'Beneficios Exclusivos', 'Restitución de Derechos', 'Desarrollo Socio-Cultural'],
     objetivo: 'Que el club deje de ser una carga y se convierta en un respaldo real para tu bolsillo y tu familia.',
@@ -69,7 +69,7 @@ const pillars = [
   },
   {
     number: 4,
-    image: '/images/cortrip-pilar4.png?v=2',
+    image: '/images/cortrip-pilar4.png',
     title: 'Operaciones e Infraestructura',
     tags: ['Seguridad Permanente', 'Infraestructura Moderna', 'Excelencia Operativa'],
     objetivo: 'Construir infraestructura de primer nivel y entornos 100% seguros para nuestras familias.',
@@ -81,7 +81,7 @@ const pillars = [
   },
   {
     number: 5,
-    image: '/images/cortrip-pilar5.png?v=2',
+    image: '/images/cortrip-pilar5.png',
     title: 'Innovación y Transformación Digital',
     tags: ['Modernización Tecnológica', 'Digitalización de Vanguardia', 'Expansión Institucional'],
     objetivo: 'Dar el salto tecnológico definitivo para erradicar la burocracia, garantizar transparencia total en los fondos y poner el control de todos tus beneficios directamente en la palma de tu mano.',

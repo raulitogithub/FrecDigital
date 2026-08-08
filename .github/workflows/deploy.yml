@@ -16,6 +16,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /home/deploy/apps/frecdigital
             git pull origin main
             IMAGE_TAG=$(git rev-parse --short HEAD)
