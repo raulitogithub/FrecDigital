@@ -457,7 +457,7 @@ export default function CortripPage() {
             ].map(({ n, nombre, cargo }) => (
               <div key={n} style={{ textAlign: 'center' }}>
                 <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: `3px solid ${gold}`, margin: '0 auto 0.6rem', boxShadow: `0 0 16px ${gold}40` }}>
-                  <Image src={`/images/cortrip-candidato-${n}.png`} alt={nombre} width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 15%' }} />
+                  <Image src={`/images/cortrip-candidato-${n}.png`} alt={nombre} width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', transform: 'scale(1.15)', transformOrigin: 'center 30%' }} />
                 </div>
                 <p style={{ color: gold, fontWeight: 700, fontSize: '0.72rem', margin: '0 0 0.15rem', lineHeight: 1.3 }}>{nombre}</p>
                 <p style={{ color: '#8090a8', fontSize: '0.65rem', margin: 0 }}>{cargo}</p>
@@ -478,7 +478,7 @@ export default function CortripPage() {
             ].map(({ n, nombre, cargo }) => (
               <div key={n} style={{ textAlign: 'center' }}>
                 <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: `2px solid ${gold}60`, margin: '0 auto 0.6rem', boxShadow: `0 0 10px ${gold}20` }}>
-                  <Image src={`/images/cortrip-candidato-${n}.png`} alt={nombre} width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 15%' }} />
+                  <Image src={`/images/cortrip-candidato-${n}.png`} alt={nombre} width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', transform: 'scale(1.15)', transformOrigin: 'center 30%' }} />
                 </div>
                 <p style={{ color: '#e8d5a0', fontWeight: 600, fontSize: '0.72rem', margin: '0 0 0.15rem', lineHeight: 1.3 }}>{nombre}</p>
                 <p style={{ color: '#8090a8', fontSize: '0.65rem', margin: 0 }}>{cargo}</p>
