@@ -150,8 +150,8 @@ export default function CortripPage() {
             justifyContent: 'center',
           }}>
             <Image
-              src="/images/sangrenueva.jpeg"
-              alt="Sangre Nueva - Horizonte 180"
+              src="/images/cortrip-logo.jpeg"
+              alt="Horizonte 180 - Lista 6"
               width={200}
               height={200}
               style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center' }}
@@ -521,6 +521,69 @@ export default function CortripPage() {
             </svg>
             Asistente Virtual Cortrito
           </a>
+        </div>
+      </section>
+
+      {/* ── CANDIDATOS ── */}
+      <section style={{ padding: '4rem 1.5rem', background: '#0a1e50' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <p style={{ textAlign: 'center', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: gold, marginBottom: '0.4rem' }}>
+            Nuestro pacto de cumplimiento es el compromiso con el socio
+          </p>
+          <SectionTitle center>Nuestro Equipo</SectionTitle>
+          <Divider center />
+
+          {/* Principales */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+            {[
+              { n: 1,  nombre: 'SGOS-MC Nivela T',      cargo: 'Presidente' },
+              { n: 2,  nombre: 'SUBS-SP Escobar E',      cargo: 'Vicepresidente' },
+              { n: 3,  nombre: 'SGOS-MC Cangá C',        cargo: '1er Vocal Principal' },
+              { n: 4,  nombre: 'SUBP-SP Rosllio C',      cargo: '2do Vocal Principal' },
+              { n: 5,  nombre: 'SGOS-MC Castro O',       cargo: '3er Vocal Principal' },
+              { n: 6,  nombre: 'SGOS-IM Guerrero J',     cargo: '4to Vocal Principal' },
+              { n: 7,  nombre: 'CBOP-IF Abad F',         cargo: '5to Vocal Principal' },
+            ].map(({ n, nombre, cargo }) => (
+              <div key={n} style={{ textAlign: 'center' }}>
+                <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: `3px solid ${gold}`, margin: '0 auto 0.6rem', boxShadow: `0 0 16px ${gold}40` }}>
+                  <Image src={`/images/cortrip-candidato-${n}.png`} alt={nombre} width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <p style={{ color: gold, fontWeight: 700, fontSize: '0.72rem', margin: '0 0 0.15rem', lineHeight: 1.3 }}>{nombre}</p>
+                <p style={{ color: '#8090a8', fontSize: '0.65rem', margin: 0 }}>{cargo}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Suplentes */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
+            {[
+              { n: 8,  nombre: 'SUBP-SP Lucas R',        cargo: 'Secretario' },
+              { n: 9,  nombre: 'CBOP-AB Montalvo R',     cargo: 'Tesorera' },
+              { n: 10, nombre: 'SUBP-SP Muñiz E',        cargo: '1er Vocal Suplente' },
+              { n: 11, nombre: 'SGOS-ET Portocarrero P', cargo: '2do Vocal Suplente' },
+              { n: 12, nombre: 'SGOP-SP Espín E',        cargo: '3er Vocal Suplente' },
+              { n: 13, nombre: 'SGOS-IM Brito J',        cargo: '4to Vocal Suplente' },
+              { n: 14, nombre: 'SUBP-SP Mejía M',        cargo: '5to Vocal Suplente' },
+            ].map(({ n, nombre, cargo }) => (
+              <div key={n} style={{ textAlign: 'center' }}>
+                <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: `2px solid ${gold}60`, margin: '0 auto 0.6rem', boxShadow: `0 0 10px ${gold}20` }}>
+                  <Image src={`/images/cortrip-candidato-${n}.png`} alt={nombre} width={100} height={100} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <p style={{ color: '#e8d5a0', fontWeight: 600, fontSize: '0.72rem', margin: '0 0 0.15rem', lineHeight: 1.3 }}>{nombre}</p>
+                <p style={{ color: '#8090a8', fontSize: '0.65rem', margin: 0 }}>{cargo}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Vota Lista 6 */}
+          <div style={{ textAlign: 'center', background: navy, borderRadius: 20, padding: '2rem', border: `1px solid ${gold}30` }}>
+            <p style={{ fontFamily: "'Georgia', serif", fontWeight: 900, fontSize: 'clamp(2rem, 6vw, 3.5rem)', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 0.25rem' }}>
+              ¡Vota Lista!
+            </p>
+            <p style={{ fontFamily: "'Georgia', serif", fontWeight: 900, fontSize: 'clamp(4rem, 15vw, 8rem)', color: gold, lineHeight: 1, margin: 0, textShadow: `0 4px 30px ${gold}80` }}>
+              6
+            </p>
+          </div>
         </div>
       </section>
 
