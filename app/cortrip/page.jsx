@@ -197,10 +197,16 @@ export default function CortripPage() {
         <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
           <SectionTitle center>¿Por qué nace Sangre Nueva?</SectionTitle>
           <Divider center />
-          <p style={{ color: '#c0d0e8', lineHeight: 1.9, fontSize: '1.05rem', textAlign: 'justify' }}>
-            Después de escuchar durante años las necesidades de nuestros compañeros, entendimos que la
-            Corporación necesita recuperar la confianza, fortalecer sus finanzas y volver a servir a sus socios.
-            Sangre Nueva representa un liderazgo cercano, transparente y comprometido con resultados reales.
+          <p style={{ color: '#e8d5a0', lineHeight: 1.9, fontSize: '1.1rem', fontStyle: 'italic', marginBottom: '1rem' }}>
+            ¿Cuándo fue la última vez que sentiste que tu Corporación trabajó para ti?
+          </p>
+          <p style={{ color: '#c0d0e8', lineHeight: 1.9, fontSize: '1rem', marginBottom: '1rem' }}>
+            Ayudaste a construir esta Corporación con tu esfuerzo, con tu sacrificio, con dinero de tu bolsillo.
+            ¿Y qué recibiste a cambio? Eso se llama traición al socio.
+          </p>
+          <p style={{ color: '#c0d0e8', lineHeight: 1.9, fontSize: '1rem' }}>
+            <strong style={{ color: gold }}>HORIZONTE 180</strong> viene a devolverte lo que siempre fue tuyo.
+            No solo venimos a pedirte el voto, sino a recordarte que tú tienes el poder de recuperar todo lo que te privaron.
           </p>
         </div>
       </section>
@@ -238,9 +244,9 @@ export default function CortripPage() {
               </div>
               <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {[
-                  'Pondremos el cargo a disposición de la asamblea de socios si no alcanzamos nuestros objetivos.',
-                  'Reduciremos inmediatamente las dietas, viáticos y comisiones de toda la directiva.',
-                  'Disminuiremos los costos en servicios de bebidas y comida hasta un 20%.',
+                  'Pondremos el cargo a disposición de la asamblea si no alcanzamos el 40% de nuestros objetivos en el primer año.',
+                  'Reduciremos inmediatamente las dietas, viáticos y comisiones de toda la directiva hasta en un 50%.',
+                  'Disminuiremos los costos en servicios de bebidas y comida hasta en un 20%.',
                 ].map((item, i) => (
                   <li key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                     <span style={{ color: gold, fontWeight: 700, fontSize: '1rem', lineHeight: 1.6, flexShrink: 0 }}>{i + 1}.</span>
@@ -277,7 +283,7 @@ export default function CortripPage() {
                 {[
                   'Plan 180 Días: En 6 meses recuperaremos la estabilidad financiera de la CORTRIP y frenaremos el despilfarro.',
                   'Auditoría Forense: Rastrearemos tus aportes. Te entregaremos los números reales, sin excusas ni maquillaje.',
-                  'Cero Impunidad: Si hubo fraude o malversación, habrá denuncia penal. Con tu dinero no se juega.',
+                  'Cero Impunidad: Si hubo fraude o malversación, denunciaremos ante la justicia ordinaria. Con tu dinero no se juega.',
                 ].map((item, i) => (
                   <li key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                     <span style={{ color: gold, fontWeight: 700, fontSize: '1rem', lineHeight: 1.6, flexShrink: 0 }}>{i + 4}.</span>
