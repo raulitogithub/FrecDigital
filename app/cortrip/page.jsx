@@ -479,7 +479,7 @@ export default function CortripPage() {
               { n: 10, nombre: 'SUBP-SP Muñiz Enrique',     cargo: '1er Vocal Suplente' },
               { n: 11, nombre: 'SGOS-ET Portocarrero P.',   cargo: '2do Vocal Suplente' },
               { n: 12, nombre: 'SGOP-SP Espín Edison',      cargo: '3er Vocal Suplente' },
-              { n: 13, nombre: 'SGOS-IM Brito Jhon',        cargo: '4to Vocal Suplente' },
+              { n: 13, nombre: 'SGOS-IM Brito John',        cargo: '4to Vocal Suplente' },
               { n: 14, nombre: 'SUBP-SP Mejía Miguel',      cargo: '5to Vocal Suplente' },
             ].map(({ n, nombre, cargo }) => (
               <div key={n} style={{ textAlign: 'center' }}>
