@@ -447,13 +447,13 @@ export default function CortripPage() {
           {/* Principales */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
             {[
-              { n: 1,  nombre: 'SGOP-MC Nivela Tulio',        cargo: 'Presidente' },
-              { n: 2,  nombre: 'SUBS-SP Escobar Eduardo',   cargo: 'Vicepresidente' },
-              { n: 3,  nombre: 'SGOS-MC Cangá Duván',       cargo: '1er Vocal Principal' },
-              { n: 4,  nombre: 'SGOP-SP Rosillo César',     cargo: '2do Vocal Principal' },
-              { n: 5,  nombre: 'SGOS-MC Castro Oscar',      cargo: '3er Vocal Principal' },
-              { n: 6,  nombre: '',                           cargo: '4to Vocal Principal' },
-              { n: 7,  nombre: '',                           cargo: '5to Vocal Principal' },
+              { n: 1, nombre: 'SGOP-MC Nivela Tulio',      cargo: 'Presidente' },
+              { n: 2, nombre: 'SUBS-SP Escobar Eduardo',  cargo: 'Vicepresidente' },
+              { n: 3, nombre: 'CBOP-AB Montalvo Roxana',  cargo: 'Tesorera' },
+              { n: 4, nombre: 'SUBP-SP Lucas Rodrigo',    cargo: 'Secretario' },
+              { n: 5, nombre: 'SGOS-MC Cangá Duván',      cargo: '1er Vocal Principal' },
+              { n: 6, nombre: 'SGOP-SP Rosillo César',    cargo: '2do Vocal Principal' },
+              { n: 7, nombre: 'SGOS-MC Castro Oscar',     cargo: '3er Vocal Principal' },
             ].map(({ n, nombre, cargo }) => (
               <div key={n} style={{ textAlign: 'center' }}>
                 <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: `3px solid ${gold}`, margin: '0 auto 0.6rem', boxShadow: `0 0 16px ${gold}40` }}>
@@ -468,8 +468,8 @@ export default function CortripPage() {
           {/* Suplentes */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
             {[
-              { n: 8,  nombre: 'SUBP-SP Lucas Rodrigo',       cargo: 'Secretario' },
-              { n: 9,  nombre: 'CBOP-AB Montalvo Roxana',   cargo: 'Tesorera' },
+              { n: 8,  nombre: 'SGOS-IM Guerrero Junior',    cargo: '4to Vocal Principal' },
+              { n: 9,  nombre: 'CBOP-IF Abad Felix',        cargo: '5to Vocal Principal' },
               { n: 10, nombre: 'SUBP-SP Muñiz Enrique',     cargo: '1er Vocal Suplente' },
               { n: 11, nombre: 'SGOS-ET Portocarrero P.',   cargo: '2do Vocal Suplente' },
               { n: 12, nombre: 'SGOP-SP Espín Edison',      cargo: '3er Vocal Suplente' },
