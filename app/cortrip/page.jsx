@@ -447,13 +447,13 @@ export default function CortripPage() {
           {/* Principales */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
             {[
-              { n: 1,  nombre: 'SGOS-MC Nivela T',      cargo: 'Presidente' },
-              { n: 2,  nombre: 'SUBS-SP Escobar E',      cargo: 'Vicepresidente' },
-              { n: 3,  nombre: 'SGOS-MC Cangá C',        cargo: '1er Vocal Principal' },
-              { n: 4,  nombre: 'SUBP-SP Rosllio C',      cargo: '2do Vocal Principal' },
-              { n: 5,  nombre: 'SGOS-MC Castro O',       cargo: '3er Vocal Principal' },
-              { n: 6,  nombre: 'SGOS-IM Guerrero J',     cargo: '4to Vocal Principal' },
-              { n: 7,  nombre: 'CBOP-IF Abad F',         cargo: '5to Vocal Principal' },
+              { n: 1,  nombre: 'SGOP-MC Nivela Tulio',        cargo: 'Presidente' },
+              { n: 2,  nombre: 'SUBS-SP Escobar Eduardo',   cargo: 'Vicepresidente' },
+              { n: 3,  nombre: 'SGOS-MC Cangá Duván',       cargo: '1er Vocal Principal' },
+              { n: 4,  nombre: 'SGOP-SP Rosillo César',     cargo: '2do Vocal Principal' },
+              { n: 5,  nombre: 'SGOS-MC Castro Oscar',      cargo: '3er Vocal Principal' },
+              { n: 6,  nombre: '',                           cargo: '4to Vocal Principal' },
+              { n: 7,  nombre: '',                           cargo: '5to Vocal Principal' },
             ].map(({ n, nombre, cargo }) => (
               <div key={n} style={{ textAlign: 'center' }}>
                 <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: `3px solid ${gold}`, margin: '0 auto 0.6rem', boxShadow: `0 0 16px ${gold}40` }}>
@@ -468,13 +468,13 @@ export default function CortripPage() {
           {/* Suplentes */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
             {[
-              { n: 8,  nombre: 'SUBP-SP Lucas R',        cargo: 'Secretario' },
-              { n: 9,  nombre: 'CBOP-AB Montalvo R',     cargo: 'Tesorera' },
-              { n: 10, nombre: 'SUBP-SP Muñiz E',        cargo: '1er Vocal Suplente' },
-              { n: 11, nombre: 'SGOS-ET Portocarrero P', cargo: '2do Vocal Suplente' },
-              { n: 12, nombre: 'SGOP-SP Espín E',        cargo: '3er Vocal Suplente' },
-              { n: 13, nombre: 'SGOS-IM Brito J',        cargo: '4to Vocal Suplente' },
-              { n: 14, nombre: 'SUBP-SP Mejía M',        cargo: '5to Vocal Suplente' },
+              { n: 8,  nombre: 'SUBP-SP Lucas Rodrigo',       cargo: 'Secretario' },
+              { n: 9,  nombre: 'CBOP-AB Montalvo Roxana',   cargo: 'Tesorera' },
+              { n: 10, nombre: 'SUBP-SP Muñiz Enrique',     cargo: '1er Vocal Suplente' },
+              { n: 11, nombre: 'SGOS-ET Portocarrero P.',   cargo: '2do Vocal Suplente' },
+              { n: 12, nombre: 'SGOP-SP Espín Edison',      cargo: '3er Vocal Suplente' },
+              { n: 13, nombre: 'SGOS-IM Brito Jhon',        cargo: '4to Vocal Suplente' },
+              { n: 14, nombre: 'SUBP-SP Mejía Miguel',      cargo: '5to Vocal Suplente' },
             ].map(({ n, nombre, cargo }) => (
               <div key={n} style={{ textAlign: 'center' }}>
                 <div style={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: `2px solid ${gold}60`, margin: '0 auto 0.6rem', boxShadow: `0 0 10px ${gold}20` }}>
