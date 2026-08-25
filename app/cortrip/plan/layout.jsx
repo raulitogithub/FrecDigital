@@ -9,7 +9,7 @@ export const metadata = {
     siteName: 'CORTRIP - Sangre Nueva',
     images: [
       {
-        url: '/images/cortrip-logo.jpeg',
+        url: 'https://frecdigital.com/images/cortrip-logo.jpeg',
         width: 800,
         height: 800,
         alt: 'Plan Maestro Horizonte 180 - Lista 6',
