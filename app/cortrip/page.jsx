@@ -515,6 +515,35 @@ export default function CortripPage() {
         borderTop: `1px solid ${gold}30`,
       }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
+
+          {/* Video interior */}
+          <div style={{
+            position: 'relative',
+            borderRadius: 16,
+            overflow: 'hidden',
+            marginBottom: '2.5rem',
+            boxShadow: `0 0 0 2px ${gold}, 0 20px 50px rgba(201,162,39,0.25)`,
+          }}>
+            <video
+              src="/images/cortrip/interior-web.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ display: 'block', width: '100%', maxHeight: 360, objectFit: 'cover' }}
+            />
+            {/* Gradiente inferior para suavizar corte */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 60,
+              background: 'linear-gradient(transparent, #0d2060)',
+              pointerEvents: 'none',
+            }} />
+          </div>
+
           <p style={{
             fontSize: '0.75rem',
             letterSpacing: '0.2em',
