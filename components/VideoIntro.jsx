@@ -6,7 +6,7 @@ const gold = '#c9a227';
 export default function VideoIntro({ src }) {
   const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
   const videoRef = useRef(null);
   const timerRef = useRef(null);
 
@@ -17,8 +17,14 @@ export default function VideoIntro({ src }) {
 
   useEffect(() => {
     if (visible && videoRef.current) {
-      // Autoplay funciona solo con muted=true en navegadores modernos
-      videoRef.current.play().catch(() => {});
+      const v = videoRef.current;
+      v.muted = false;
+      v.play().catch(() => {
+        // Navegador bloqueó autoplay con sonido → fallback silenciado
+        v.muted = true;
+        setMuted(true);
+        v.play().catch(() => {});
+      });
     }
   }, [visible]);
 
@@ -86,7 +92,6 @@ export default function VideoIntro({ src }) {
           ref={videoRef}
           src={src}
           playsInline
-          muted
           style={{ display: 'block', width: '100%', maxHeight: '80vh', objectFit: 'contain', background: '#000' }}
           onEnded={startClose}
         />
