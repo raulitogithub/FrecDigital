@@ -56,7 +56,7 @@ export default function CortripPage() {
   return (
     <div style={{ background: navy, minHeight: '100vh', color: '#fff', fontFamily: "'Arial', sans-serif" }}>
 
-      <VideoIntro src="/images/cortrip/portada1-web.mp4" />
+      <VideoIntro src="/images/cortrip/portada2-web.mp4" />
 
       {/* ── BOTÓN FLOTANTE PLAN MAESTRO ── */}
       {showFloatingBtn && <Link href="/cortrip/plan" style={{
