@@ -310,6 +310,31 @@ export default function PlanMaestroPage() {
                     <BulletItem key={i} title={item.title}>{item.body}</BulletItem>
                   ))}
                 </ul>
+                {pilar.number === 5 && (
+                  <div style={{
+                    position: 'relative',
+                    borderRadius: 14,
+                    overflow: 'hidden',
+                    marginTop: '2rem',
+                    boxShadow: `0 0 0 2px ${gold}, 0 20px 50px rgba(201,162,39,0.25)`,
+                  }}>
+                    <video
+                      src="/images/cortrip/plan.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      style={{ display: 'block', width: '100%', maxHeight: 360, objectFit: 'cover' }}
+                    />
+                    <div style={{
+                      position: 'absolute',
+                      bottom: 0, left: 0, right: 0,
+                      height: 60,
+                      background: `linear-gradient(transparent, ${navy})`,
+                      pointerEvents: 'none',
+                    }} />
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -328,31 +353,6 @@ export default function PlanMaestroPage() {
 
         <div style={{ background: `linear-gradient(160deg, #0d2060, #050e25)`, padding: '3rem 1.5rem 4rem', borderTop: `1px solid ${gold}30` }}>
           <div style={{ maxWidth: 700, margin: '0 auto' }}>
-
-            {/* Video plan */}
-            <div style={{
-              position: 'relative',
-              borderRadius: 16,
-              overflow: 'hidden',
-              marginBottom: '2.5rem',
-              boxShadow: `0 0 0 2px ${gold}, 0 20px 50px rgba(201,162,39,0.25)`,
-            }}>
-              <video
-                src="/images/cortrip/plan.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                style={{ display: 'block', width: '100%', maxHeight: 360, objectFit: 'cover' }}
-              />
-              <div style={{
-                position: 'absolute',
-                bottom: 0, left: 0, right: 0,
-                height: 60,
-                background: 'linear-gradient(transparent, #0d2060)',
-                pointerEvents: 'none',
-              }} />
-            </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2.5rem' }}>
               {[
