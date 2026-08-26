@@ -3,11 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 
 const gold = '#c9a227';
-const navy = '#081539';
-
 export default function VideoIntro({ src }) {
   const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [muted, setMuted] = useState(true);
   const videoRef = useRef(null);
   const timerRef = useRef(null);
 
@@ -18,9 +17,17 @@ export default function VideoIntro({ src }) {
 
   useEffect(() => {
     if (visible && videoRef.current) {
+      // Autoplay funciona solo con muted=true en navegadores modernos
       videoRef.current.play().catch(() => {});
     }
   }, [visible]);
+
+  function toggleMute() {
+    setMuted((prev) => {
+      if (videoRef.current) videoRef.current.muted = !prev;
+      return !prev;
+    });
+  }
 
   function startClose() {
     if (timerRef.current) return;
@@ -79,23 +86,61 @@ export default function VideoIntro({ src }) {
           ref={videoRef}
           src={src}
           playsInline
-          muted={false}
-          controls={false}
+          muted
           style={{ display: 'block', width: '100%', maxHeight: '80vh', objectFit: 'contain', background: '#000' }}
           onEnded={startClose}
         />
 
-        {/* Barra inferior con botón cerrar */}
+        {/* Barra inferior */}
         <div style={{
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
           padding: '10px 16px',
-          background: 'linear-gradient(transparent, rgba(8,21,57,0.9))',
+          background: 'linear-gradient(transparent, rgba(8,21,57,0.95))',
           display: 'flex',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 10,
         }}>
+          {/* Botón silencio / sonido */}
+          <button
+            onClick={toggleMute}
+            style={{
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.25)',
+              color: '#fff',
+              borderRadius: 8,
+              padding: '6px 14px',
+              fontSize: 13,
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+          >
+            {muted ? (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+                </svg>
+                Activar sonido
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                </svg>
+                Silenciar
+              </>
+            )}
+          </button>
+
+          {/* Botón cerrar */}
           <button
             onClick={handleManualClose}
             style={{
