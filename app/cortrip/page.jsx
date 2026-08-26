@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { HeartHandshake, Unlock, CreditCard, Bot } from 'lucide-react';
+import VideoIntro from '@/components/VideoIntro';
 
 const gold = '#c9a227';
 const navy = '#081539';
@@ -54,6 +55,8 @@ export default function CortripPage() {
 
   return (
     <div style={{ background: navy, minHeight: '100vh', color: '#fff', fontFamily: "'Arial', sans-serif" }}>
+
+      <VideoIntro src="/images/cortrip/portada-web.mp4" />
 
       {/* ── BOTÓN FLOTANTE PLAN MAESTRO ── */}
       {showFloatingBtn && <Link href="/cortrip/plan" style={{
