@@ -40,7 +40,7 @@ export default function VideoIntro({ src }) {
     timerRef.current = setTimeout(() => {
       setClosing(true);
       setTimeout(() => setVisible(false), 400);
-    }, 3000);
+    }, 2000);
   }
 
   function handleManualClose() {
