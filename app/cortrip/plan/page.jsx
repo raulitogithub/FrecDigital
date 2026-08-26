@@ -305,17 +305,12 @@ export default function PlanMaestroPage() {
                 <p style={{ color: '#e8d5a0', fontWeight: 700, marginBottom: '1.25rem', fontSize: '1rem' }}>
                   <strong>Objetivo:</strong> {pilar.objetivo}
                 </p>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {pilar.items.map((item, i) => (
-                    <BulletItem key={i} title={item.title}>{item.body}</BulletItem>
-                  ))}
-                </ul>
                 {pilar.number === 5 && (
                   <div style={{
                     position: 'relative',
                     borderRadius: 14,
                     overflow: 'hidden',
-                    marginTop: '2rem',
+                    marginBottom: '1.75rem',
                     boxShadow: `0 0 0 2px ${gold}, 0 20px 50px rgba(201,162,39,0.25)`,
                   }}>
                     <video
@@ -324,7 +319,7 @@ export default function PlanMaestroPage() {
                       muted
                       loop
                       playsInline
-                      style={{ display: 'block', width: '100%', maxHeight: 360, objectFit: 'cover' }}
+                      style={{ display: 'block', width: '100%', maxHeight: 480, objectFit: 'cover' }}
                     />
                     <div style={{
                       position: 'absolute',
@@ -335,6 +330,11 @@ export default function PlanMaestroPage() {
                     }} />
                   </div>
                 )}
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {pilar.items.map((item, i) => (
+                    <BulletItem key={i} title={item.title}>{item.body}</BulletItem>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}
