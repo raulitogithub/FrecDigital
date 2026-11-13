@@ -16,18 +16,20 @@ export const viewport = {
 };
 
 const BASE_URL = 'https://frecdigital.com';
+const TITLE = 'FrecDigital · Consultora de IA para pymes e industria';
 
+// La imagen para redes (1200×630) se genera en app/opengraph-image.js y
+// app/twitter-image.js. El canonical de cada página se define en su page.js.
 export const metadata = {
   metadataBase: new URL(BASE_URL),
 
-  title: "FrecDigital - Inteligencia Artificial para tu Negocio",
-  description: siteMetadata.description,
-  authors: [{ name: siteMetadata.author, url: BASE_URL }],
-
-  alternates: {
-    canonical: '/',
-    languages: { es: '/' },
+  title: {
+    default: TITLE,
+    template: '%s | FrecDigital',
   },
+  description: siteMetadata.description,
+  keywords: siteMetadata.keywords,
+  authors: [{ name: siteMetadata.author, url: BASE_URL }],
 
   icons: {
     icon: "/images/logo1.webp",
@@ -36,28 +38,19 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "FrecDigital - Inteligencia Artificial para tu Negocio",
+    title: TITLE,
     description: siteMetadata.description,
     url: BASE_URL,
     type: 'website',
     siteName: 'FrecDigital',
-    images: [
-      {
-        url: '/images/logo1.webp',
-        width: 200,
-        height: 200,
-        alt: 'FrecDigital - Inteligencia Artificial',
-        type: 'image/webp',
-      },
-    ],
     locale: 'es_ES',
+    alternateLocale: ['es_EC'],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: "FrecDigital - Inteligencia Artificial para tu Negocio",
+    title: TITLE,
     description: siteMetadata.description,
-    images: ['/images/logo1.webp'],
   },
 
   robots: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",

@@ -12,6 +12,9 @@ import {
   MessageCircle,
   Globe
 } from 'lucide-react';
+import { company } from '@/lib/seo-metadata';
+
+const { founder } = company;
 
 export default function WhyUsSection() {
   const features = [
@@ -91,7 +94,7 @@ export default function WhyUsSection() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="w-24 h-1 bg-[#00b4d8] rounded-full mx-auto mt-4 mb-8"
             />
-            <motion.h2
+            <motion.h3
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -99,7 +102,7 @@ export default function WhyUsSection() {
               className="text-3xl md:text-4xl font-bold text-[#00b4d8]"
             >
               Nuestra historia
-            </motion.h2>
+            </motion.h3>
           </div>
 
           {/* Contenido Centrado */}
@@ -118,6 +121,11 @@ export default function WhyUsSection() {
               </p>
             </motion.div>
 
+            {/* Fundador y presencia (texto plano en el HTML para buscadores e IA) */}
+            <p className="text-lg text-white/80 leading-relaxed text-center">
+              Al frente está <span className="font-semibold text-white">{founder.name}</span>, {founder.degree} y {founder.masters} por la {founder.university}. Hoy es {founder.currentRole.charAt(0).toLowerCase() + founder.currentRole.slice(1)}. Trabajamos con pymes e industria en <span className="text-[#00b4d8] font-semibold">España ({company.locations[0].city})</span> y <span className="text-[#00b4d8] font-semibold">Ecuador ({company.locations[1].city})</span>.
+            </p>
+
             {/* Línea decorativa */}
             <motion.div
               initial={{ scaleX: 0 }}
@@ -135,7 +143,7 @@ export default function WhyUsSection() {
               transition={{ delay: 0.4 }}
               className="text-lg text-white/80 leading-relaxed text-center"
             >
-              Reconocemos que muchas empresas, startups y profesionales cuentan con grandes ideas, pero se enfrentan a:
+              Reconocemos que muchas pymes, empresas industriales y profesionales cuentan con grandes ideas, pero se enfrentan a:
             </motion.p>
 
             {/* Lista de problemas */}

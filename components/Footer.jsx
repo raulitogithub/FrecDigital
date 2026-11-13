@@ -23,11 +23,17 @@ export default function Footer() {
     { icon: Mail, href: EMAIL_HREF, label: 'Email' },
   ].filter((link) => Boolean(link.href));
   const footerLinks = [
-    { label: 'Inicio', href: '#hero' },
-    { label: 'Servicios', href: '#services' },
-    { label: 'Nosotros', href: '#why-us' },
-    { label: 'Preguntas frecuentes', href: '#faq' },
-    { label: 'Contacto', href: '#contact' },
+    { label: 'Inicio', href: '/#hero' },
+    { label: 'Servicios', href: '/#services' },
+    { label: 'Nosotros', href: '/#why-us' },
+    { label: 'Proyectos', href: '/#proyectos' },
+    { label: 'Preguntas frecuentes', href: '/#faq' },
+    { label: 'Contacto', href: '/#contact' },
+  ];
+  const legalLinks = [
+    { label: 'Aviso legal', href: '/aviso-legal' },
+    { label: 'Privacidad', href: '/privacidad' },
+    { label: 'Cookies', href: '/cookies' },
   ];
 
   return (
@@ -116,7 +122,7 @@ export default function Footer() {
                 'Integración Inteligente de Sistemas',
               ].map((service) => (
                 <li key={service} className="group">
-                  <Link href="#services" className="text-white/55 hover:text-[#00b4d8] transition-colors duration-300 hover:translate-x-2 inline-flex items-center gap-2">
+                  <Link href="/#services" className="text-white/55 hover:text-[#00b4d8] transition-colors duration-300 hover:translate-x-2 inline-flex items-center gap-2">
                     <span className="text-[#00b4d8] opacity-0 group-hover:opacity-100 transition-all duration-300">›</span>
                     {service}
                   </Link>
@@ -167,15 +173,11 @@ export default function Footer() {
             © {currentYear} FrecDigital · Todos los derechos reservados
           </p>
           <div className="flex gap-6">
-            <Link href="#" className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
-              Privacidad
-            </Link>
-            <Link href="#" className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
-              Términos
-            </Link>
-            <Link href="#" className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
-              Cookies
-            </Link>
+            {legalLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </motion.div>
       </div>

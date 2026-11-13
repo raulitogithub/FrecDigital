@@ -15,6 +15,7 @@ export default function Navbar() {
     { label: 'Inicio', href: '#hero' },
     { label: 'Servicios', href: '#services' },
     { label: 'Nosotros', href: '#why-us' },
+    { label: 'Proyectos', href: '#proyectos' },
     { label: 'Contacto', href: '#contact' },
   ];
 

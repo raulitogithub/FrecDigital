@@ -53,7 +53,7 @@ export default function ProcessSection() {
   };
 
   return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="proceso" className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Fondo con imagen local */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
