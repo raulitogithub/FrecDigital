@@ -6,6 +6,7 @@ import { Mail } from 'lucide-react';
 import { FaWhatsapp, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Logo from './Logo';
 import { company, whatsappUrl } from '@/lib/seo-metadata';
+import { services } from '@/lib/services';
 
 const WHATSAPP_FOOTER_MESSAGE =
   'Estimado, me gustaría recibir más información sobre sus servicios. Gracias.';
@@ -114,17 +115,11 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Servicios</h4>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <ul className="space-y-3 text-sm">
-              {[
-                'Asistentes de IA Especializados',
-                'Agendamiento Inteligente',
-                'Automatización Inteligente de Procesos',
-                'Consultas Gerenciales IA',
-                'Integración Inteligente de Sistemas',
-              ].map((service) => (
-                <li key={service} className="group">
-                  <Link href="/#services" className="text-white/55 hover:text-[#00b4d8] transition-colors duration-300 hover:translate-x-2 inline-flex items-center gap-2">
+              {services.map((service) => (
+                <li key={service.slug} className="group">
+                  <Link href={`/#${service.slug}`} className="text-white/55 hover:text-[#00b4d8] transition-colors duration-300 hover:translate-x-2 inline-flex items-center gap-2">
                     <span className="text-[#00b4d8] opacity-0 group-hover:opacity-100 transition-all duration-300">›</span>
-                    {service}
+                    {service.title}
                   </Link>
                 </li>
               ))}
