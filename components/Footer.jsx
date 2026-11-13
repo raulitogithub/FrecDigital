@@ -26,6 +26,7 @@ export default function Footer() {
     { label: 'Inicio', href: '#hero' },
     { label: 'Servicios', href: '#services' },
     { label: 'Nosotros', href: '#why-us' },
+    { label: 'Preguntas frecuentes', href: '#faq' },
     { label: 'Contacto', href: '#contact' },
   ];
 

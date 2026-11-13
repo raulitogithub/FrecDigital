@@ -2,15 +2,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ChatWrapper from "./ChatWrapper";
 import WhatsAppButton from "@/components/WhatsAppButtonWrapper";
-import { siteMetadata, generateSchemaMarkup } from "@/lib/seo-metadata";
+import { siteMetadata, siteJsonLd } from "@/lib/seo-metadata";
+import JsonLd from "@/components/JsonLd";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
-
-const schemaOrganization = generateSchemaMarkup('Organization');
-const schemaFAQ = generateSchemaMarkup('FAQPage');
 
 export const viewport = {
   themeColor: "#1a3a6b",
@@ -80,8 +78,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="utf-8" />
 
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrganization) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }} />
+        <JsonLd data={siteJsonLd()} />
 
         {/* Google Analytics (opcional) */}
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
