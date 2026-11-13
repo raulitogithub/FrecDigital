@@ -2,24 +2,28 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Mail, Clock, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 import Button from './ui/Button';
 import { handleContactForm } from "@/app/actions/lib-email";
 import { company } from '@/lib/seo-metadata';
-// Validation Schema
-const contactFormSchema = z.object({
-  fullName: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
-  email: z.string().email('Por favor ingresa un email válido'),
-  company: z.string().optional(),
-  service: z.string().min(1, 'Por favor selecciona un servicio'),
-  message: z
-    .string()
-    .min(20, 'El mensaje debe tener al menos 20 caracteres')
-    .max(1000, 'El mensaje no puede exceder 1000 caracteres'),
-});
+import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES } from '@/lib/contact-schema';
+
+const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
+const selectClassName =
+  'w-full px-4 py-3 rounded-lg border-2 border-white/15 focus:border-[#00b4d8] focus:outline-none transition-all bg-white/8 backdrop-blur-md text-white placeholder-white/30 focus:bg-white/12 focus:shadow-lg focus:shadow-[#00b4d8]/20 appearance-none pr-10';
+
+function SelectChevron() {
+  return (
+    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/60">
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  );
+}
 
 export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState('idle'); // idle | loading | success | error
@@ -32,16 +36,8 @@ export default function ContactForm() {
     reset,
   } = useForm({
     resolver: zodResolver(contactFormSchema),
+    defaultValues: { country: '', service: '', privacy: false },
   });
-
-  const services = [
-    'Asistentes de IA Especializados',
-    'Agendamiento Inteligente',
-    'Automatización Inteligente de Procesos',
-    'Consultas Gerenciales IA',
-    'Integración Inteligente de Sistemas',
-    'Otros',
-  ];
 
   const contactInfo = [
     { icon: Mail, label: 'Email', value: company.email },
@@ -62,11 +58,11 @@ export default function ContactForm() {
       }, 5000);
     } else {
       setSubmitStatus('error');
-      setSubmitMessage('Ocurrió un error al enviar. Por favor intenta de nuevo.');
+      setSubmitMessage(result.message || GENERIC_ERROR);
     }
   } catch (error) {
     setSubmitStatus('error');
-    setSubmitMessage('Ocurrió un error al enviar. Por favor intenta de nuevo.');
+    setSubmitMessage(GENERIC_ERROR);
   }
 };
 
@@ -183,28 +179,42 @@ export default function ContactForm() {
                 />
               </div>
 
+              {/* Country Select */}
+              <div>
+                <label htmlFor="contact-country" className="block text-sm font-semibold text-white/80 mb-2">
+                  País *
+                </label>
+                <div className="relative">
+                  <select id="contact-country" {...register('country')} className={selectClassName}>
+                    <option value="" className="bg-[#0a1628] text-white">Selecciona un país</option>
+                    {CONTACT_COUNTRIES.map((country) => (
+                      <option key={country} value={country} className="bg-[#0a1628] text-white">
+                        {country}
+                      </option>
+                    ))}
+                  </select>
+                  <SelectChevron />
+                </div>
+                {errors.country && (
+                  <p className="text-red-300 text-sm mt-1">{errors.country.message}</p>
+                )}
+              </div>
+
               {/* Service Select */}
               <div>
-                <label className="block text-sm font-semibold text-white/80 mb-2">
+                <label htmlFor="contact-service" className="block text-sm font-semibold text-white/80 mb-2">
                   Servicio de interés *
                 </label>
                 <div className="relative">
-                  <select
-                    {...register('service')}
-                    className="w-full px-4 py-3 rounded-lg border-2 border-white/15 focus:border-[#00b4d8] focus:outline-none transition-all bg-white/8 backdrop-blur-md text-white placeholder-white/30 focus:bg-white/12 focus:shadow-lg focus:shadow-[#00b4d8]/20 appearance-none pr-10"
-                  >
+                  <select id="contact-service" {...register('service')} className={selectClassName}>
                     <option value="" className="bg-[#0a1628] text-white">Selecciona un servicio</option>
-                    {services.map((service) => (
+                    {CONTACT_SERVICES.map((service) => (
                       <option key={service} value={service} className="bg-[#0a1628] text-white">
                         {service}
                       </option>
                     ))}
                   </select>
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/60">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
+                  <SelectChevron />
                 </div>
                 {errors.service && (
                   <p className="text-red-300 text-sm mt-1">{errors.service.message}</p>
@@ -224,6 +234,32 @@ export default function ContactForm() {
                 />
                 {errors.message && (
                   <p className="text-red-300 text-sm mt-1">{errors.message.message}</p>
+                )}
+              </div>
+
+              {/* Privacy consent (obligatorio) */}
+              <div>
+                <label htmlFor="contact-privacy" className="flex items-start gap-3 cursor-pointer text-sm text-white/80">
+                  <input
+                    id="contact-privacy"
+                    type="checkbox"
+                    {...register('privacy')}
+                    className="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-2 border-white/30 bg-white/10 accent-[#00b4d8] cursor-pointer"
+                  />
+                  <span>
+                    He leído y acepto la{' '}
+                    <Link
+                      href="/privacidad"
+                      target="_blank"
+                      className="text-[#00b4d8] underline underline-offset-2 hover:text-white"
+                    >
+                      política de privacidad
+                    </Link>{' '}
+                    *
+                  </span>
+                </label>
+                {errors.privacy && (
+                  <p className="text-red-300 text-sm mt-1">{errors.privacy.message}</p>
                 )}
               </div>
 
@@ -340,7 +376,7 @@ export default function ContactForm() {
                     Respuesta rápida garantizada
                   </p>
                   <p className="text-white/60 text-sm">
-                    Nuestro equipo se pondrá en contacto contigo en menos de 24 horas.
+                    Nuestro equipo se pondrá en contacto contigo en menos de 24 horas en días laborables.
                   </p>
                 </div>
               </motion.div>
