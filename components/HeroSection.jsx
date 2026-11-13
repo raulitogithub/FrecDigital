@@ -32,15 +32,18 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      {/* Video Background */}
+      {/* Video Background (decorativo). El póster es su primer fotograma:
+          se ve al instante mientras carga el vídeo (1,4 MB, sin audio). */}
       <video
         autoPlay
         muted
         loop
         playsInline
+        poster="/images/hero-poster.webp"
+        aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/images/video3.mp4" type="video/mp4" />
+        <source src="/images/hero-video.mp4" type="video/mp4" />
       </video>
 
       {/* Background with gradient overlay */}

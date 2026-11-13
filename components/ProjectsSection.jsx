@@ -16,7 +16,7 @@ export default function ProjectsSection() {
       <div className="absolute inset-0 bg-[#c8dff0]" />
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ backgroundImage: 'url(/images/fondo2.webp)' }}
+        style={{ backgroundImage: 'url(/images/fondo2-opt.webp)' }}
       />
       <div className="absolute top-10 left-10 w-96 h-96 bg-[#1a3a6b]/20 rounded-full blur-3xl" />
       <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#1a3a6b]/20 rounded-full blur-3xl" />
