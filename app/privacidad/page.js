@@ -1,25 +1,194 @@
-import LegalPage from '@/components/LegalPage';
+import Link from 'next/link';
+import LegalPage, { LegalSection } from '@/components/LegalPage';
+import { legal } from '@/lib/legal';
+import { company } from '@/lib/seo-metadata';
 
-// noindex mientras el contenido esté en preparación; quitarlo al publicar el texto.
+// TODO(profesional): revisar el texto completo antes de publicarlo como definitivo.
+// TODO: quitar el noindex y añadir la página al sitemap cuando estén completos los marcadores [ ... ].
 export const metadata = {
   title: 'Política de privacidad',
+  description: `Cómo trata ${company.name} los datos personales del formulario de contacto y cómo ejercer tus derechos.`,
   robots: { index: false, follow: true },
   alternates: { canonical: '/privacidad' },
 };
 
-const sections = [
-  { title: 'Responsable del tratamiento' },
-  { title: 'Datos personales que tratamos' },
-  { title: 'Finalidad del tratamiento' },
-  { title: 'Base jurídica' },
-  { title: 'Plazo de conservación' },
-  { title: 'Destinatarios y transferencias internacionales' },
-  { title: 'Derechos de las personas interesadas' },
-  { title: 'Reclamación ante la autoridad de control' },
-  { title: 'Medidas de seguridad' },
-  { title: 'Cambios en esta política' },
-];
+const mail = <a href={`mailto:${legal.email}`}>{legal.email}</a>;
 
 export default function PrivacidadPage() {
-  return <LegalPage title="Política de privacidad" sections={sections} />;
+  return (
+    <LegalPage title="Política de privacidad" lastUpdated={legal.lastUpdated}>
+      <p>
+        Esta política explica qué datos personales tratamos a través de este sitio web, para qué, con
+        qué base legal, durante cuánto tiempo y cómo puedes ejercer tus derechos. Se ha redactado
+        conforme al Reglamento (UE) 2016/679 (RGPD), la Ley Orgánica 3/2018 de Protección de Datos
+        Personales y garantía de los derechos digitales (LOPDGDD) y la Ley Orgánica de Protección de
+        Datos Personales de Ecuador (LOPDP).
+      </p>
+
+      <LegalSection number={1} title="Responsable del tratamiento">
+        {/* TODO(profesional): el responsable está establecido fuera de la UE y ofrece servicios a personas en
+            España. Valorar la obligación de designar un representante en la UE (art. 27 RGPD) e indicarlo aquí. */}
+        <ul>
+          <li><strong>Responsable:</strong> {legal.ownerName}, {legal.ownerType}.</li>
+          <li><strong>RUC:</strong> {legal.ruc}</li>
+          <li><strong>Domicilio:</strong> {legal.address}</li>
+          <li><strong>Email de contacto para protección de datos:</strong> {mail}</li>
+        </ul>
+      </LegalSection>
+
+      <LegalSection number={2} title="Datos personales que tratamos">
+        <p>
+          <strong>Formulario de contacto.</strong> Cuando nos escribes desde el formulario tratamos:
+        </p>
+        <ul>
+          <li>Nombre completo y correo electrónico (obligatorios).</li>
+          <li>Empresa u organización (opcional).</li>
+          <li>País (España, Ecuador u otro) y servicio de interés.</li>
+          <li>El mensaje que nos envías.</li>
+          <li>La constancia de que has aceptado esta política de privacidad.</li>
+        </ul>
+        <p>
+          Te pedimos que no incluyas en el mensaje datos especialmente protegidos (salud, ideología,
+          origen étnico, etc.) ni datos de otras personas sin su consentimiento.
+        </p>
+        <p>
+          <strong>Datos técnicos.</strong> Para evitar abusos, usamos tu dirección IP de forma temporal
+          para limitar el número de envíos del formulario (cinco por hora). Se guarda solo en la memoria
+          del servidor y se descarta como máximo al cabo de una hora.
+        </p>
+        {/* TODO: confirmar con el proveedor de hosting qué registros de acceso (logs) guarda y durante cuánto tiempo. */}
+        <p>
+          <strong>Contacto directo.</strong> Si nos escribes por email o WhatsApp, trataremos los datos
+          que nos facilites en esa comunicación con la misma finalidad.
+        </p>
+      </LegalSection>
+
+      <LegalSection number={3} title="Finalidad del tratamiento">
+        <ul>
+          <li>Responder a tu consulta y, si lo pides, enviarte información o una propuesta sobre nuestros servicios.</li>
+          <li>Proteger el formulario frente a envíos masivos o abusivos.</li>
+        </ul>
+        <p>
+          No usamos tus datos para enviarte comunicaciones comerciales sin tu consentimiento expreso,
+          ni tomamos decisiones automatizadas ni elaboramos perfiles con ellos.
+        </p>
+      </LegalSection>
+
+      <LegalSection number={4} title="Base legal">
+        {/* TODO(profesional): validar las bases legales. Si tras la consulta se prepara una propuesta o un
+            contrato, puede aplicar también la ejecución de medidas precontractuales (art. 6.1.b RGPD). */}
+        <ul>
+          <li>
+            <strong>Consentimiento</strong> (art. 6.1.a RGPD y art. 7 LOPDP): lo das al marcar la
+            casilla de aceptación del formulario. Puedes retirarlo en cualquier momento escribiendo a{' '}
+            {mail}, sin que ello afecte a la licitud del tratamiento anterior.
+          </li>
+          <li>
+            <strong>Interés legítimo</strong> (art. 6.1.f RGPD) en mantener la seguridad del sitio, para
+            el uso temporal de la dirección IP descrito arriba.
+          </li>
+        </ul>
+      </LegalSection>
+
+      <LegalSection number={5} title="Plazo de conservación">
+        {/* TODO(profesional): fijar el plazo concreto de conservación (p. ej., 12 meses desde el último contacto). */}
+        <p>
+          Conservaremos los datos del formulario durante el tiempo necesario para atender tu consulta
+          y, si no se inicia una relación profesional, durante un máximo de [PLAZO] desde el último
+          contacto. Después se suprimirán, salvo que debamos conservarlos bloqueados para atender
+          posibles responsabilidades legales.
+        </p>
+        <p>
+          Si se inicia una relación profesional, los datos se conservarán mientras dure y, después,
+          durante los plazos que exija la normativa aplicable.
+        </p>
+      </LegalSection>
+
+      <LegalSection number={6} title="Destinatarios">
+        {/* TODO: completar [PROVEEDORES] con nombre y país de cada proveedor. Según el código actual, los
+            correos del formulario se envían con la API de Gmail (Google) y el dominio pasa por Cloudflare.
+            TODO(profesional): firmar o verificar los contratos de encargado del tratamiento (art. 28 RGPD). */}
+        <p>
+          No cedemos tus datos a terceros, salvo obligación legal. Para prestar el servicio, acceden a
+          ellos como encargados del tratamiento los siguientes proveedores: {legal.providers}
+          (alojamiento web y envío de correo electrónico).
+        </p>
+      </LegalSection>
+
+      <LegalSection number={7} title="Transferencias internacionales">
+        {/* TODO(profesional): el responsable está en Ecuador, país sin decisión de adecuación de la Comisión
+            Europea. Definir las garantías de las transferencias desde la UE (p. ej., cláusulas contractuales
+            tipo) y comprobar las de cada proveedor (p. ej., EU-US Data Privacy Framework). */}
+        <p>
+          El responsable del tratamiento se encuentra en Ecuador, por lo que los datos de personas
+          residentes en la Unión Europea se transfieren fuera del Espacio Económico Europeo. Algunos
+          proveedores también pueden tratar datos fuera del país de origen. Estas transferencias se
+          realizan con las garantías adecuadas previstas en el RGPD y en la LOPDP: [GARANTÍAS].
+        </p>
+      </LegalSection>
+
+      <LegalSection number={8} title="Tus derechos">
+        {/* TODO(profesional): revisar los plazos de respuesta exigidos por la LOPDP de Ecuador. */}
+        <p>
+          Puedes ejercer en cualquier momento los siguientes derechos (conocidos como ARCO-POL):
+        </p>
+        <ul>
+          <li><strong>Acceso:</strong> saber qué datos tuyos tratamos.</li>
+          <li><strong>Rectificación:</strong> corregir o actualizar datos inexactos.</li>
+          <li><strong>Cancelación o supresión:</strong> pedir que eliminemos tus datos.</li>
+          <li><strong>Oposición:</strong> oponerte a un tratamiento concreto.</li>
+          <li><strong>Portabilidad:</strong> recibir tus datos en un formato estructurado y de uso común.</li>
+          <li><strong>Olvido:</strong> pedir que dejen de difundirse tus datos cuando ya no sean necesarios.</li>
+          <li><strong>Limitación:</strong> pedir que suspendamos el tratamiento en determinados casos.</li>
+        </ul>
+        <p>
+          La LOPDP de Ecuador reconoce además el derecho a no ser objeto de decisiones basadas
+          únicamente en tratamientos automatizados. También puedes retirar tu consentimiento en
+          cualquier momento.
+        </p>
+        <p>
+          Para ejercerlos, escribe a {mail} con el asunto «Protección de datos», indicando el derecho
+          que quieres ejercer. Si tenemos dudas razonables sobre tu identidad, podremos pedirte
+          información adicional para confirmarla. Responderemos en el plazo de un mes, prorrogable en
+          los casos previstos en el RGPD.
+        </p>
+      </LegalSection>
+
+      <LegalSection number={9} title="Reclamación ante la autoridad de control">
+        <p>Si consideras que no hemos atendido correctamente tus derechos, puedes reclamar ante:</p>
+        <ul>
+          <li>
+            En España: la Agencia Española de Protección de Datos (
+            <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).
+          </li>
+          <li>En Ecuador: la Superintendencia de Protección de Datos Personales.</li>
+        </ul>
+      </LegalSection>
+
+      <LegalSection number={10} title="Menores de edad">
+        {/* TODO(profesional): confirmar la edad mínima de consentimiento aplicable en Ecuador. */}
+        <p>
+          Este sitio está dirigido a empresas y profesionales. No recogemos conscientemente datos de
+          menores de 14 años; si eres menor, no nos envíes tus datos sin la autorización de tus padres
+          o tutores.
+        </p>
+      </LegalSection>
+
+      <LegalSection number={11} title="Seguridad">
+        <p>
+          Aplicamos medidas técnicas y organizativas para proteger tus datos: conexión cifrada (HTTPS),
+          validación de los datos del formulario en el servidor, límite de envíos y acceso restringido
+          a la información recibida.
+        </p>
+      </LegalSection>
+
+      <LegalSection number={12} title="Cambios en esta política">
+        <p>
+          Podemos actualizar esta política para adaptarla a cambios normativos o del sitio web. La
+          fecha de la última actualización figura al principio de la página. Consulta también nuestra{' '}
+          <Link href="/cookies">política de cookies</Link>.
+        </p>
+      </LegalSection>
+    </LegalPage>
+  );
 }

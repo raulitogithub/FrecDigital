@@ -9,6 +9,7 @@ import { Mail, Clock, Send, CheckCircle, AlertCircle, Loader } from 'lucide-reac
 import Button from './ui/Button';
 import { handleContactForm } from "@/app/actions/lib-email";
 import { company } from '@/lib/seo-metadata';
+import { legal } from '@/lib/legal';
 import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES } from '@/lib/contact-schema';
 
 const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
@@ -261,6 +262,19 @@ export default function ContactForm() {
                 {errors.privacy && (
                   <p className="text-red-300 text-sm mt-1">{errors.privacy.message}</p>
                 )}
+                {/* Información básica de protección de datos (primera capa).
+                    TODO(profesional): revisar junto con la política de privacidad. */}
+                <p className="mt-3 text-xs leading-relaxed text-white/50">
+                  <strong className="text-white/70">Responsable:</strong> {legal.ownerName}.{' '}
+                  <strong className="text-white/70">Finalidad:</strong> responder a tu consulta.{' '}
+                  <strong className="text-white/70">Legitimación:</strong> tu consentimiento.{' '}
+                  <strong className="text-white/70">Destinatarios:</strong> proveedores de alojamiento y correo; no se ceden datos salvo obligación legal.{' '}
+                  <strong className="text-white/70">Derechos:</strong> acceso, rectificación, supresión y otros, escribiendo a {legal.email}.{' '}
+                  Más información en la{' '}
+                  <Link href="/privacidad" target="_blank" className="text-[#00b4d8] underline underline-offset-2 hover:text-white">
+                    política de privacidad
+                  </Link>.
+                </p>
               </div>
 
               {/* Submit Status Messages */}

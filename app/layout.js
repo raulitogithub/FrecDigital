@@ -1,12 +1,20 @@
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import ChatWrapper from "./ChatWrapper";
 import WhatsAppButton from "@/components/WhatsAppButtonWrapper";
+import CookieConsent from "@/components/CookieConsent";
 import { siteMetadata, siteJsonLd } from "@/lib/seo-metadata";
 import JsonLd from "@/components/JsonLd";
 
+// next/font descarga las fuentes en el build y las sirve desde nuestro dominio:
+// el navegador del visitante no hace ninguna petición a Google.
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -66,42 +74,12 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang={siteMetadata.language}
-      className={`${inter.variable} h-full antialiased scroll-smooth`}
+      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased scroll-smooth`}
     >
       <head>
         <meta charSet="utf-8" />
 
         <JsonLd data={siteJsonLd()} />
-
-        {/* Google Analytics (opcional) */}
-        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
-                    page_path: window.location.pathname,
-                  });
-                `,
-              }}
-            />
-          </>
-        )}
-
-        {/* DNS Prefetch para optimización */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-
-        {/* Preconnect */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Manifest para PWA */}
         <link rel="manifest" href="/manifest.json" />
@@ -110,6 +88,8 @@ export default function RootLayout({ children }) {
         {children}
         <ChatWrapper />
         <WhatsAppButton />
+        {/* Google Analytics solo se carga tras aceptar en el banner (si hay ID configurado) */}
+        <CookieConsent />
       </body>
     </html>
   );

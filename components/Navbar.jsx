@@ -11,13 +11,25 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
+  // Rutas absolutas ("/#…") para que el menú funcione también desde las páginas legales
   const navLinks = [
-    { label: 'Inicio', href: '#hero' },
-    { label: 'Servicios', href: '#services' },
-    { label: 'Nosotros', href: '#why-us' },
-    { label: 'Proyectos', href: '#proyectos' },
-    { label: 'Contacto', href: '#contact' },
+    { label: 'Inicio', href: '/#hero' },
+    { label: 'Servicios', href: '/#services' },
+    { label: 'Nosotros', href: '/#why-us' },
+    { label: 'Proyectos', href: '/#proyectos' },
+    { label: 'Contacto', href: '/#contact' },
   ];
+  const sectionId = (href) => href.split('#')[1];
+
+  // En la home baja al formulario; en otras páginas navega a /#contact
+  const goToContact = () => {
+    const contactSection = document.querySelector('#contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = '/#contact';
+    }
+  };
 
   // Scroll detection
   useEffect(() => {
@@ -46,7 +58,7 @@ export default function Navbar() {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     navLinks.forEach((link) => {
-      const element = document.querySelector(link.href);
+      const element = document.getElementById(sectionId(link.href));
       if (element) {
         observer.observe(element);
       }
@@ -83,7 +95,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className={`relative text-sm font-medium transition-all duration-300 group ${
-                  activeSection === link.href.slice(1)
+                  activeSection === sectionId(link.href)
                     ? 'text-[#00b4d8]'
                     : 'text-[#1a3a6b]/70 hover:text-[#00b4d8]'
                 }`}
@@ -92,7 +104,7 @@ export default function Navbar() {
                 {/* Animated underline */}
                 <span
                   className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#00b4d8] to-cyan-300 transition-all duration-300 ${
-                    activeSection === link.href.slice(1)
+                    activeSection === sectionId(link.href)
                       ? 'w-full'
                       : 'w-0 group-hover:w-full'
                   }`}
@@ -107,10 +119,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              onClick={() => {
-                const contactSection = document.querySelector('#contact');
-                contactSection?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={goToContact}
               className="px-5 py-2 rounded-full bg-[#00b4d8] text-white font-medium text-sm border border-[#00b4d8] hover:bg-[#0090b0] hover:shadow-lg hover:shadow-[#00b4d8]/25 transition-all duration-300 flex items-center gap-2"
             >
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -157,7 +166,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   className={`block text-lg font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
-                    activeSection === link.href.slice(1)
+                    activeSection === sectionId(link.href)
                       ? 'text-[#00b4d8] bg-[#e8f4fc] font-semibold'
                       : 'text-[#1a3a6b]/70 hover:text-[#00b4d8] hover:bg-[#f0f9ff]'
                   }`}
@@ -184,8 +193,7 @@ export default function Navbar() {
                 transition={{ duration: 0.2, ease: 'easeOut' }}
                 onClick={() => {
                   setIsMenuOpen(false);
-                  const contactSection = document.querySelector('#contact');
-                  contactSection?.scrollIntoView({ behavior: 'smooth' });
+                  goToContact();
                 }}
                 className="w-full px-5 py-3 rounded-full bg-[#00b4d8] text-white font-medium text-base border border-[#00b4d8] hover:bg-[#0090b0] hover:shadow-lg hover:shadow-[#00b4d8]/25 transition-all duration-300 flex items-center justify-center gap-2"
               >

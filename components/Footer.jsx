@@ -7,6 +7,7 @@ import { FaWhatsapp, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Logo from './Logo';
 import { company, whatsappUrl } from '@/lib/seo-metadata';
 import { services } from '@/lib/services';
+import CookieSettingsButton from './CookieSettingsButton';
 
 const WHATSAPP_FOOTER_MESSAGE =
   'Estimado, me gustaría recibir más información sobre sus servicios. Gracias.';
@@ -167,12 +168,13 @@ export default function Footer() {
           <p className="flex items-center gap-2">
             © {currentYear} FrecDigital · Todos los derechos reservados
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {legalLinks.map((link) => (
               <Link key={link.href} href={link.href} className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
                 {link.label}
               </Link>
             ))}
+            <CookieSettingsButton className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300" />
           </div>
         </motion.div>
       </div>
