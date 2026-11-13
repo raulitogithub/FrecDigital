@@ -4,11 +4,26 @@ import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  X, Wrench, DollarSign, Phone, CalendarDays,
-  Bot, Settings, GitMerge, BarChart2, ArrowLeft,
-  Home, ClipboardList, BadgeDollarSign
+  X, Wrench, DollarSign, Phone, CalendarDays, ArrowLeft,
+  Home, ClipboardList, BadgeDollarSign, ExternalLink
 } from 'lucide-react';
 import { company } from '@/lib/seo-metadata';
+import { services } from '@/lib/services';
+
+// Un paso del flujo por servicio, generado desde lib/services.js
+const SERVICE_STEPS = Object.fromEntries(
+  services.map((s) => [
+    s.slug,
+    {
+      text: `${s.title}${s.badge ? ` (${s.badge.toLowerCase()})` : ''}\n\n${s.question}\n${s.detail}\n\n${s.tags.map((t) => `✓ ${t}`).join('\n')}`,
+      buttons: [
+        { icon: BadgeDollarSign, label: 'Quiero cotizar',  next: 'cotizar' },
+        { icon: ExternalLink,    label: 'Verlo en la web', action: 'scroll', target: `#${s.slug}` },
+        { icon: ArrowLeft,       label: 'Otros servicios', next: 'servicios' },
+      ],
+    },
+  ])
+);
 
 const FLOW = {
   welcome: {
@@ -22,49 +37,9 @@ const FLOW = {
   },
   servicios: {
     text: 'Ofrecemos estas soluciones con IA. ¿Cuál te interesa?',
-    buttons: [
-      { icon: Bot,           label: 'Asistentes de IA',       next: 'chatbots' },
-      { icon: Settings,      label: 'Automatización',         next: 'automatizacion' },
-      { icon: GitMerge,      label: 'Integración de Sistemas', next: 'integracion' },
-      { icon: CalendarDays,  label: 'Agendamiento',           next: 'agendamiento' },
-      { icon: BarChart2,     label: 'Consultas Gerenciales',  next: 'consultas' },
-    ],
+    buttons: services.map((s) => ({ icon: s.icon, label: s.shortTitle, next: s.slug })),
   },
-  chatbots: {
-    text: 'Nuestros Asistentes de IA Especializados:\n✓ Atienden consultas automáticamente, sin intervención humana\n✓ WhatsApp, Instagram, Facebook y web\n✓ Personalizados para tu industria y procesos\n✓ Califican leads y guían al cliente automáticamente',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  automatizacion: {
-    text: 'Automatización de Procesos:\n✓ Elimina tareas repetitivas\n✓ Envío automático de correos\n✓ Generación de reportes\n✓ Gestión de bases de datos',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  integracion: {
-    text: 'Integración de Sistemas con IA:\n✓ Conecta CRM, ERP y apps\n✓ Datos centralizados en tiempo real\n✓ Elimina errores manuales',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  agendamiento: {
-    text: 'Agendamiento Inteligente:\n✓ Asistente de IA agenda citas automáticamente\n✓ Confirmaciones y recordatorios\n✓ Disponibilidad en tiempo real',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  consultas: {
-    text: 'Consultas Gerenciales con IA:\n✓ Pregunta tus datos en lenguaje natural\n✓ Reportes automáticos al instante\n✓ Análisis de ventas por período',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
+  ...SERVICE_STEPS,
   precios: {
     text: 'Nuestros precios son personalizados según tu proyecto. Un asesor te dará una cotización adaptada a tu negocio.',
     buttons: [
@@ -80,7 +55,7 @@ const FLOW = {
     ],
   },
   agendar: {
-    text: '¡Perfecto! Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas.',
+    text: '¡Perfecto! Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas en días laborables.',
     buttons: [
       { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
       { icon: Home,          label: 'Inicio',           next: 'welcome' },
@@ -120,8 +95,14 @@ export default function FrecBot() {
   }, [messages, isOpen]);
 
   const handleButton = (button) => {
-    if (button.action === 'scroll-contact') {
-      document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+    if (button.action === 'scroll-contact' || button.action === 'scroll') {
+      const target = button.action === 'scroll' ? button.target : '#contact';
+      const element = document.querySelector(target);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.location.href = `/${target}`; // p. ej. desde las páginas legales
+      }
       setIsOpen(false);
       return;
     }
