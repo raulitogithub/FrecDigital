@@ -8,6 +8,7 @@ import {
   Bot, Settings, GitMerge, BarChart2, ArrowLeft,
   Home, ClipboardList, BadgeDollarSign
 } from 'lucide-react';
+import { company } from '@/lib/seo-metadata';
 
 const FLOW = {
   welcome: {
@@ -30,7 +31,7 @@ const FLOW = {
     ],
   },
   chatbots: {
-    text: 'Nuestros Asistentes de IA Especializados:\n✓ Atienden consultas 24/7 sin intervención humana\n✓ WhatsApp, Instagram, Facebook y web\n✓ Personalizados para tu industria y procesos\n✓ Califican leads y guían al cliente automáticamente',
+    text: 'Nuestros Asistentes de IA Especializados:\n✓ Atienden consultas automáticamente, sin intervención humana\n✓ WhatsApp, Instagram, Facebook y web\n✓ Personalizados para tu industria y procesos\n✓ Califican leads y guían al cliente automáticamente',
     buttons: [
       { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
       { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
@@ -51,7 +52,7 @@ const FLOW = {
     ],
   },
   agendamiento: {
-    text: 'Agendamiento Inteligente:\n✓ Asistente de IA agenda citas automáticamente\n✓ Confirmaciones y recordatorios\n✓ Disponibilidad en tiempo real 24/7',
+    text: 'Agendamiento Inteligente:\n✓ Asistente de IA agenda citas automáticamente\n✓ Confirmaciones y recordatorios\n✓ Disponibilidad en tiempo real',
     buttons: [
       { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
       { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
@@ -72,7 +73,7 @@ const FLOW = {
     ],
   },
   contacto: {
-    text: 'Puedes contactarnos en:\n✉ fespinoza@frecdigital.com\n🕐 Lun - Vie, 08:00 a 16:00 (Ecuador)',
+    text: `Puedes contactarnos en:\n✉ ${company.email}\n🕐 ${company.hours.short}`,
     buttons: [
       { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
       { icon: Home,          label: 'Inicio',           next: 'welcome' },

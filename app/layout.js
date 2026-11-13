@@ -57,8 +57,6 @@ export const metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    site: '@frecdigital',
-    creator: '@frecdigital',
     title: "FrecDigital - Inteligencia Artificial para tu Negocio",
     description: siteMetadata.description,
     images: ['/images/logo1.webp'],

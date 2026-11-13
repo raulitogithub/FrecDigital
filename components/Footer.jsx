@@ -2,19 +2,26 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Share2, Heart, Mail } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { Mail } from 'lucide-react';
+import { FaWhatsapp, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Logo from './Logo';
+import { company, whatsappUrl } from '@/lib/seo-metadata';
 
-export default function Footer() { 
+const WHATSAPP_FOOTER_MESSAGE =
+  'Estimado, me gustaría recibir más información sobre sus servicios. Gracias.';
+const EMAIL_HREF = `mailto:${company.email}?subject=${encodeURIComponent('Información sobre servicios')}&body=${encodeURIComponent('Hola, buen día. Me gustaría conocer más sobre sus servicios. Quedo atento. Gracias.')}`;
+
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  // Solo se muestran los canales con dato definido en lib/seo-metadata.js
   const socialLinks = [
-    { icon: Share2, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Heart, href: 'https://instagram.com', label: 'Instagram' },
-    { icon: FaWhatsapp, href: 'https://wa.me/34643466617?text=Estimado%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.%20Gracias.', label: 'WhatsApp' },
-    { icon: Mail, href: 'mailto:fespinoza@frecdigital.com?subject=Información%20sobre%20servicios&body=Hola,%20buen%20día.%20Me%20gustaría%20conocer%20más%20sobre%20sus%20servicios.%20Quedo%20atento.%20Gracias.', label: 'Email' },
-  ];
+    { icon: FaLinkedin, href: company.social.linkedin, label: 'LinkedIn' },
+    { icon: FaInstagram, href: company.social.instagram, label: 'Instagram' },
+    { icon: FaWhatsapp, href: whatsappUrl('es', WHATSAPP_FOOTER_MESSAGE), label: 'WhatsApp España' },
+    { icon: FaWhatsapp, href: whatsappUrl('ec', WHATSAPP_FOOTER_MESSAGE), label: 'WhatsApp Ecuador' },
+    { icon: Mail, href: EMAIL_HREF, label: 'Email' },
+  ].filter((link) => Boolean(link.href));
   const footerLinks = [
     { label: 'Inicio', href: '#hero' },
     { label: 'Servicios', href: '#services' },
@@ -124,14 +131,14 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
           >
-            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Síguenos</h4>
+            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Contacto</h4>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <div className="grid grid-cols-2 gap-3">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  target="_blank"
+                  target={social.href.startsWith('mailto:') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-full flex items-center gap-3 px-3 py-2.5 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-[#00b4d8]/50 hover:bg-[#00b4d8]/10 transition-all duration-300 group"

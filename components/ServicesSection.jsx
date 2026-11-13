@@ -13,7 +13,7 @@ export default function ServicesSection() {
       image: '/images/Chatbots.webp',
       adMessage: '¿Pierdes clientes por responder tarde los mensajes?',
       adDescription: 'Nuestros asistentes de IA atienden automáticamente WhatsApp, aplicaciones web, resolviendo preguntas frecuentes y guiando a tus clientes en tiempo real sin descanso.',
-      adBadges: [' Atención automática 24/7'],
+      adBadges: [' Respuesta automática al instante'],
       adBorderColor: '#10b981',
     },
     {
@@ -22,8 +22,8 @@ export default function ServicesSection() {
       description: 'Automatiza tus reservas con un asistente virtual que agenda, confirma y recuerda citas sin intervención humana.',
       image: '/images/agendamiento.webp',
       adMessage: '¿Cansado de gestionar citas manualmente?',
-      adDescription: 'Nuestro asistente de IA atiende 24/7, sincroniza con tu calendario y envía recordatorios automáticos. Reduce el 80% de las ausencias y no-shows.',
-      adBadges: [' Disponible 24/7'],
+      adDescription: 'Nuestro asistente de IA gestiona las reservas, sincroniza con tu calendario y envía recordatorios automáticos para reducir las ausencias y los no-shows.',
+      adBadges: [' Recordatorios automáticos'],
       adBorderColor: '#06b6d4',
     },
     {

@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { Mail, Clock, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 import Button from './ui/Button';
 import { handleContactForm } from "@/app/actions/lib-email";
+import { company } from '@/lib/seo-metadata';
 // Validation Schema
 const contactFormSchema = z.object({
   fullName: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
@@ -43,10 +44,8 @@ export default function ContactForm() {
   ];
 
   const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'fespinoza@frecdigital.com' },
-    //{ icon: Phone, label: 'Teléfono', value: '+1 (555) 123-4567' },
-    //{ icon: MapPin, label: 'Ubicación', value: 'Ecuador, EC' },
-    { icon: Clock, label: 'Horario', value: 'Lun - Vie, 08:00 a 16:00' },
+    { icon: Mail, label: 'Email', value: company.email },
+    { icon: Clock, label: 'Horario', value: company.hours.short },
   ];
   
   const onSubmit = async (data) => {
