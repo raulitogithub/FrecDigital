@@ -9,7 +9,6 @@ import { Mail, Clock, Send, CheckCircle, AlertCircle, Loader } from 'lucide-reac
 import Button from './ui/Button';
 import { handleContactForm } from "@/app/actions/lib-email";
 import { company } from '@/lib/seo-metadata';
-import { legal } from '@/lib/legal';
 import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES, HONEYPOT_FIELD } from '@/lib/contact-schema';
 
 const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
@@ -288,16 +287,9 @@ export default function ContactForm() {
                     Quiero recibir novedades de FrecDigital por email (opcional). Puedes darte de baja cuando quieras.
                   </span>
                 </label>
-
-                {/* Información básica de protección de datos (primera capa).
-                    TODO(profesional): revisar junto con la política de privacidad. */}
-                <p className="mt-3 text-xs leading-relaxed text-white/50">
-                  <strong className="text-white/70">Responsable:</strong> {legal.ownerName}.{' '}
-                  <strong className="text-white/70">Finalidad:</strong> responder a tu consulta y, solo si lo marcas, enviarte novedades.{' '}
-                  <strong className="text-white/70">Legitimación:</strong> tu consentimiento.{' '}
-                  <strong className="text-white/70">Destinatarios:</strong> proveedores de alojamiento y correo; no se ceden datos salvo obligación legal.{' '}
-                  <strong className="text-white/70">Derechos:</strong> acceso, rectificación, supresión y otros, escribiendo a {legal.email}.
-                </p>
+                {/* La información de protección de datos está en /privacidad, enlazada en la casilla.
+                    TODO(profesional): confirmar que basta con el enlace en el punto de recogida
+                    (la AEPD recomienda además una primera capa informativa junto al formulario). */}
               </div>
 
               {/* Submit Status Messages */}
