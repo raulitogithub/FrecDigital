@@ -1,4 +1,3 @@
-const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -66,19 +65,8 @@ const nextConfig = {
           },
         ],
       },
-      ...(isProd
-        ? [
-            {
-              source: '/_next/static/:path*',
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable'
-                },
-              ],
-            },
-          ]
-        : []),
+      // /_next/static/* no necesita cabecera propia: Next.js ya lo sirve como
+      // "public, max-age=31536000, immutable" (y definirla genera un aviso en el build).
     ];
   },
 

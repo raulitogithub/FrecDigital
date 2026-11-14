@@ -77,9 +77,12 @@ export default function FrecBot() {
   const [messages, setMessages] = useState([]);
   const [hasOpened, setHasOpened] = useState(false);
   const messagesEndRef = useRef(null);
+  const nextMessageId = useRef(1); // ids de mensaje sin Date.now() (regla de pureza de React)
 
-  useEffect(() => {
-    if (isOpen && !hasOpened) {
+  // Abre/cierra el chat. El mensaje de bienvenida se crea en el primer clic
+  // (en el evento, no en un efecto, para no encadenar renders).
+  const toggleOpen = () => {
+    if (!isOpen && !hasOpened) {
       setMessages([{
         id: 1,
         type: 'bot',
@@ -89,7 +92,8 @@ export default function FrecBot() {
       }]);
       setHasOpened(true);
     }
-  }, [isOpen, hasOpened]);
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     if (!isOpen) return;
@@ -110,7 +114,7 @@ export default function FrecBot() {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        window.location.href = `/${target}`; // p. ej. desde las páginas legales
+        window.location.assign(`/${target}`); // p. ej. desde las páginas legales
       }
       setIsOpen(false);
       return;
@@ -118,13 +122,13 @@ export default function FrecBot() {
 
     const nextStep = FLOW[button.next];
     const userMsg = {
-      id: Date.now(),
+      id: ++nextMessageId.current,
       type: 'user',
       text: button.label,
       timestamp: new Date(),
     };
     const botMsg = {
-      id: Date.now() + 1,
+      id: ++nextMessageId.current,
       type: 'bot',
       text: nextStep.text,
       buttons: nextStep.buttons,
@@ -147,7 +151,7 @@ export default function FrecBot() {
         <div className="relative">
           <div className="absolute inset-0 rounded-full bg-cyan-500 animate-ping opacity-20" />
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleOpen}
             className="relative w-14 h-14 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/50 hover:scale-110 transition-transform overflow-hidden border-2 border-cyan-600"
             aria-label="Abrir chat"
           >

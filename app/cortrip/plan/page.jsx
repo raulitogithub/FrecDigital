@@ -166,7 +166,7 @@ export default function PlanMaestroPage() {
             Plan Maestro
           </h1>
           <h2 style={{ fontFamily: "'Georgia', serif", fontStyle: 'italic', fontWeight: 400, fontSize: 'clamp(1.1rem, 3vw, 1.6rem)', color: '#e8d5a0', marginBottom: '1rem' }}>
-            "Horizonte 180"
+            &quot;Horizonte 180&quot;
           </h2>
           <div style={{ width: 80, height: 3, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: '0 auto 1.25rem' }} />
           <p style={{ color: '#8090a8', fontSize: '0.85rem' }}>Presentado por el equipo de trabajo <strong style={{ color: gold }}>Sangre Nueva</strong></p>
@@ -232,9 +232,9 @@ export default function PlanMaestroPage() {
           </div>
 
           <div style={{ background: '#0d2060', border: `2px solid ${gold}50`, borderRadius: 14, padding: '2rem', textAlign: 'center' }}>
-            <p style={{ color: '#8090a8', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1rem' }}>Objetivo General — Administración "Sangre Nueva"</p>
+            <p style={{ color: '#8090a8', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '1rem' }}>Objetivo General — Administración &quot;Sangre Nueva&quot;</p>
             <p style={{ color: '#e8d5a0', lineHeight: 1.9, margin: 0, fontStyle: 'italic', fontSize: '1.05rem' }}>
-              "Transformar la Corporación de Tripulación de la Armada en una institución financieramente autosostenible, jurídicamente blindada y tecnológicamente avanzada; garantizando la restitución de derechos, el bienestar integral y el orgullo de la familia naval mediante un modelo de alta gerencia y transparencia absoluta."
+              &quot;Transformar la Corporación de Tripulación de la Armada en una institución financieramente autosostenible, jurídicamente blindada y tecnológicamente avanzada; garantizando la restitución de derechos, el bienestar integral y el orgullo de la familia naval mediante un modelo de alta gerencia y transparencia absoluta.&quot;
             </p>
           </div>
         </div>

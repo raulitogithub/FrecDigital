@@ -90,7 +90,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
           >
-            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Enlaces Rápidos</h4>
+            <h2 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Enlaces Rápidos</h2>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <ul className="space-y-3">
               {footerLinks.map((link) => (
@@ -114,7 +114,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
           >
-            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Servicios</h4>
+            <h2 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Servicios</h2>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <ul className="space-y-3 text-sm">
               {services.map((service) => (
@@ -135,7 +135,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
           >
-            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Contacto</h4>
+            <h2 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Contacto</h2>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <div className="grid grid-cols-2 gap-3">
               {socialLinks.map((social) => (

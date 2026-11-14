@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 import { GA_ID, CONSENT_STORAGE_KEY, OPEN_COOKIE_SETTINGS_EVENT } from '@/lib/legal';
@@ -12,11 +12,14 @@ import { GA_ID, CONSENT_STORAGE_KEY, OPEN_COOKIE_SETTINGS_EVENT } from '@/lib/le
 // - La elección se puede cambiar en cualquier momento (CookieSettingsButton).
 // TODO(profesional): revisar textos y la duración de la elección guardada.
 
+const CONSENT_CHANGED_EVENT = 'frec:cookie-consent-changed';
+
 function readConsent() {
   try {
-    return window.localStorage.getItem(CONSENT_STORAGE_KEY);
+    const value = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+    return value === 'granted' || value === 'denied' ? value : 'pending';
   } catch {
-    return null;
+    return 'pending';
   }
 }
 
@@ -26,6 +29,16 @@ function saveConsent(value) {
   } catch {
     // Navegación privada o almacenamiento bloqueado: la elección dura esta visita.
   }
+}
+
+// Suscripción a cambios de la elección (en esta pestaña y en otras)
+function subscribe(onChange) {
+  window.addEventListener(CONSENT_CHANGED_EVENT, onChange);
+  window.addEventListener('storage', onChange);
+  return () => {
+    window.removeEventListener(CONSENT_CHANGED_EVENT, onChange);
+    window.removeEventListener('storage', onChange);
+  };
 }
 
 // Borra las cookies _ga y _ga_* en el dominio actual y en el dominio raíz.
@@ -43,20 +56,19 @@ function deleteAnalyticsCookies() {
 }
 
 export default function CookieConsent() {
-  // 'loading' hasta leer la elección guardada; luego 'granted' | 'denied' | 'pending'
-  const [consent, setConsent] = useState('loading');
+  // Elección guardada; en el servidor (y antes de hidratar) vale 'loading'.
+  const stored = useSyncExternalStore(subscribe, readConsent, () => 'loading');
+  // Elección de esta visita, por si el almacenamiento está bloqueado.
+  const [sessionChoice, setSessionChoice] = useState(null);
+  // true cuando el visitante reabre el banner para cambiar su elección.
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const wasGranted = useRef(false);
 
   useEffect(() => {
-    if (!GA_ID) return;
-    const stored = readConsent();
-    setConsent(stored === 'granted' || stored === 'denied' ? stored : 'pending');
-
+    if (!GA_ID) return undefined;
     const openSettings = () => {
-      setConsent((current) => {
-        wasGranted.current = current === 'granted';
-        return 'pending';
-      });
+      wasGranted.current = readConsent() === 'granted';
+      setSettingsOpen(true);
     };
     window.addEventListener(OPEN_COOKIE_SETTINGS_EVENT, openSettings);
     return () => window.removeEventListener(OPEN_COOKIE_SETTINGS_EVENT, openSettings);
@@ -64,18 +76,22 @@ export default function CookieConsent() {
 
   if (!GA_ID) return null;
 
+  const consent = settingsOpen ? 'pending' : sessionChoice ?? stored;
+
   const decide = (value) => {
     saveConsent(value);
+    setSessionChoice(value);
+    setSettingsOpen(false);
+    window.dispatchEvent(new Event(CONSENT_CHANGED_EVENT));
+
     if (value === 'granted') {
       window[`ga-disable-${GA_ID}`] = false;
-      setConsent('granted');
       return;
     }
     // Rechazo: si Analytics ya estaba cargado, se desactiva, se borran sus
     // cookies y se recarga la página para descargar el script.
     window[`ga-disable-${GA_ID}`] = true;
     deleteAnalyticsCookies();
-    setConsent('denied');
     if (wasGranted.current) window.location.reload();
   };
 

@@ -189,7 +189,7 @@ export default function CortripPage() {
             textAlign: 'left',
           }}>
             <p style={{ fontStyle: 'italic', color: '#e8d5a0', fontSize: '1rem', lineHeight: 1.7 }}>
-              "La Corporación no necesita promesas. Necesita liderazgo, transparencia y resultados."
+              &quot;La Corporación no necesita promesas. Necesita liderazgo, transparencia y resultados.&quot;
             </p>
           </div>
         </div>
@@ -310,7 +310,7 @@ export default function CortripPage() {
               <div>
                 <p style={{ color: gold, fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Cero Impunidad</p>
                 <p style={{ color: '#fff', fontStyle: 'italic', fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', fontWeight: 700, lineHeight: 1.4, maxWidth: 500, margin: '0 auto' }}>
-                  "Con tu dinero no se juega. El que le falló al socio, tendrá que responder."
+                  &quot;Con tu dinero no se juega. El que le falló al socio, tendrá que responder.&quot;
                 </p>
               </div>
             </div>
@@ -370,7 +370,7 @@ export default function CortripPage() {
             textAlign: 'left',
           }}>
             <p style={{ fontStyle: 'italic', color: '#e8d5a0', fontSize: '1rem', lineHeight: 1.7, margin: 0 }}>
-              "No te pedimos un voto de confianza, te presentamos un plan para ganarnos esa confianza."
+              &quot;No te pedimos un voto de confianza, te presentamos un plan para ganarnos esa confianza.&quot;
             </p>
           </div>
         </div>

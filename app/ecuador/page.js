@@ -13,7 +13,7 @@ const PATH = '/ecuador';
 const PAGE_URL = `${company.url}${PATH}`;
 const TITLE = 'Inteligencia artificial para empresas en Ecuador';
 const DESCRIPTION =
-  'Asistentes de IA por WhatsApp, voto electrónico para corporaciones y plataforma para academias. FrecDigital trabaja desde Guayaquil con empresas de todo Ecuador.';
+  'Asistentes de IA por WhatsApp, voto electrónico para corporaciones y plataforma para academias. FrecDigital trabaja desde Guayaquil con todo Ecuador.';
 
 export const metadata = {
   title: 'IA para empresas en Ecuador: Guayaquil y Quito',
@@ -25,6 +25,8 @@ export const metadata = {
     url: PATH,
     type: 'website',
     locale: 'es_EC',
+    // Al definir openGraph propio hay que indicar la imagen (la generada en app/opengraph-image.js)
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'FrecDigital · Consultora de IA aplicada para pymes e industria' }],
   },
 };
 
