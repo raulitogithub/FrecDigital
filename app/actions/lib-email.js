@@ -2,7 +2,7 @@
 
 import { headers } from 'next/headers';
 import { google } from 'googleapis';
-import { contactFormSchema } from '@/lib/contact-schema';
+import { contactFormSchema, HONEYPOT_FIELD } from '@/lib/contact-schema';
 import { escapeHtml } from '@/lib/security';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { SECURITY_CONFIG } from '@/lib/security-config';
@@ -18,6 +18,13 @@ function encodeHeader(value) {
 }
 
 export async function handleContactForm(data) {
+  // 0. Campo trampa: una persona nunca lo ve ni lo rellena. Si viene con contenido es un bot:
+  //    respondemos "éxito" para no darle pistas, pero no enviamos nada.
+  if (typeof data?.[HONEYPOT_FIELD] === 'string' && data[HONEYPOT_FIELD].trim() !== '') {
+    console.warn('🛑 Envío del formulario descartado: campo trampa relleno (probable bot).');
+    return { success: true };
+  }
+
   // 1. Límite de envíos por IP (5 por hora, ver lib/security-config.js)
   const { maxRequests, windowMs } = SECURITY_CONFIG.RATE_LIMITS.contact;
   const rateLimit = checkRateLimit({ headers: await headers() }, maxRequests, windowMs);
@@ -36,7 +43,7 @@ export async function handleContactForm(data) {
       message: parsed.error.issues[0]?.message || 'Revisa los datos del formulario.',
     };
   }
-  const { fullName, email, company, country, service, message } = parsed.data;
+  const { fullName, email, company, country, service, message, marketing } = parsed.data;
 
   // 3. Escape de todos los campos antes de insertarlos en el HTML del correo
   const safe = {
@@ -86,7 +93,10 @@ export async function handleContactForm(data) {
           <p><strong>País:</strong> ${safe.country}</p>
           <p><strong>Servicio:</strong> ${safe.service}</p>
           <p><strong>Mensaje:</strong><br>${safe.message}</p>
-          <p style="color: #64748b; font-size: 12px;">Aceptó la política de privacidad.</p>
+          <p style="color: #64748b; font-size: 12px;">
+            Aceptó la política de privacidad.<br>
+            Comunicaciones comerciales: <strong>${marketing ? 'SÍ, acepta recibir novedades' : 'NO (usar sus datos solo para responder a esta consulta)'}</strong>
+          </p>
         </div>
       </div>`,
     ].join('\r\n');

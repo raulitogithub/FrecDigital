@@ -10,7 +10,7 @@ import Button from './ui/Button';
 import { handleContactForm } from "@/app/actions/lib-email";
 import { company } from '@/lib/seo-metadata';
 import { legal } from '@/lib/legal';
-import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES } from '@/lib/contact-schema';
+import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES, HONEYPOT_FIELD } from '@/lib/contact-schema';
 
 const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
 const selectClassName =
@@ -37,7 +37,7 @@ export default function ContactForm() {
     reset,
   } = useForm({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: { country: '', service: '', privacy: false },
+    defaultValues: { country: '', service: '', privacy: false, marketing: false, [HONEYPOT_FIELD]: '' },
   });
 
   const contactInfo = [
@@ -238,6 +238,19 @@ export default function ContactForm() {
                 )}
               </div>
 
+              {/* Campo trampa antispam: fuera de pantalla, sin foco y oculto a lectores de pantalla.
+                  Las personas no lo ven; los bots que rellenan todo, sí (ver app/actions/lib-email.js). */}
+              <div aria-hidden="true" className="absolute -left-[10000px] top-auto w-px h-px overflow-hidden">
+                <label htmlFor="contact-website">No rellenes este campo</label>
+                <input
+                  id="contact-website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  {...register(HONEYPOT_FIELD)}
+                />
+              </div>
+
               {/* Privacy consent (obligatorio) */}
               <div>
                 <label htmlFor="contact-privacy" className="flex items-start gap-3 cursor-pointer text-sm text-white/80">
@@ -262,11 +275,25 @@ export default function ContactForm() {
                 {errors.privacy && (
                   <p className="text-red-300 text-sm mt-1">{errors.privacy.message}</p>
                 )}
+
+                {/* Consentimiento comercial: opcional, separado y sin marcar por defecto (LSSI art. 21, RGPD) */}
+                <label htmlFor="contact-marketing" className="mt-3 flex items-start gap-3 cursor-pointer text-sm text-white/80">
+                  <input
+                    id="contact-marketing"
+                    type="checkbox"
+                    {...register('marketing')}
+                    className="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-2 border-white/30 bg-white/10 accent-[#00b4d8] cursor-pointer"
+                  />
+                  <span>
+                    Quiero recibir novedades de FrecDigital por email (opcional). Puedes darte de baja cuando quieras.
+                  </span>
+                </label>
+
                 {/* Información básica de protección de datos (primera capa).
                     TODO(profesional): revisar junto con la política de privacidad. */}
                 <p className="mt-3 text-xs leading-relaxed text-white/50">
                   <strong className="text-white/70">Responsable:</strong> {legal.ownerName}.{' '}
-                  <strong className="text-white/70">Finalidad:</strong> responder a tu consulta.{' '}
+                  <strong className="text-white/70">Finalidad:</strong> responder a tu consulta y, solo si lo marcas, enviarte novedades.{' '}
                   <strong className="text-white/70">Legitimación:</strong> tu consentimiento.{' '}
                   <strong className="text-white/70">Destinatarios:</strong> proveedores de alojamiento y correo; no se ceden datos salvo obligación legal.{' '}
                   <strong className="text-white/70">Derechos:</strong> acceso, rectificación, supresión y otros, escribiendo a {legal.email}.{' '}

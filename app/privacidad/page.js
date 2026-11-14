@@ -49,6 +49,7 @@ export default function PrivacidadPage() {
           <li>País (España, Ecuador u otro) y servicio de interés.</li>
           <li>El mensaje que nos envías.</li>
           <li>La constancia de que has aceptado esta política de privacidad.</li>
+          <li>Si quieres recibir o no novedades por email (casilla opcional, desmarcada por defecto).</li>
         </ul>
         <p>
           Te pedimos que no incluyas en el mensaje datos especialmente protegidos (salud, ideología,
@@ -69,11 +70,15 @@ export default function PrivacidadPage() {
       <LegalSection number={3} title="Finalidad del tratamiento">
         <ul>
           <li>Responder a tu consulta y, si lo pides, enviarte información o una propuesta sobre nuestros servicios.</li>
+          <li>
+            Solo si marcas la casilla correspondiente, enviarte por email novedades sobre nuestros
+            servicios, proyectos y demos.
+          </li>
           <li>Proteger el formulario frente a envíos masivos o abusivos.</li>
         </ul>
         <p>
-          No usamos tus datos para enviarte comunicaciones comerciales sin tu consentimiento expreso,
-          ni tomamos decisiones automatizadas ni elaboramos perfiles con ellos.
+          Si no marcas la casilla de novedades, usaremos tus datos únicamente para responder a tu
+          consulta. No tomamos decisiones automatizadas ni elaboramos perfiles con tus datos.
         </p>
       </LegalSection>
 
@@ -85,6 +90,11 @@ export default function PrivacidadPage() {
             <strong>Consentimiento</strong> (art. 6.1.a RGPD y art. 7 LOPDP): lo das al marcar la
             casilla de aceptación del formulario. Puedes retirarlo en cualquier momento escribiendo a{' '}
             {mail}, sin que ello afecte a la licitud del tratamiento anterior.
+          </li>
+          <li>
+            <strong>Consentimiento específico para novedades</strong> (art. 6.1.a RGPD y art. 21 de la
+            LSSI): solo si marcas la casilla opcional. Es independiente del anterior: puedes enviar el
+            formulario sin aceptarlo.
           </li>
           <li>
             <strong>Interés legítimo</strong> (art. 6.1.f RGPD) en mantener la seguridad del sitio, para
@@ -100,6 +110,13 @@ export default function PrivacidadPage() {
           último contacto. Después se suprimirán, salvo que debamos conservarlos bloqueados para atender
           posibles responsabilidades legales.
         </p>
+        <p>
+          Si aceptaste recibir novedades, conservaremos tu nombre y email para ese fin hasta que te des
+          de baja. Cada envío incluirá un enlace para hacerlo, y también puedes pedirlo en cualquier
+          momento escribiendo a {mail}.
+        </p>
+        {/* TODO: cuando se envíen novedades, incluir en cada email un enlace o instrucciones de baja
+            (LSSI art. 22) y registrar la fecha del consentimiento de cada contacto. */}
         <p>
           Si se inicia una relación profesional, los datos se conservarán mientras dure y, después,
           durante los plazos que exija la normativa aplicable.
