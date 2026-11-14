@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
@@ -112,6 +113,13 @@ export default function ServiceCard({
                       ))}
                     </ul>
                   )}
+                  <Link
+                    href={`/servicios/${slug}`}
+                    className="inline-flex items-center gap-1 mt-3 text-xs font-semibold text-[#00b4d8] hover:text-white transition-colors"
+                  >
+                    Más información <span aria-hidden="true">→</span>
+                    <span className="sr-only">sobre {title}</span>
+                  </Link>
                 </div>
               </div>
             </div>

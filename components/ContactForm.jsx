@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -10,6 +10,7 @@ import Button from './ui/Button';
 import { handleContactForm } from "@/app/actions/lib-email";
 import { company } from '@/lib/seo-metadata';
 import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES, HONEYPOT_FIELD } from '@/lib/contact-schema';
+import { services } from '@/lib/services';
 
 const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
 const selectClassName =
@@ -34,10 +35,18 @@ export default function ContactForm() {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm({
     resolver: zodResolver(contactFormSchema),
     defaultValues: { country: '', service: '', privacy: false, marketing: false, [HONEYPOT_FIELD]: '' },
   });
+
+  // Preselección desde las páginas de servicio: /?servicio=<slug>#contact
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get('servicio');
+    const service = services.find((s) => s.slug === slug);
+    if (service) setValue('service', service.title);
+  }, [setValue]);
 
   const contactInfo = [
     { icon: Mail, label: 'Email', value: company.email },

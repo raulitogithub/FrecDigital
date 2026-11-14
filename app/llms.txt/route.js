@@ -25,7 +25,7 @@ export function GET() {
 
 ## Servicios
 
-${siteMetadata.services.map((s) => `- ${s.name}: ${s.description}`).join('\n')}
+${siteMetadata.services.map((s) => `- [${s.name}](${url}/servicios/${s.slug}): ${s.description}`).join('\n')}
 
 ## Proyectos y demos
 
@@ -55,7 +55,7 @@ ${faqs.map((f) => `### ${f.question}\n\n${f.answer}`).join('\n\n')}
 ## Enlaces
 
 - [Inicio](${url}/)
-- [Servicios](${url}/#services)
+- [Servicios](${url}/servicios)
 - [Proyectos y demos](${url}/#proyectos)
 - [Preguntas frecuentes](${url}/#faq)
 - [Contacto](${url}/#contact)
