@@ -48,7 +48,7 @@ const FLOW = {
     ],
   },
   contacto: {
-    text: `Puedes contactarnos en:\n✉ ${company.email}\n🕐 ${company.hours.short}`,
+    text: `Puedes contactarnos en:\n✉ ${company.email}\n\nO déjanos tu consulta en el formulario y te respondemos en menos de 24 horas en días laborables.`,
     buttons: [
       { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
       { icon: Home,          label: 'Inicio',           next: 'welcome' },

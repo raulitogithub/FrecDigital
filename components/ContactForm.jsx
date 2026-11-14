@@ -53,7 +53,6 @@ export default function ContactForm() {
 
   const contactInfo = [
     { icon: Mail, label: 'Email', value: company.email },
-    { icon: Clock, label: 'Horario', value: company.hours.short },
   ];
   
   const onSubmit = async (data) => {

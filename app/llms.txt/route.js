@@ -14,7 +14,6 @@ export function GET() {
     ...Object.values(company.whatsapp)
       .filter((w) => w.number)
       .map((w) => `- WhatsApp ${w.country}: ${w.display}`),
-    `- Horario: ${company.hours.label}`,
     `- Formulario: ${url}/#contact`,
     ...activeSocialLinks().map((s) => `- ${s.key.charAt(0).toUpperCase() + s.key.slice(1)}: ${s.url}`),
   ];
