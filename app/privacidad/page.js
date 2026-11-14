@@ -26,8 +26,11 @@ export default function PrivacidadPage() {
       </p>
 
       <LegalSection number={1} title="Responsable del tratamiento">
-        {/* TODO(profesional): el responsable está establecido fuera de la UE y ofrece servicios a personas en
-            España. Valorar la obligación de designar un representante en la UE (art. 27 RGPD) e indicarlo aquí. */}
+        {/* TODO(profesional): si el titular reside y presta servicios en España, puede necesitar alta
+            fiscal en España; en ese caso cambiarían el titular, el identificador fiscal y las secciones 7 y 8.
+            Si se mantiene como responsable establecido fuera de la UE: confirmar que aplica la exención de
+            representante en la UE del art. 27.2 RGPD (tratamiento ocasional, de bajo riesgo y sin datos
+            sensibles a gran escala, como un formulario de contacto). */}
         <ul>
           <li><strong>Responsable:</strong> {legal.ownerName}, {legal.ownerType}.</li>
           <li><strong>RUC:</strong> {legal.ruc}</li>
@@ -91,11 +94,10 @@ export default function PrivacidadPage() {
       </LegalSection>
 
       <LegalSection number={5} title="Plazo de conservación">
-        {/* TODO(profesional): fijar el plazo concreto de conservación (p. ej., 12 meses desde el último contacto). */}
         <p>
           Conservaremos los datos del formulario durante el tiempo necesario para atender tu consulta
-          y, si no se inicia una relación profesional, durante un máximo de [PLAZO] desde el último
-          contacto. Después se suprimirán, salvo que debamos conservarlos bloqueados para atender
+          y, si no se inicia una relación profesional, durante un máximo de {legal.retention} desde el
+          último contacto. Después se suprimirán, salvo que debamos conservarlos bloqueados para atender
           posibles responsabilidades legales.
         </p>
         <p>
@@ -105,26 +107,41 @@ export default function PrivacidadPage() {
       </LegalSection>
 
       <LegalSection number={6} title="Destinatarios">
-        {/* TODO: completar [PROVEEDORES] con nombre y país de cada proveedor. Según el código actual, los
-            correos del formulario se envían con la API de Gmail (Google) y el dominio pasa por Cloudflare.
-            TODO(profesional): firmar o verificar los contratos de encargado del tratamiento (art. 28 RGPD). */}
+        {/* TODO(profesional): verificar que se aceptaron los contratos de encargado del tratamiento
+            (art. 28 RGPD) de cada proveedor; Hetzner, Google y Cloudflare los ofrecen en sus paneles. */}
         <p>
           No cedemos tus datos a terceros, salvo obligación legal. Para prestar el servicio, acceden a
-          ellos como encargados del tratamiento los siguientes proveedores: {legal.providers}
-          (alojamiento web y envío de correo electrónico).
+          ellos, como encargados del tratamiento, los siguientes proveedores:
         </p>
+        <ul>
+          {legal.providers.map((p) => (
+            <li key={p.name}>
+              <strong>{p.name}</strong> ({p.country}): {p.role}.
+            </li>
+          ))}
+        </ul>
       </LegalSection>
 
       <LegalSection number={7} title="Transferencias internacionales">
-        {/* TODO(profesional): el responsable está en Ecuador, país sin decisión de adecuación de la Comisión
-            Europea. Definir las garantías de las transferencias desde la UE (p. ej., cláusulas contractuales
-            tipo) y comprobar las de cada proveedor (p. ej., EU-US Data Privacy Framework). */}
+        {/* TODO(profesional): validar la base de la transferencia al responsable en Ecuador (país sin
+            decisión de adecuación de la Comisión Europea) y confirmar la adhesión vigente de Google y
+            Cloudflare al EU-US Data Privacy Framework. */}
         <p>
-          El responsable del tratamiento se encuentra en Ecuador, por lo que los datos de personas
-          residentes en la Unión Europea se transfieren fuera del Espacio Económico Europeo. Algunos
-          proveedores también pueden tratar datos fuera del país de origen. Estas transferencias se
-          realizan con las garantías adecuadas previstas en el RGPD y en la LOPDP: [GARANTÍAS].
+          El sitio web se aloja en la Unión Europea (Hetzner, Alemania). No obstante, hay datos que
+          salen del Espacio Económico Europeo:
         </p>
+        <ul>
+          <li>
+            <strong>Al responsable, en Ecuador:</strong> los mensajes del formulario llegan al
+            responsable, que se encuentra en Ecuador, con la única finalidad de responder a tu
+            consulta.
+          </li>
+          <li>
+            <strong>A proveedores de EE. UU.:</strong> Google y Cloudflare pueden tratar datos en
+            Estados Unidos. Ambas empresas están adheridas al Marco de Privacidad de Datos UE-EE. UU.
+            (EU-US Data Privacy Framework), reconocido por la Comisión Europea como garantía adecuada.
+          </li>
+        </ul>
       </LegalSection>
 
       <LegalSection number={8} title="Tus derechos">
