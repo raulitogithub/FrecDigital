@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, Wrench, DollarSign, Phone, CalendarDays, ArrowLeft,
@@ -18,7 +19,7 @@ const SERVICE_STEPS = Object.fromEntries(
       text: `${s.title}${s.badge ? ` (${s.badge.toLowerCase()})` : ''}\n\n${s.question}\n${s.detail}\n\n${s.tags.map((t) => `✓ ${t}`).join('\n')}`,
       buttons: [
         { icon: BadgeDollarSign, label: 'Quiero cotizar',  next: 'cotizar' },
-        { icon: ExternalLink,    label: 'Verlo en la web', action: 'scroll', target: `#${s.slug}` },
+        { icon: ExternalLink,    label: 'Más información', action: 'navigate', target: `/servicios/${s.slug}` },
         { icon: ArrowLeft,       label: 'Otros servicios', next: 'servicios' },
       ],
     },
@@ -71,6 +72,7 @@ const FLOW = {
 };
 
 export default function FrecBot() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [hasOpened, setHasOpened] = useState(false);
@@ -95,6 +97,13 @@ export default function FrecBot() {
   }, [messages, isOpen]);
 
   const handleButton = (button) => {
+    // Abre la página del servicio
+    if (button.action === 'navigate') {
+      router.push(button.target);
+      setIsOpen(false);
+      return;
+    }
+
     if (button.action === 'scroll-contact' || button.action === 'scroll') {
       const target = button.action === 'scroll' ? button.target : '#contact';
       const element = document.querySelector(target);

@@ -29,12 +29,16 @@ export default function ServiceCard({
       id={slug}
       className="scroll-mt-24 rounded-2xl border border-white/10 hover:border-[#00b4d8]/50 transition-all duration-500 overflow-hidden group bg-[#0a1628]"
     >
-      {/* Imagen — contenida en su propio bloque con overflow-hidden */}
-      <div className="relative h-64 w-full overflow-hidden">
+      {/* Imagen + título: enlace a la página del servicio. El botón "Ver detalles"
+          queda fuera del enlace y sigue abriendo el desplegable. */}
+      <Link
+        href={`/servicios/${slug}`}
+        className="relative block h-64 w-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#00b4d8]"
+      >
         {image ? (
           <Image
             src={image}
-            alt={title}
+            alt=""
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -64,7 +68,7 @@ export default function ServiceCard({
             {shortDescription}
           </p>
         </div>
-      </div>
+      </Link>
 
       {hasDetails && (
         <>

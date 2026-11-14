@@ -2,24 +2,34 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import Logo from './Logo';
+import { services } from '@/lib/services';
+
+// Rutas absolutas ("/#…") para que el menú funcione desde cualquier página.
+// "Servicios" lleva a /servicios (con submenú en escritorio); `section` es la
+// sección de la home que lo marca como activo al hacer scroll.
+const navLinks = [
+  { label: 'Inicio', href: '/#hero', section: 'hero' },
+  { label: 'Servicios', href: '/servicios', section: 'services', hasSubmenu: true },
+  { label: 'Nosotros', href: '/#why-us', section: 'why-us' },
+  { label: 'Proyectos', href: '/#proyectos', section: 'proyectos' },
+  { label: 'Contacto', href: '/#contact', section: 'contact' },
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const pathname = usePathname();
 
-  // Rutas absolutas ("/#…") para que el menú funcione también desde las páginas legales
-  const navLinks = [
-    { label: 'Inicio', href: '/#hero' },
-    { label: 'Servicios', href: '/#services' },
-    { label: 'Nosotros', href: '/#why-us' },
-    { label: 'Proyectos', href: '/#proyectos' },
-    { label: 'Contacto', href: '/#contact' },
-  ];
-  const sectionId = (href) => href.split('#')[1];
+  // En la home manda la sección visible; en /servicios… se marca "Servicios".
+  const isActive = (link) => {
+    if (link.hasSubmenu && pathname?.startsWith('/servicios')) return true;
+    return pathname === '/' && activeSection === link.section;
+  };
 
   // En la home baja al formulario; en otras páginas navega a /#contact
   const goToContact = () => {
@@ -58,7 +68,7 @@ export default function Navbar() {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     navLinks.forEach((link) => {
-      const element = document.getElementById(sectionId(link.href));
+      const element = document.getElementById(link.section);
       if (element) {
         observer.observe(element);
       }
@@ -90,27 +100,72 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`relative text-sm font-medium transition-all duration-300 group ${
-                  activeSection === sectionId(link.href)
-                    ? 'text-[#00b4d8]'
-                    : 'text-[#1a3a6b]/70 hover:text-[#00b4d8]'
-                }`}
-              >
-                {link.label}
-                {/* Animated underline */}
-                <span
-                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#00b4d8] to-cyan-300 transition-all duration-300 ${
-                    activeSection === sectionId(link.href)
-                      ? 'w-full'
-                      : 'w-0 group-hover:w-full'
+            {navLinks.map((link) => {
+              const linkEl = (
+                <Link
+                  href={link.href}
+                  className={`relative inline-flex items-center gap-1 text-sm font-medium transition-all duration-300 group ${
+                    isActive(link) ? 'text-[#00b4d8]' : 'text-[#1a3a6b]/70 hover:text-[#00b4d8]'
                   }`}
-                />
-              </Link>
-            ))}
+                >
+                  {link.label}
+                  {link.hasSubmenu && (
+                    <ChevronDown aria-hidden="true" size={14} className="transition-transform duration-200 group-hover/menu:rotate-180" />
+                  )}
+                  {/* Animated underline */}
+                  <span
+                    className={`absolute -bottom-0.5 left-0 h-0.5 bg-gradient-to-r from-[#00b4d8] to-cyan-300 transition-all duration-300 ${
+                      isActive(link) ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                  />
+                </Link>
+              );
+
+              if (!link.hasSubmenu) return <div key={link.label}>{linkEl}</div>;
+
+              // Submenú de servicios: se abre al pasar el ratón o al llegar con el teclado (Tab)
+              return (
+                <div key={link.label} className="relative group/menu">
+                  {linkEl}
+                  <div className="invisible opacity-0 translate-y-1 group-hover/menu:visible group-hover/menu:opacity-100 group-hover/menu:translate-y-0 group-focus-within/menu:visible group-focus-within/menu:opacity-100 group-focus-within/menu:translate-y-0 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full pt-4 w-80">
+                    <ul className="rounded-2xl border border-[#e8f4fc] bg-white p-2 shadow-xl shadow-[#1a3a6b]/10">
+                      {services.map((s) => {
+                        const Icon = s.icon;
+                        return (
+                          <li key={s.slug}>
+                            <Link
+                              href={`/servicios/${s.slug}`}
+                              className={`flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors ${
+                                pathname === `/servicios/${s.slug}`
+                                  ? 'bg-[#e8f4fc] text-[#00b4d8] font-semibold'
+                                  : 'text-[#1a3a6b] hover:bg-[#f0f9ff] hover:text-[#00b4d8]'
+                              }`}
+                            >
+                              <Icon aria-hidden="true" className="w-4 h-4 flex-shrink-0 text-[#00b4d8]" />
+                              <span className="flex-1">{s.title}</span>
+                              {s.badge && (
+                                <span className="px-1.5 py-0.5 rounded-full bg-[#00b4d8] text-white text-[10px] font-bold uppercase">
+                                  {s.badge}
+                                </span>
+                              )}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                      <li className="mt-1 border-t border-[#e8f4fc] pt-1">
+                        <Link
+                          href="/servicios"
+                          className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold text-[#0284a8] hover:bg-[#f0f9ff]"
+                        >
+                          Ver todos los servicios
+                          <ArrowRight aria-hidden="true" size={16} />
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* CTA Button with Pulse Indicator */}
@@ -166,7 +221,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   className={`block text-lg font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
-                    activeSection === sectionId(link.href)
+                    isActive(link)
                       ? 'text-[#00b4d8] bg-[#e8f4fc] font-semibold'
                       : 'text-[#1a3a6b]/70 hover:text-[#00b4d8] hover:bg-[#f0f9ff]'
                   }`}
