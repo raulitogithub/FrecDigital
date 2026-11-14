@@ -73,12 +73,17 @@ const nextConfig = {
   // Redirects para SEO
   async redirects() {
     return [
-      // El agendamiento se integró en los asistentes de IA
+      // Servicios unificados: las URL antiguas redirigen al servicio que las absorbe
       {
         source: '/servicios/agendamiento-inteligente',
         destination: '/servicios/asistentes-ia',
         permanent: true,
       },
+      ...['automatizacion-procesos', 'integracion-sistemas', 'ia-erp-crm'].map((slug) => ({
+        source: `/servicios/${slug}`,
+        destination: '/servicios/automatizacion-integracion',
+        permanent: true,
+      })),
       // Asegurar HTTPS en producción (configurar en hosting)
       // {
       //   source: '/:path*',

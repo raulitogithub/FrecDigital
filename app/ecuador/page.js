@@ -233,9 +233,9 @@ export default function EcuadorPage() {
             </ul>
             <p className="mt-6 text-sm">
               También ofrecemos en Ecuador el resto de nuestros servicios, como la{' '}
-              <Link href="/servicios/automatizacion-procesos" className="text-[#0284a8] underline underline-offset-2">automatización de procesos</Link>{' '}
-              o la{' '}
-              <Link href="/servicios/ia-erp-crm" className="text-[#0284a8] underline underline-offset-2">IA sobre ERP</Link>.
+              <Link href="/servicios/automatizacion-integracion" className="text-[#0284a8] underline underline-offset-2">automatización e integración de sistemas</Link>{' '}
+              (con especialidad en Dynamics 365) o la{' '}
+              <Link href="/servicios/vision-artificial" className="text-[#0284a8] underline underline-offset-2">visión artificial industrial</Link>.
             </p>
           </section>
 
