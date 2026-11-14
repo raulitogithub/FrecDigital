@@ -73,6 +73,12 @@ const nextConfig = {
   // Redirects para SEO
   async redirects() {
     return [
+      // El agendamiento se integró en los asistentes de IA
+      {
+        source: '/servicios/agendamiento-inteligente',
+        destination: '/servicios/asistentes-ia',
+        permanent: true,
+      },
       // Asegurar HTTPS en producción (configurar en hosting)
       // {
       //   source: '/:path*',

@@ -10,7 +10,7 @@ import { breadcrumbNode, serviceUrl, siteMetadata } from '@/lib/seo-metadata';
 export const metadata = {
   title: 'Servicios de IA para pymes e industria',
   description:
-    'Asistentes de IA, agendamiento, visión artificial, automatización, IA sobre ERP, integración y gobernanza de IA para pymes e industria en España y Ecuador.',
+    'Asistentes de IA, visión artificial, automatización, IA sobre ERP, integración de sistemas y gobernanza de IA para pymes e industria en España y Ecuador.',
   alternates: { canonical: '/servicios' },
 };
 
