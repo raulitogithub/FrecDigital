@@ -30,6 +30,7 @@ export default function Footer() {
     { label: 'Nosotros', href: '/#why-us' },
     { label: 'Proyectos', href: '/#proyectos' },
     { label: 'Preguntas frecuentes', href: '/#faq' },
+    { label: 'IA en Ecuador', href: '/ecuador' },
     { label: 'Contacto', href: '/#contact' },
   ];
   const legalLinks = [

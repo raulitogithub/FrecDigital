@@ -11,6 +11,7 @@ export default function sitemap() {
   return [
     { url: `${baseUrl}/`, lastModified, changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/servicios`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/ecuador`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
     ...services.map((s) => ({
       url: `${baseUrl}/servicios/${s.slug}`,
       lastModified,

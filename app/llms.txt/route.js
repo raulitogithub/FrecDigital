@@ -56,6 +56,7 @@ ${faqs.map((f) => `### ${f.question}\n\n${f.answer}`).join('\n\n')}
 
 - [Inicio](${url}/)
 - [Servicios](${url}/servicios)
+- [Inteligencia artificial para empresas en Ecuador](${url}/ecuador)
 - [Proyectos y demos](${url}/#proyectos)
 - [Preguntas frecuentes](${url}/#faq)
 - [Contacto](${url}/#contact)

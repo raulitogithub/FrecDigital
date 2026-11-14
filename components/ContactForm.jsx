@@ -41,11 +41,14 @@ export default function ContactForm() {
     defaultValues: { country: '', service: '', privacy: false, marketing: false, [HONEYPOT_FIELD]: '' },
   });
 
-  // Preselección desde las páginas de servicio: /?servicio=<slug>#contact
+  // Preselección desde otras páginas: /?servicio=<slug>#contact (páginas de servicio)
+  // y /?pais=ecuador#contact (landing de Ecuador)
   useEffect(() => {
-    const slug = new URLSearchParams(window.location.search).get('servicio');
-    const service = services.find((s) => s.slug === slug);
+    const params = new URLSearchParams(window.location.search);
+    const service = services.find((s) => s.slug === params.get('servicio'));
     if (service) setValue('service', service.title);
+    const country = { ecuador: 'Ecuador', espana: 'España' }[params.get('pais')];
+    if (country) setValue('country', country);
   }, [setValue]);
 
   const contactInfo = [
