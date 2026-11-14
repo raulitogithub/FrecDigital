@@ -296,11 +296,7 @@ export default function ContactForm() {
                   <strong className="text-white/70">Finalidad:</strong> responder a tu consulta y, solo si lo marcas, enviarte novedades.{' '}
                   <strong className="text-white/70">Legitimación:</strong> tu consentimiento.{' '}
                   <strong className="text-white/70">Destinatarios:</strong> proveedores de alojamiento y correo; no se ceden datos salvo obligación legal.{' '}
-                  <strong className="text-white/70">Derechos:</strong> acceso, rectificación, supresión y otros, escribiendo a {legal.email}.{' '}
-                  Más información en la{' '}
-                  <Link href="/privacidad" target="_blank" className="text-[#00b4d8] underline underline-offset-2 hover:text-white">
-                    política de privacidad
-                  </Link>.
+                  <strong className="text-white/70">Derechos:</strong> acceso, rectificación, supresión y otros, escribiendo a {legal.email}.
                 </p>
               </div>
 
