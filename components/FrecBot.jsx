@@ -163,7 +163,7 @@ export default function FrecBot() {
                 </motion.div>
               ) : (
                 <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} className="w-full h-full flex items-center justify-center">
-                  <ChatBotIcon size={56} className="w-full h-full" />
+                  <ChatBotIcon size={56} className="w-full h-full" priority />
                 </motion.div>
               )}
             </AnimatePresence>
