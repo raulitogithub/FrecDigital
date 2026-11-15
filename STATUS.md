@@ -234,13 +234,13 @@ http://localhost:3000
 
 ### Para Detener el Servidor
 ```bash
-# En la terminal donde corre npm run dev
+# En la terminal donde corre pnpm dev
 Ctrl + C
 ```
 
 ### Para Reiniciar
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ---

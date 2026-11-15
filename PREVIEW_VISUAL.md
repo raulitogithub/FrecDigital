@@ -154,7 +154,7 @@ ls -la components/HeroSection.jsx
 
 ### 2. Ejecutar dev server:
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ### 3. Abrir en navegador:

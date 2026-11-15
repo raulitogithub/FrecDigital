@@ -1,0 +1,16 @@
+# Configuración de pnpm para este proyecto (un solo paquete, sin workspace).
+
+# pnpm 10 bloquea por defecto los scripts de instalación (preinstall/install/
+# postinstall) de las dependencias, que son la vía habitual de los ataques a la
+# cadena de suministro. Solo se permiten a los paquetes de esta lista:
+#  - sharp: optimizador de imágenes de Next.js (comprueba su binario nativo)
+#  - unrs-resolver: resolvedor que usa ESLint (comprueba su módulo nativo)
+# Si en el futuro un paquete nuevo necesita su script, pnpm avisará al instalar
+# y se puede revisar y autorizar con `pnpm approve-builds`.
+onlyBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
+# No instalar versiones publicadas hace menos de 24 horas (valor en minutos).
+# Los paquetes maliciosos suelen detectarse y retirarse en ese margen.
+minimumReleaseAge: 1440
