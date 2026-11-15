@@ -74,9 +74,13 @@ export async function handleContactForm(data) {
 
     const gmail = google.gmail({ version: 'v1', auth: oauth2Client });
 
+    // Buzón real de la cuenta de Google que envía (no se publica en la web).
+    // La dirección pública (companyData.email) es un alias de ese mismo buzón.
+    const mailbox = process.env.GMAIL_USER || companyData.email;
+
     const emailContent = [
-      `To: ${companyData.email}`,
-      `From: ${companyData.email}`,
+      `To: ${mailbox}`,
+      `From: ${mailbox}`,
       `Reply-To: ${email}`,
       `Subject: ${encodeHeader(`Nuevo contacto: ${service} - ${fullName} (${country})`)}`,
       'MIME-Version: 1.0',
