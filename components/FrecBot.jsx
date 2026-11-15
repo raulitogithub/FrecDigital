@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import ChatBotIcon from './ui/ChatBotIcon';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -153,7 +153,8 @@ export default function FrecBot() {
           <button
             onClick={toggleOpen}
             className="relative w-14 h-14 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/50 hover:scale-110 transition-transform overflow-hidden border-2 border-cyan-600"
-            aria-label="Abrir chat"
+            aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat con FrecBot'}
+            aria-expanded={isOpen}
           >
             <AnimatePresence mode="wait">
               {isOpen ? (
@@ -162,7 +163,7 @@ export default function FrecBot() {
                 </motion.div>
               ) : (
                 <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} className="w-full h-full flex items-center justify-center">
-                  <Image src="/images/avatar1.webp" alt="FrecBot" width={56} height={56} className="w-full h-full object-cover rounded-full" loading="eager" />
+                  <ChatBotIcon size={56} className="w-full h-full" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -182,7 +183,7 @@ export default function FrecBot() {
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Image src="/images/avatar1.webp" alt="FrecBot" width={36} height={36} className="rounded-full object-cover border-2 border-cyan-300" />
+                <ChatBotIcon size={36} className="rounded-full ring-2 ring-cyan-300" />
                 <div>
                   <h2 className="text-white font-semibold text-sm">FrecBot</h2>
                   <p className="text-xs text-green-300 flex items-center gap-1">
@@ -203,7 +204,7 @@ export default function FrecBot() {
                   <div className={`flex gap-2 ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.type === 'bot' && (
                       <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-1">
-                        <Image src="/images/avatar1.webp" alt="FrecBot" width={24} height={24} className="w-full h-full object-cover" />
+                        <ChatBotIcon size={24} className="w-full h-full" />
                       </div>
                     )}
                     <div className={`max-w-[80%] px-3 py-2 rounded-lg text-xs leading-relaxed whitespace-pre-wrap ${
