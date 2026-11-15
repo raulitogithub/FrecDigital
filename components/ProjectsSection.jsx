@@ -1,11 +1,10 @@
-import { Container, GraduationCap, Vote, Factory, ArrowRight } from 'lucide-react';
+import { Container, GraduationCap, Factory, ArrowRight } from 'lucide-react';
 
 // Componente de servidor: todo el texto va en el HTML inicial.
 // Sin cifras ni nombres de clientes: solo soluciones en desarrollo o en demo.
 const projects = [
   { icon: Container, title: 'Contenedores y precintos', sector: 'Logística' },
   { icon: GraduationCap, title: 'Plataforma para academias', sector: 'Educación', badge: 'Acceso anticipado' },
-  { icon: Vote, title: 'Voto electrónico y asambleas virtuales', sector: 'Corporaciones' },
   { icon: Factory, title: 'Agentes sobre Dynamics 365', sector: 'Industria' },
 ];
 
@@ -36,7 +35,7 @@ export default function ProjectsSection() {
           </p>
         </div>
 
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {projects.map(({ icon: Icon, title, sector, badge }) => (
             <li
               key={title}

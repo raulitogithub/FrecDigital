@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, ChevronRight, MessageSquareMore, Vote, GraduationCap, MapPin, Receipt, Monitor, PlayCircle } from 'lucide-react';
+import { ArrowRight, ChevronRight, MessageSquareMore, Workflow, GraduationCap, MapPin, Receipt, Monitor, PlayCircle } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -13,7 +13,7 @@ const PATH = '/ecuador';
 const PAGE_URL = `${company.url}${PATH}`;
 const TITLE = 'Inteligencia artificial para empresas en Ecuador';
 const DESCRIPTION =
-  'Asistentes de IA por WhatsApp, voto electrónico para corporaciones y plataforma para academias. FrecDigital trabaja desde Guayaquil con todo Ecuador.';
+  'Asistentes de IA por WhatsApp, automatización con IA sobre tu ERP y plataforma para academias. FrecDigital trabaja desde Guayaquil con todo Ecuador.';
 
 export const metadata = {
   title: 'IA para empresas en Ecuador: Guayaquil y Quito',
@@ -46,12 +46,12 @@ const solutions = [
     linkLabel: 'Ver el servicio',
   },
   {
-    icon: Vote,
-    title: 'Voto electrónico y asambleas virtuales',
-    status: 'En demo',
-    text: 'Para corporaciones, cooperativas, gremios y clubes que necesitan celebrar asambleas y votaciones de socios en línea. Es una solución que ya tenemos en demo: pídenos verla funcionando.',
-    href: FORM_EC,
-    linkLabel: 'Pedir una demo',
+    icon: Workflow,
+    title: 'Automatización e integración con IA',
+    status: null,
+    text: 'Para empresas que mueven datos a mano entre Excel, correo y sistemas que no se hablan. Automatizamos esos procesos con IA y conectamos tu ERP, CRM, WhatsApp y pagos, con especialidad en Dynamics 365 y ERP a medida en .NET.',
+    href: '/servicios/automatizacion-integracion',
+    linkLabel: 'Ver el servicio',
   },
   {
     icon: GraduationCap,
@@ -189,9 +189,9 @@ export default function EcuadorPage() {
             </span>
             <h1 className="text-4xl md:text-5xl font-bold font-display leading-tight mb-6">{TITLE}</h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl">
-              FrecDigital ayuda a pymes, corporaciones y academias de Ecuador a aplicar la
+              FrecDigital ayuda a pymes, empresas industriales y academias de Ecuador a aplicar la
               inteligencia artificial en su día a día, con asistentes que atienden por WhatsApp,
-              voto electrónico para asambleas y una plataforma para academias. Trabajamos desde
+              automatización e integración de sistemas con IA y una plataforma para academias. Trabajamos desde
               Guayaquil con empresas de todo el país, incluida Quito, en remoto y con facturación
               en Ecuador.
             </p>
@@ -233,9 +233,9 @@ export default function EcuadorPage() {
             </ul>
             <p className="mt-6 text-sm">
               También ofrecemos en Ecuador el resto de nuestros servicios, como la{' '}
-              <Link href="/servicios/automatizacion-integracion" className="text-[#0284a8] underline underline-offset-2">automatización e integración de sistemas con IA</Link>{' '}
-              (con especialidad en Dynamics 365) o la{' '}
-              <Link href="/servicios/vision-artificial" className="text-[#0284a8] underline underline-offset-2">visión artificial industrial</Link>.
+              <Link href="/servicios/vision-artificial" className="text-[#0284a8] underline underline-offset-2">visión artificial industrial</Link>{' '}
+              o la{' '}
+              <Link href="/servicios/gobernanza-ia" className="text-[#0284a8] underline underline-offset-2">gobernanza y adopción de IA</Link>.
             </p>
           </section>
 

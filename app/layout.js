@@ -75,6 +75,8 @@ export default function RootLayout({ children }) {
     <html
       lang={siteMetadata.language}
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased scroll-smooth`}
+      // Desplazamiento suave en anclas (#servicios…), pero no al cambiar de página
+      data-scroll-behavior="smooth"
     >
       <head>
         <meta charSet="utf-8" />

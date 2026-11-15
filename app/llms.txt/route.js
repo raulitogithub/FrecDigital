@@ -32,7 +32,6 @@ Soluciones en desarrollo o en demo (se pueden ver funcionando antes de contratar
 
 - Contenedores y precintos (Logística)
 - Plataforma para academias (Educación, acceso anticipado)
-- Voto electrónico y asambleas virtuales (Corporaciones)
 - Agentes sobre Dynamics 365 (Industria)
 
 ## Fundador
