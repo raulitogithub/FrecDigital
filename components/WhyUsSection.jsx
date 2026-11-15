@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { company } from '@/lib/seo-metadata';
 
-const { founder } = company;
+const { team } = company;
 
 export default function WhyUsSection() {
   const features = [
@@ -121,9 +121,9 @@ export default function WhyUsSection() {
               </p>
             </motion.div>
 
-            {/* Fundador y presencia (texto plano en el HTML para buscadores e IA) */}
+            {/* Perfil del equipo, sin datos personales (texto plano en el HTML para buscadores e IA) */}
             <p className="text-lg text-white/80 leading-relaxed text-center">
-              Al frente está <span className="font-semibold text-white">{founder.name}</span>, {founder.degree} y {founder.masters} por la {founder.university}. Hoy es {founder.currentRole.charAt(0).toLowerCase() + founder.currentRole.slice(1)}. Trabajamos con pymes e industria en <span className="text-[#00b4d8] font-semibold">España ({company.locations[0].city})</span> y <span className="text-[#00b4d8] font-semibold">Ecuador ({company.locations[1].city})</span>.
+              Al frente hay un <span className="font-semibold text-white">{team.degree}</span> con un {team.masters} por la {team.university} y {team.industryRole}.
             </p>
 
             {/* Línea decorativa */}

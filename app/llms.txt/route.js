@@ -6,7 +6,7 @@ import { company, siteMetadata, faqs, activeSocialLinks } from '@/lib/seo-metada
 export const dynamic = 'force-static';
 
 export function GET() {
-  const { founder } = company;
+  const { team } = company;
   const url = company.url;
 
   const contact = [
@@ -34,9 +34,9 @@ Soluciones en desarrollo o en demo (se pueden ver funcionando antes de contratar
 - Plataforma para academias (Educación, acceso anticipado): para academias e institutos que quieren gestionar su día a día y atender a alumnos y familias con ayuda de la inteligencia artificial.
 - Agentes de IA para Dynamics 365 (Industria): consultas de ventas, stock o pedidos en lenguaje natural desde Teams o WhatsApp, y preparación de pedidos u ofertas en el ERP con aprobación humana.
 
-## Fundador
+## Equipo
 
-${founder.name}: ${founder.degree}, ${founder.masters} por la ${founder.university}. ${founder.currentRole}. Acumula ${founder.experience}.
+FrecDigital está liderada por un ${team.degree} con un ${team.masters} por la ${team.university}, que acumula ${team.experience} y tiene ${team.industryRole}.
 
 ## Ubicación
 
