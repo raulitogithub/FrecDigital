@@ -9,7 +9,9 @@ import { Mail, Clock, Send, CheckCircle, AlertCircle, Loader } from 'lucide-reac
 import Button from './ui/Button';
 import { handleContactForm } from "@/app/actions/lib-email";
 import { company } from '@/lib/seo-metadata';
-import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES, HONEYPOT_FIELD } from '@/lib/contact-schema';
+import { contactFormSchema, CONTACT_COUNTRIES, CONTACT_SERVICES, HONEYPOT_FIELD, CONSENT_TEXTS } from '@/lib/contact-schema';
+
+const PRIVACY_LINK_TEXT = 'política de privacidad';
 import { services } from '@/lib/services';
 
 const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
@@ -273,13 +275,14 @@ export default function ContactForm() {
                     className="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-2 border-white/30 bg-white/10 accent-[#00b4d8] cursor-pointer"
                   />
                   <span>
-                    He leído y acepto la{' '}
+                    {/* Texto de CONSENT_TEXTS.privacy, con "política de privacidad" como enlace */}
+                    {CONSENT_TEXTS.privacy.replace(PRIVACY_LINK_TEXT, '')}
                     <Link
                       href="/privacidad"
                       target="_blank"
                       className="text-[#00b4d8] underline underline-offset-2 hover:text-white"
                     >
-                      política de privacidad
+                      {PRIVACY_LINK_TEXT}
                     </Link>{' '}
                     *
                   </span>
@@ -296,9 +299,7 @@ export default function ContactForm() {
                     {...register('marketing')}
                     className="mt-0.5 h-5 w-5 flex-shrink-0 rounded border-2 border-white/30 bg-white/10 accent-[#00b4d8] cursor-pointer"
                   />
-                  <span>
-                    Quiero recibir novedades de FrecDigital por email (opcional). Puedes darte de baja cuando quieras.
-                  </span>
+                  <span>{CONSENT_TEXTS.marketing}</span>
                 </label>
                 {/* La información de protección de datos está en /privacidad, enlazada en la casilla.
                     TODO(profesional): confirmar que basta con el enlace en el punto de recogida

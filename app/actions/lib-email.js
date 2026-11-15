@@ -2,7 +2,8 @@
 
 import { headers } from 'next/headers';
 import { google } from 'googleapis';
-import { contactFormSchema, HONEYPOT_FIELD } from '@/lib/contact-schema';
+import { contactFormSchema, HONEYPOT_FIELD, CONSENT_TEXTS, CONTACT_SUBJECT_TAG } from '@/lib/contact-schema';
+import { legal } from '@/lib/legal';
 import { escapeHtml } from '@/lib/security';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { SECURITY_CONFIG } from '@/lib/security-config';
@@ -45,6 +46,11 @@ export async function handleContactForm(data) {
   }
   const { fullName, email, company, country, service, message, marketing } = parsed.data;
 
+  // Momento del consentimiento (prueba exigida por el art. 7.1 RGPD)
+  const consentAt = new Date();
+  const formatIn = (timeZone) =>
+    new Intl.DateTimeFormat('es-ES', { timeZone, dateStyle: 'long', timeStyle: 'medium' }).format(consentAt);
+
   // 3. Escape de todos los campos antes de insertarlos en el HTML del correo
   const safe = {
     fullName: escapeHtml(fullName),
@@ -82,7 +88,7 @@ export async function handleContactForm(data) {
       `To: ${mailbox}`,
       `From: ${mailbox}`,
       `Reply-To: ${email}`,
-      `Subject: ${encodeHeader(`Nuevo contacto: ${service} - ${fullName} (${country})`)}`,
+      `Subject: ${encodeHeader(`${CONTACT_SUBJECT_TAG} ${service} - ${fullName} (${country})${marketing ? ' · Novedades: SÍ' : ''}`)}`,
       'MIME-Version: 1.0',
       'Content-Type: text/html; charset=utf-8',
       '',
@@ -97,10 +103,19 @@ export async function handleContactForm(data) {
           <p><strong>País:</strong> ${safe.country}</p>
           <p><strong>Servicio:</strong> ${safe.service}</p>
           <p><strong>Mensaje:</strong><br>${safe.message}</p>
-          <p style="color: #64748b; font-size: 12px;">
-            Aceptó la política de privacidad.<br>
-            Comunicaciones comerciales: <strong>${marketing ? 'SÍ, acepta recibir novedades' : 'NO (usar sus datos solo para responder a esta consulta)'}</strong>
-          </p>
+
+          <div style="margin-top: 24px; padding: 16px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; color: #334155;">
+            <p style="margin: 0 0 10px; font-weight: bold; color: #1a3a6b;">Registro del consentimiento</p>
+            <p style="margin: 0 0 6px;"><strong>Fecha y hora:</strong> ${formatIn('Europe/Madrid')} (hora de España) · ${formatIn('America/Guayaquil')} (hora de Ecuador) · ${consentAt.toISOString()} (UTC)</p>
+            <p style="margin: 0 0 6px;"><strong>Política de privacidad aceptada:</strong> versión del ${escapeHtml(legal.lastUpdated)} (${companyData.url}/privacidad)</p>
+            <p style="margin: 0 0 6px;"><strong>Casilla obligatoria marcada:</strong> «${escapeHtml(CONSENT_TEXTS.privacy)}»</p>
+            <p style="margin: 0 0 6px;"><strong>Novedades por email:</strong> ${
+              marketing
+                ? `<strong style="color: #15803d;">SÍ</strong>. Marcó «${escapeHtml(CONSENT_TEXTS.marketing)}»`
+                : `<strong style="color: #b91c1c;">NO</strong>. No marcó «${escapeHtml(CONSENT_TEXTS.marketing)}». Usar sus datos solo para responder a esta consulta.`
+            }</p>
+            <p style="margin: 10px 0 0; color: #64748b; font-size: 12px;">Conservación: ${escapeHtml(legal.retention)} desde el último contacto si no se inicia una relación profesional${marketing ? '; para las novedades, hasta que se dé de baja' : ''}.</p>
+          </div>
         </div>
       </div>`,
     ].join('\r\n');
