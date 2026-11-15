@@ -45,8 +45,10 @@ export default function ContactForm() {
   // y /?pais=ecuador#contact (landing de Ecuador)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const service = services.find((s) => s.slug === params.get('servicio'));
+    const slug = params.get('servicio');
+    const service = services.find((s) => s.slug === slug);
     if (service) setValue('service', service.title);
+    else if (slug === 'academias') setValue('service', 'Plataforma para academias');
     const country = { ecuador: 'Ecuador', espana: 'España' }[params.get('pais')];
     if (country) setValue('country', country);
   }, [setValue]);

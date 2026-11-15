@@ -1,11 +1,39 @@
+import Link from 'next/link';
 import { Container, GraduationCap, Factory, ArrowRight } from 'lucide-react';
 
 // Componente de servidor: todo el texto va en el HTML inicial.
 // Sin cifras ni nombres de clientes: solo soluciones en desarrollo o en demo.
 const projects = [
-  { icon: Container, title: 'Contenedores y precintos', sector: 'Logística' },
-  { icon: GraduationCap, title: 'Plataforma para academias', sector: 'Educación', badge: 'Acceso anticipado' },
-  { icon: Factory, title: 'Agentes sobre Dynamics 365', sector: 'Industria' },
+  {
+    icon: Container,
+    title: 'Verificación de contenedores y precintos',
+    sector: 'Logística',
+    badge: 'En demo',
+    description:
+      'Lee en las fotos de cada expedición los números de contenedor y precinto, los compara con los registrados y avisa si no coinciden antes de que salga el camión.',
+    href: '/servicios/vision-artificial',
+    linkLabel: 'Ver visión artificial',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Plataforma para academias',
+    sector: 'Educación',
+    badge: 'Acceso anticipado',
+    // TODO: concretar las funciones principales de la plataforma cuando estén definidas
+    description:
+      'Para academias e institutos que quieren gestionar su día a día y atender a alumnos y familias con ayuda de la inteligencia artificial.',
+    href: '/?servicio=academias#contact',
+    linkLabel: 'Solicitar acceso',
+  },
+  {
+    icon: Factory,
+    title: 'Agentes de IA para Dynamics 365',
+    sector: 'Industria',
+    description:
+      'Pregunta por ventas, stock o pedidos en lenguaje natural desde Teams o WhatsApp, y el agente prepara pedidos u ofertas en el ERP para que una persona los apruebe.',
+    href: '/servicios/automatizacion-integracion',
+    linkLabel: 'Ver automatización e integración',
+  },
 ];
 
 export default function ProjectsSection() {
@@ -36,7 +64,7 @@ export default function ProjectsSection() {
         </div>
 
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {projects.map(({ icon: Icon, title, sector, badge }) => (
+          {projects.map(({ icon: Icon, title, sector, badge, description, href, linkLabel }) => (
             <li
               key={title}
               className="flex flex-col bg-white/80 rounded-2xl p-8 text-center border border-[#b0cfe8] hover:border-[#00b4d8]/40 hover:shadow-xl hover:shadow-[#00b4d8]/20 transition-all duration-500 group"
@@ -45,7 +73,8 @@ export default function ProjectsSection() {
               <div className="w-14 h-14 bg-[#e8f4fc] rounded-full flex items-center justify-center mx-auto mb-5">
                 <Icon aria-hidden="true" className="w-7 h-7 text-[#00b4d8]" />
               </div>
-              <h3 className="text-xl font-bold text-[#1a3a6b] mb-4 font-display">{title}</h3>
+              <h3 className="text-xl font-bold text-[#1a3a6b] mb-3 font-display">{title}</h3>
+              <p className="text-sm text-[#4a6080] leading-relaxed mb-5">{description}</p>
               <div className="mt-auto flex flex-wrap justify-center gap-2">
                 <span className="px-3 py-1 rounded-full bg-[#1a3a6b]/10 text-[#1a3a6b] text-xs font-semibold uppercase tracking-wider">
                   {sector}
@@ -56,6 +85,12 @@ export default function ProjectsSection() {
                   </span>
                 )}
               </div>
+              <Link
+                href={href}
+                className="mt-5 inline-flex items-center justify-center gap-1 text-sm font-semibold text-[#0284a8] hover:text-[#1a3a6b] transition-colors"
+              >
+                {linkLabel} <ArrowRight aria-hidden="true" size={16} />
+              </Link>
             </li>
           ))}
         </ul>

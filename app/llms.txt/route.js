@@ -30,9 +30,9 @@ ${siteMetadata.services.map((s) => `- [${s.name}](${url}/servicios/${s.slug}): $
 
 Soluciones en desarrollo o en demo (se pueden ver funcionando antes de contratar):
 
-- Contenedores y precintos (Logística)
-- Plataforma para academias (Educación, acceso anticipado)
-- Agentes sobre Dynamics 365 (Industria)
+- Verificación de contenedores y precintos (Logística, en demo): lee en las fotos de cada expedición los números de contenedor y precinto, los compara con los registrados y avisa si no coinciden antes de que salga el camión.
+- Plataforma para academias (Educación, acceso anticipado): para academias e institutos que quieren gestionar su día a día y atender a alumnos y familias con ayuda de la inteligencia artificial.
+- Agentes de IA para Dynamics 365 (Industria): consultas de ventas, stock o pedidos en lenguaje natural desde Teams o WhatsApp, y preparación de pedidos u ofertas en el ERP con aprobación humana.
 
 ## Fundador
 
