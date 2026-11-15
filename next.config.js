@@ -1,4 +1,3 @@
-const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -66,25 +65,25 @@ const nextConfig = {
           },
         ],
       },
-      ...(isProd
-        ? [
-            {
-              source: '/_next/static/:path*',
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable'
-                },
-              ],
-            },
-          ]
-        : []),
+      // /_next/static/* no necesita cabecera propia: Next.js ya lo sirve como
+      // "public, max-age=31536000, immutable" (y definirla genera un aviso en el build).
     ];
   },
 
   // Redirects para SEO
   async redirects() {
     return [
+      // Servicios unificados: las URL antiguas redirigen al servicio que las absorbe
+      {
+        source: '/servicios/agendamiento-inteligente',
+        destination: '/servicios/asistentes-ia',
+        permanent: true,
+      },
+      ...['automatizacion-procesos', 'integracion-sistemas', 'ia-erp-crm'].map((slug) => ({
+        source: `/servicios/${slug}`,
+        destination: '/servicios/automatizacion-integracion',
+        permanent: true,
+      })),
       // Asegurar HTTPS en producción (configurar en hosting)
       // {
       //   source: '/:path*',

@@ -5,8 +5,10 @@ import { ArrowRight } from 'lucide-react';
 import Button from './ui/Button';
 
 export default function HeroSection() {
+  // El contenedor solo coordina el escalonado: no se oculta, para que el título
+  // y el texto sean visibles desde el HTML inicial (SEO y LCP).
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
@@ -30,15 +32,18 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      {/* Video Background */}
+      {/* Video Background (decorativo). El póster es su primer fotograma:
+          se ve al instante mientras carga el vídeo (1,4 MB, sin audio). */}
       <video
         autoPlay
         muted
         loop
         playsInline
+        poster="/images/hero-poster.webp"
+        aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/images/video3.mp4" type="video/mp4" />
+        <source src="/images/hero-video.mp4" type="video/mp4" />
       </video>
 
       {/* Background with gradient overlay */}
@@ -59,22 +64,19 @@ export default function HeroSection() {
             animate="visible"
             className="flex flex-col justify-center"
           >
-            {/* Main Title */}
-            <motion.div variants={itemVariants} className="mb-8">
+            {/* Main Title (sin animación de entrada: visible sin JavaScript) */}
+            <div className="mb-8">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-3 text-center">
                 <span className="text-white">Potencia tu negocio con </span>
                 <span className="text-cyan-500">Inteligencia Artificial</span>
               </h1>
-            </motion.div>
+            </div>
 
             {/* Description */}
-            <motion.p
-              variants={itemVariants}
-              className="text-lg sm:text-xl text-gray-200 leading-relaxed mb-10 max-w-2xl text-center mx-auto"
-            >
+            <p className="text-lg sm:text-xl text-gray-200 leading-relaxed mb-10 max-w-2xl text-center mx-auto">
               Deja de preocuparte por las operaciones, empieza a enfocarte en lo que importa.
               Un equipo experto a tu disposición, sin los costos de una contratación tradicional. Transparente, simple y predecible
-            </motion.p>
+            </p>
 
             {/* CTA Buttons */}
         
@@ -118,18 +120,16 @@ export default function HeroSection() {
               variants={itemVariants}
               className="flex flex-wrap justify-center gap-10 sm:gap-12 mt-14 pt-10 border-t border-white/20"
             >
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-black text-cyan-500 mb-2">50+</p>
-                <p className="text-sm sm:text-base text-gray-300">Empresas confían en nosotros</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-black text-cyan-500 mb-2">98%</p>
-                <p className="text-sm sm:text-base text-gray-300">Satisfacción de clientes</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-black text-cyan-500 mb-2">24/7</p>
-                <p className="text-sm sm:text-base text-gray-300">Soporte disponible</p>
-              </div>
+              {[
+                { value: '2 países', label: 'Atención en España y Ecuador' },
+                { value: '<24 h', label: 'Primera respuesta en días laborables' },
+                { value: 'Demo', label: 'La ves funcionar antes de contratar' },
+              ].map((item) => (
+                <div key={item.value} className="text-center">
+                  <p className="text-3xl sm:text-4xl font-black text-cyan-500 mb-2">{item.value}</p>
+                  <p className="text-sm sm:text-base text-gray-300">{item.label}</p>
+                </div>
+              ))}
             </motion.div>
 
           </motion.div>

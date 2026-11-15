@@ -1,13 +1,30 @@
 'use client';
 
-import Image from 'next/image';
+import ChatBotIcon from './ui/ChatBotIcon';
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  X, Wrench, DollarSign, Phone, CalendarDays,
-  Bot, Settings, GitMerge, BarChart2, ArrowLeft,
-  Home, ClipboardList, BadgeDollarSign
+  X, Wrench, DollarSign, Phone, CalendarDays, ArrowLeft,
+  Home, ClipboardList, BadgeDollarSign, ExternalLink
 } from 'lucide-react';
+import { company } from '@/lib/seo-metadata';
+import { services } from '@/lib/services';
+
+// Un paso del flujo por servicio, generado desde lib/services.js
+const SERVICE_STEPS = Object.fromEntries(
+  services.map((s) => [
+    s.slug,
+    {
+      text: `${s.title}${s.badge ? ` (${s.badge.toLowerCase()})` : ''}\n\n${s.question}\n${s.detail}\n\n${s.tags.map((t) => `✓ ${t}`).join('\n')}`,
+      buttons: [
+        { icon: BadgeDollarSign, label: 'Quiero cotizar',  next: 'cotizar' },
+        { icon: ExternalLink,    label: 'Más información', action: 'navigate', target: `/servicios/${s.slug}` },
+        { icon: ArrowLeft,       label: 'Otros servicios', next: 'servicios' },
+      ],
+    },
+  ])
+);
 
 const FLOW = {
   welcome: {
@@ -21,49 +38,9 @@ const FLOW = {
   },
   servicios: {
     text: 'Ofrecemos estas soluciones con IA. ¿Cuál te interesa?',
-    buttons: [
-      { icon: Bot,           label: 'Asistentes de IA',       next: 'chatbots' },
-      { icon: Settings,      label: 'Automatización',         next: 'automatizacion' },
-      { icon: GitMerge,      label: 'Integración de Sistemas', next: 'integracion' },
-      { icon: CalendarDays,  label: 'Agendamiento',           next: 'agendamiento' },
-      { icon: BarChart2,     label: 'Consultas Gerenciales',  next: 'consultas' },
-    ],
+    buttons: services.map((s) => ({ icon: s.icon, label: s.shortTitle, next: s.slug })),
   },
-  chatbots: {
-    text: 'Nuestros Asistentes de IA Especializados:\n✓ Atienden consultas 24/7 sin intervención humana\n✓ WhatsApp, Instagram, Facebook y web\n✓ Personalizados para tu industria y procesos\n✓ Califican leads y guían al cliente automáticamente',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  automatizacion: {
-    text: 'Automatización de Procesos:\n✓ Elimina tareas repetitivas\n✓ Envío automático de correos\n✓ Generación de reportes\n✓ Gestión de bases de datos',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  integracion: {
-    text: 'Integración de Sistemas con IA:\n✓ Conecta CRM, ERP y apps\n✓ Datos centralizados en tiempo real\n✓ Elimina errores manuales',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  agendamiento: {
-    text: 'Agendamiento Inteligente:\n✓ Asistente de IA agenda citas automáticamente\n✓ Confirmaciones y recordatorios\n✓ Disponibilidad en tiempo real 24/7',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
-  consultas: {
-    text: 'Consultas Gerenciales con IA:\n✓ Pregunta tus datos en lenguaje natural\n✓ Reportes automáticos al instante\n✓ Análisis de ventas por período',
-    buttons: [
-      { icon: BadgeDollarSign, label: 'Quiero cotizar',   next: 'cotizar' },
-      { icon: ArrowLeft,       label: 'Otros servicios',  next: 'servicios' },
-    ],
-  },
+  ...SERVICE_STEPS,
   precios: {
     text: 'Nuestros precios son personalizados según tu proyecto. Un asesor te dará una cotización adaptada a tu negocio.',
     buttons: [
@@ -72,14 +49,14 @@ const FLOW = {
     ],
   },
   contacto: {
-    text: 'Puedes contactarnos en:\n✉ fespinoza@frecdigital.com\n🕐 Lun - Vie, 08:00 a 16:00 (Ecuador)',
+    text: `Puedes contactarnos en:\n✉ ${company.email}\n\nO déjanos tu consulta en el formulario y te respondemos en menos de 24 horas en días laborables.`,
     buttons: [
       { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
       { icon: Home,          label: 'Inicio',           next: 'welcome' },
     ],
   },
   agendar: {
-    text: '¡Perfecto! Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas.',
+    text: '¡Perfecto! Completa el formulario y un asesor se pondrá en contacto contigo en menos de 24 horas en días laborables.',
     buttons: [
       { icon: ClipboardList, label: 'Ir al formulario', action: 'scroll-contact' },
       { icon: Home,          label: 'Inicio',           next: 'welcome' },
@@ -95,13 +72,17 @@ const FLOW = {
 };
 
 export default function FrecBot() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [hasOpened, setHasOpened] = useState(false);
   const messagesEndRef = useRef(null);
+  const nextMessageId = useRef(1); // ids de mensaje sin Date.now() (regla de pureza de React)
 
-  useEffect(() => {
-    if (isOpen && !hasOpened) {
+  // Abre/cierra el chat. El mensaje de bienvenida se crea en el primer clic
+  // (en el evento, no en un efecto, para no encadenar renders).
+  const toggleOpen = () => {
+    if (!isOpen && !hasOpened) {
       setMessages([{
         id: 1,
         type: 'bot',
@@ -111,7 +92,8 @@ export default function FrecBot() {
       }]);
       setHasOpened(true);
     }
-  }, [isOpen, hasOpened]);
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     if (!isOpen) return;
@@ -119,21 +101,34 @@ export default function FrecBot() {
   }, [messages, isOpen]);
 
   const handleButton = (button) => {
-    if (button.action === 'scroll-contact') {
-      document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+    // Abre la página del servicio
+    if (button.action === 'navigate') {
+      router.push(button.target);
+      setIsOpen(false);
+      return;
+    }
+
+    if (button.action === 'scroll-contact' || button.action === 'scroll') {
+      const target = button.action === 'scroll' ? button.target : '#contact';
+      const element = document.querySelector(target);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.location.assign(`/${target}`); // p. ej. desde las páginas legales
+      }
       setIsOpen(false);
       return;
     }
 
     const nextStep = FLOW[button.next];
     const userMsg = {
-      id: Date.now(),
+      id: ++nextMessageId.current,
       type: 'user',
       text: button.label,
       timestamp: new Date(),
     };
     const botMsg = {
-      id: Date.now() + 1,
+      id: ++nextMessageId.current,
       type: 'bot',
       text: nextStep.text,
       buttons: nextStep.buttons,
@@ -156,9 +151,10 @@ export default function FrecBot() {
         <div className="relative">
           <div className="absolute inset-0 rounded-full bg-cyan-500 animate-ping opacity-20" />
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleOpen}
             className="relative w-14 h-14 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/50 hover:scale-110 transition-transform overflow-hidden border-2 border-cyan-600"
-            aria-label="Abrir chat"
+            aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat con FrecBot'}
+            aria-expanded={isOpen}
           >
             <AnimatePresence mode="wait">
               {isOpen ? (
@@ -167,7 +163,7 @@ export default function FrecBot() {
                 </motion.div>
               ) : (
                 <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} className="w-full h-full flex items-center justify-center">
-                  <Image src="/images/avatar1.webp" alt="FrecBot" width={56} height={56} className="w-full h-full object-cover rounded-full" loading="eager" />
+                  <ChatBotIcon size={56} className="w-full h-full" priority />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -187,7 +183,7 @@ export default function FrecBot() {
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Image src="/images/avatar1.webp" alt="FrecBot" width={36} height={36} className="rounded-full object-cover border-2 border-cyan-300" />
+                <ChatBotIcon size={36} className="rounded-full ring-2 ring-cyan-300" />
                 <div>
                   <h2 className="text-white font-semibold text-sm">FrecBot</h2>
                   <p className="text-xs text-green-300 flex items-center gap-1">
@@ -208,7 +204,7 @@ export default function FrecBot() {
                   <div className={`flex gap-2 ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                     {msg.type === 'bot' && (
                       <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-1">
-                        <Image src="/images/avatar1.webp" alt="FrecBot" width={24} height={24} className="w-full h-full object-cover" />
+                        <ChatBotIcon size={24} className="w-full h-full" />
                       </div>
                     )}
                     <div className={`max-w-[80%] px-3 py-2 rounded-lg text-xs leading-relaxed whitespace-pre-wrap ${

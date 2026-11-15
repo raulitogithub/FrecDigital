@@ -1,63 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MessageSquareMore, Blocks, CircuitBoard, Calendar, BarChart3 } from 'lucide-react';
 import ServiceCard from './ui/ServiceCard';
+import { services } from '@/lib/services';
 
 export default function ServicesSection() {
-  const services = [
-    {
-      icon: MessageSquareMore,
-      title: 'Asistentes de IA Especializados',
-      description: 'Asistentes virtuales con IA que responden consultas, automatizan la atención y mejoran la experiencia.',
-      image: '/images/Chatbots.webp',
-      adMessage: '¿Pierdes clientes por responder tarde los mensajes?',
-      adDescription: 'Nuestros asistentes de IA atienden automáticamente WhatsApp, aplicaciones web, resolviendo preguntas frecuentes y guiando a tus clientes en tiempo real sin descanso.',
-      adBadges: [' Atención automática 24/7'],
-      adBorderColor: '#10b981',
-    },
-    {
-      icon: Calendar,
-      title: 'Agendamiento Inteligente',
-      description: 'Automatiza tus reservas con un asistente virtual que agenda, confirma y recuerda citas sin intervención humana.',
-      image: '/images/agendamiento.webp',
-      adMessage: '¿Cansado de gestionar citas manualmente?',
-      adDescription: 'Nuestro asistente de IA atiende 24/7, sincroniza con tu calendario y envía recordatorios automáticos. Reduce el 80% de las ausencias y no-shows.',
-      adBadges: [' Disponible 24/7'],
-      adBorderColor: '#06b6d4',
-    },
-    {
-      icon: Blocks,
-      title: 'Automatización Inteligente de Procesos',
-      description: 'Digitaliza y automatiza tareas repetitivas para optimizar tiempos, reducir errores y aumentar la productividad.',
-      image: '/images/Automatización.webp',
-      adMessage: '¿Tu equipo pierde tiempo en tareas manuales repetitivas?',
-      adDescription: 'Creamos flujos automatizados adaptados a tu empresa para gestionar procesos de manera más rápida, eficiente y organizada, reduciendo costos operativos.',
-      adBadges: [' Procesos más rápidos y eficientes'],
-      adBorderColor: '#f59e0b',
-    },
-    {
-      icon: BarChart3,
-      title: 'Consultas Gerenciales IA',
-      description: 'Consulta tus datos de ventas en lenguaje natural. Pregunta por períodos específicos y obtén reportes instantáneos.',
-      image: '/images/gerencial.webp',
-      adMessage: 'Tus datos hablan, ¿los estás escuchando?',
-      adDescription: 'Pregunta: "¿Cuáles fueron mis ventas de enero y febrero?" y obtén un reporte completo al instante. Conectamos tu base de datos con IA para decisiones más rápidas.',
-      adBadges: [' Ventas del último mes', ' Comparar 2 períodos', ' Producto más vendido'],
-      adBorderColor: '#818cf8',
-    },
-    {
-      icon: CircuitBoard,
-      title: 'Integración Inteligente de Sistemas',
-      description: 'Conectamos tus plataformas empresariales para centralizar procesos, automatizar tareas y mejorar la comunicación.',
-      image: '/images/Integración.webp',
-      adMessage: '¿Tu información está dispersa en diferentes plataformas?',
-      adDescription: 'Integramos tus sistemas, aplicaciones y bases de datos para que trabajen en conjunto en tiempo real. Optimiza procesos, evita errores manuales y mejora la productividad de tu empresa.',
-      adBadges: [' Integración en tiempo real'],
-      adBorderColor: '#8b5cf6',
-    },
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -125,16 +72,15 @@ export default function ServicesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-5xl mx-auto"
         >
           {services.map((service, index) => (
-            <motion.div 
-              key={index}
+            <motion.div
+              key={service.slug}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
               viewport={{ once: true }}
-              className=""
             >
               <ServiceCard {...service} />
             </motion.div>

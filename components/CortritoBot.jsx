@@ -122,9 +122,12 @@ export default function CortritoBot() {
   const [messages, setMessages] = useState([]);
   const [hasOpened, setHasOpened] = useState(false);
   const messagesEndRef = useRef(null);
+  const nextMessageId = useRef(1); // ids de mensaje sin Date.now() (regla de pureza de React)
 
-  useEffect(() => {
-    if (isOpen && !hasOpened) {
+  // Abre/cierra el chat. El mensaje de bienvenida se crea en el primer clic
+  // (en el evento, no en un efecto, para no encadenar renders).
+  const toggleOpen = () => {
+    if (!isOpen && !hasOpened) {
       setMessages([{
         id: 1,
         type: 'bot',
@@ -134,7 +137,8 @@ export default function CortritoBot() {
       }]);
       setHasOpened(true);
     }
-  }, [isOpen, hasOpened]);
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     if (!isOpen) return;
@@ -147,7 +151,7 @@ export default function CortritoBot() {
       return;
     }
     if (button.action === 'plan-link') {
-      window.location.href = '/cortrip/plan';
+      window.location.assign('/cortrip/plan');
       return;
     }
 
@@ -155,13 +159,13 @@ export default function CortritoBot() {
     if (!nextStep) return;
 
     const userMsg = {
-      id: Date.now(),
+      id: ++nextMessageId.current,
       type: 'user',
       text: button.label,
       timestamp: new Date(),
     };
     const botMsg = {
-      id: Date.now() + 1,
+      id: ++nextMessageId.current,
       type: 'bot',
       text: nextStep.text,
       buttons: nextStep.buttons,
@@ -200,7 +204,7 @@ export default function CortritoBot() {
             style={{ background: GOLD, pointerEvents: 'none' }}
           />
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleOpen}
             style={{
               width: 56, height: 56, borderRadius: '50%',
               background: `linear-gradient(135deg, ${NAVY}, #0d2060)`,

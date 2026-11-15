@@ -1,11 +1,16 @@
 FROM node:20-slim AS builder
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# pnpm vía Corepack, en la versión fijada en "packageManager" de package.json
+RUN corepack enable
+
+# --frozen-lockfile: instala exactamente las versiones de pnpm-lock.yaml
+# (falla si el lockfile no coincide con package.json, en vez de actualizar nada)
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 FROM node:20-slim AS runner
 WORKDIR /app

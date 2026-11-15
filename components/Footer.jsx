@@ -2,24 +2,41 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Share2, Heart, Mail } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { Mail } from 'lucide-react';
+import { FaWhatsapp, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import Logo from './Logo';
+import { company, whatsappUrl } from '@/lib/seo-metadata';
+import { services } from '@/lib/services';
+import CookieSettingsButton from './CookieSettingsButton';
 
-export default function Footer() { 
+const WHATSAPP_FOOTER_MESSAGE =
+  'Estimado, me gustaría recibir más información sobre sus servicios. Gracias.';
+const EMAIL_HREF = `mailto:${company.email}?subject=${encodeURIComponent('Información sobre servicios')}&body=${encodeURIComponent('Hola, buen día. Me gustaría conocer más sobre sus servicios. Quedo atento. Gracias.')}`;
+
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  // Solo se muestran los canales con dato definido en lib/seo-metadata.js
   const socialLinks = [
-    { icon: Share2, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Heart, href: 'https://instagram.com', label: 'Instagram' },
-    { icon: FaWhatsapp, href: 'https://wa.me/34643466617?text=Estimado%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.%20Gracias.', label: 'WhatsApp' },
-    { icon: Mail, href: 'mailto:fespinoza@frecdigital.com?subject=Información%20sobre%20servicios&body=Hola,%20buen%20día.%20Me%20gustaría%20conocer%20más%20sobre%20sus%20servicios.%20Quedo%20atento.%20Gracias.', label: 'Email' },
-  ];
+    { icon: FaLinkedin, href: company.social.linkedin, label: 'LinkedIn' },
+    { icon: FaInstagram, href: company.social.instagram, label: 'Instagram' },
+    { icon: FaWhatsapp, href: whatsappUrl('es', WHATSAPP_FOOTER_MESSAGE), label: 'WhatsApp España' },
+    { icon: FaWhatsapp, href: whatsappUrl('ec', WHATSAPP_FOOTER_MESSAGE), label: 'WhatsApp Ecuador' },
+    { icon: Mail, href: EMAIL_HREF, label: 'Email' },
+  ].filter((link) => Boolean(link.href));
   const footerLinks = [
-    { label: 'Inicio', href: '#hero' },
-    { label: 'Servicios', href: '#services' },
-    { label: 'Nosotros', href: '#why-us' },
-    { label: 'Contacto', href: '#contact' },
+    { label: 'Inicio', href: '/#hero' },
+    { label: 'Servicios', href: '/#services' },
+    { label: 'Nosotros', href: '/#why-us' },
+    { label: 'Proyectos', href: '/#proyectos' },
+    { label: 'Preguntas frecuentes', href: '/#faq' },
+    { label: 'IA en Ecuador', href: '/ecuador' },
+    { label: 'Contacto', href: '/#contact' },
+  ];
+  const legalLinks = [
+    { label: 'Aviso legal', href: '/aviso-legal' },
+    { label: 'Privacidad', href: '/privacidad' },
+    { label: 'Cookies', href: '/cookies' },
   ];
 
   return (
@@ -31,7 +48,7 @@ export default function Footer() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/fondo4.webp)',
+          backgroundImage: 'url(/images/fondo4-opt.webp)',
         }}
       />
       
@@ -73,7 +90,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
           >
-            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Enlaces Rápidos</h4>
+            <h2 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Enlaces Rápidos</h2>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <ul className="space-y-3">
               {footerLinks.map((link) => (
@@ -97,20 +114,14 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
           >
-            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Servicios</h4>
+            <h2 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Servicios</h2>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <ul className="space-y-3 text-sm">
-              {[
-                'Asistentes de IA Especializados',
-                'Agendamiento Inteligente',
-                'Automatización Inteligente de Procesos',
-                'Consultas Gerenciales IA',
-                'Integración Inteligente de Sistemas',
-              ].map((service) => (
-                <li key={service} className="group">
-                  <Link href="#services" className="text-white/55 hover:text-[#00b4d8] transition-colors duration-300 hover:translate-x-2 inline-flex items-center gap-2">
+              {services.map((service) => (
+                <li key={service.slug} className="group">
+                  <Link href={`/servicios/${service.slug}`} className="text-white/55 hover:text-[#00b4d8] transition-colors duration-300 hover:translate-x-2 inline-flex items-center gap-2">
                     <span className="text-[#00b4d8] opacity-0 group-hover:opacity-100 transition-all duration-300">›</span>
-                    {service}
+                    {service.title}
                   </Link>
                 </li>
               ))}
@@ -124,14 +135,14 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
           >
-            <h4 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Síguenos</h4>
+            <h2 className="font-bold text-lg mb-4 font-display text-[#00b4d8]">Contacto</h2>
             <div className="w-8 h-px bg-[#00b4d8]/50 mb-4" />
             <div className="grid grid-cols-2 gap-3">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  target="_blank"
+                  target={social.href.startsWith('mailto:') ? undefined : '_blank'}
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   className="w-full flex items-center gap-3 px-3 py-2.5 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-[#00b4d8]/50 hover:bg-[#00b4d8]/10 transition-all duration-300 group"
@@ -158,16 +169,13 @@ export default function Footer() {
           <p className="flex items-center gap-2">
             © {currentYear} FrecDigital · Todos los derechos reservados
           </p>
-          <div className="flex gap-6">
-            <Link href="#" className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
-              Privacidad
-            </Link>
-            <Link href="#" className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
-              Términos
-            </Link>
-            <Link href="#" className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
-              Cookies
-            </Link>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {legalLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300">
+                {link.label}
+              </Link>
+            ))}
+            <CookieSettingsButton className="text-white/40 hover:text-[#00b4d8] transition-colors duration-300" />
           </div>
         </motion.div>
       </div>

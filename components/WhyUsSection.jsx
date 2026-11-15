@@ -12,6 +12,9 @@ import {
   MessageCircle,
   Globe
 } from 'lucide-react';
+import { company } from '@/lib/seo-metadata';
+
+const { team } = company;
 
 export default function WhyUsSection() {
   const features = [
@@ -91,7 +94,7 @@ export default function WhyUsSection() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="w-24 h-1 bg-[#00b4d8] rounded-full mx-auto mt-4 mb-8"
             />
-            <motion.h2
+            <motion.h3
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -99,7 +102,7 @@ export default function WhyUsSection() {
               className="text-3xl md:text-4xl font-bold text-[#00b4d8]"
             >
               Nuestra historia
-            </motion.h2>
+            </motion.h3>
           </div>
 
           {/* Contenido Centrado */}
@@ -114,9 +117,14 @@ export default function WhyUsSection() {
               className="text-center"
             >
               <p className="text-lg text-white/80 leading-relaxed">
-                FREC Digital nació del deseo de <span className="text-[#00b4d8] font-semibold">cerrar la brecha entre la tecnología y las personas</span>. Con más de <span className="font-semibold">20 años de experiencia</span> en proyectos tecnológicos dentro del sector público y privado, decidimos emprender un nuevo camino: <span className="text-[#00b4d8] font-semibold">uno donde la innovación tuviera sentido, propósito y cercanía</span>.
+                FrecDigital nació del deseo de <span className="text-[#00b4d8] font-semibold">cerrar la brecha entre la tecnología y las personas</span>. Su fundador acumula <span className="font-semibold">más de 20 años en proyectos tecnológicos</span> dentro del sector público y privado, y decidió emprender un nuevo camino: <span className="text-[#00b4d8] font-semibold">uno donde la innovación tuviera sentido, propósito y cercanía</span>.
               </p>
             </motion.div>
+
+            {/* Perfil del equipo, sin datos personales (texto plano en el HTML para buscadores e IA) */}
+            <p className="text-lg text-white/80 leading-relaxed text-center">
+              Al frente hay un <span className="font-semibold text-white">{team.degree}</span> con un {team.masters} por la {team.university} y {team.industryRole}.
+            </p>
 
             {/* Línea decorativa */}
             <motion.div
@@ -135,7 +143,7 @@ export default function WhyUsSection() {
               transition={{ delay: 0.4 }}
               className="text-lg text-white/80 leading-relaxed text-center"
             >
-              Reconocemos que muchas empresas, startups y profesionales cuentan con grandes ideas, pero se enfrentan a:
+              Reconocemos que muchas pymes, empresas industriales y profesionales cuentan con grandes ideas, pero se enfrentan a:
             </motion.p>
 
             {/* Lista de problemas */}
@@ -182,12 +190,12 @@ export default function WhyUsSection() {
               transition={{ delay: 0.8 }}
               className="text-lg text-white/80 leading-relaxed text-center"
             >
-              Por eso, en FREC Digital nos comprometemos a <span className="text-[#00b4d8] font-semibold">crear soluciones personalizadas</span> y <span className="text-[#00b4d8] font-semibold">soluciones que realmente funcionen</span> para tu negocio. Somos más que proveedores: somos tu aliado en la transformación digital.
+              Por eso, en FrecDigital nos comprometemos a <span className="text-[#00b4d8] font-semibold">crear soluciones personalizadas</span> y <span className="text-[#00b4d8] font-semibold">soluciones que realmente funcionen</span> para tu negocio. Somos más que proveedores: somos tu aliado en la transformación digital.
             </motion.p>
           </div>
         </motion.div>
 
-        {/* SECCIÓN: POR QUÉ FREC DIGITAL (Features) */}
+        {/* SECCIÓN: POR QUÉ FRECDIGITAL (Features) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -3,3 +3,7 @@ node_modules
 .env
 .env.local
 *.local
+# Salidas de "next dev" redirigidas a archivo
+dev.err
+dev.out
+*.log

@@ -2,11 +2,10 @@
 
 import { FaWhatsapp } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { whatsappUrl as buildWhatsappUrl } from '@/lib/seo-metadata';
 
 const WhatsAppButton = () => {
-  const phoneNumber = '34643466617';
-  const message = 'Hola. Me interesa conocer más sobre sus servicios, ¿podrían brindarme más información? Muchas gracias.';
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = buildWhatsappUrl('es');
 
   return (
     <div className="fixed bottom-24 right-6 z-50 group">

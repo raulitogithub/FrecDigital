@@ -332,8 +332,8 @@ GitHub Push
 Vercel Webhook
     ↓
 Vercel Build
-├── npm install
-├── npm run build
+├── pnpm install
+├── pnpm build
 ├── Optimización
 └── Deploy automático
     ↓
