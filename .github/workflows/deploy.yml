@@ -1,12 +1,25 @@
 name: Deploy to Hetzner
 
+# Despliega frecdigital.com en el servidor Sistema-academico en cada push a main.
+# En el servidor, la clave SSH de este workflow solo puede ejecutar
+# /opt/frecdigital/deploy.sh (restricción command= en authorized_keys): construye
+# la imagen del commit, la activa y vuelve a la versión anterior si la web no responde.
+#
+# Secrets: SERVER_HOST (IP del servidor), SERVER_USER (root), SSH_PRIVATE_KEY.
+
 on:
   push:
     branches: [main]
+  workflow_dispatch: # botón "Run workflow" para redesplegar a mano
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
 
     steps:
       - name: Build and deploy via SSH
@@ -15,11 +28,5 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            set -e
-            cd /home/deploy/apps/frecdigital
-            git pull origin main
-            IMAGE_TAG=$(git rev-parse --short HEAD)
-            docker build -t frecdigital:$IMAGE_TAG .
-            docker service update --image frecdigital:$IMAGE_TAG frecdigital_web --force
-            docker image prune -f
+          command_timeout: 20m
+          script: /opt/frecdigital/deploy.sh
