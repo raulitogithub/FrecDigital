@@ -8,6 +8,7 @@ import { escapeHtml } from '@/lib/security';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { SECURITY_CONFIG } from '@/lib/security-config';
 import { company as companyData } from '@/lib/seo-metadata';
+import { enviarLeadAlCrm } from '@/lib/crm';
 
 const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
 
@@ -50,6 +51,24 @@ export async function handleContactForm(data) {
   const consentAt = new Date();
   const formatIn = (timeZone) =>
     new Intl.DateTimeFormat('es-ES', { timeZone, dateStyle: 'long', timeStyle: 'medium' }).format(consentAt);
+
+  // 2b. El lead también va al CRM (contacto, consentimientos y bandeja). Si el CRM
+  //     no responde, el correo se envía igual: el formulario nunca falla por esto.
+  const cabeceras = await headers();
+  await enviarLeadAlCrm({
+    nombre: fullName,
+    email,
+    empresa: company,
+    pais: country,
+    servicio: service,
+    mensaje: message,
+    privacidad: { aceptada: true, version: legal.lastUpdated },
+    comunicacionesComerciales: Boolean(marketing),
+    enviadoEn: consentAt.toISOString(),
+    ip: cabeceras.get('cf-connecting-ip') || cabeceras.get('x-forwarded-for')?.split(',')[0]?.trim(),
+    userAgent: cabeceras.get('user-agent')?.slice(0, 400),
+    pagina: cabeceras.get('referer')?.slice(0, 500),
+  });
 
   // 3. Escape de todos los campos antes de insertarlos en el HTML del correo
   const safe = {
