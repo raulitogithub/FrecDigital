@@ -10,6 +10,12 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
+
+# Identificador de la versión (el commit), pasado por /opt/frecdigital/deploy.sh.
+# Next.js lo usa para detectar que el navegador tiene una página de una versión
+# anterior y recargarla al navegar, en vez de fallar. Vacío = sin identificador.
+ARG NEXT_DEPLOYMENT_ID=""
+ENV NEXT_DEPLOYMENT_ID=${NEXT_DEPLOYMENT_ID}
 RUN pnpm run build
 
 FROM node:20-slim AS runner

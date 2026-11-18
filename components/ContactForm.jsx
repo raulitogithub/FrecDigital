@@ -15,6 +15,56 @@ const PRIVACY_LINK_TEXT = 'política de privacidad';
 import { services } from '@/lib/services';
 
 const GENERIC_ERROR = 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
+
+// Si se despliega una versión nueva de la web mientras el visitante tiene la página
+// abierta, la Server Action de su página ya no existe en el servidor ("Failed to find
+// Server Action"). En ese caso se guarda lo escrito, se recarga la página una sola vez
+// y se devuelve al formulario. Las casillas de consentimiento no se restauran: el
+// visitante las vuelve a marcar.
+const DRAFT_KEY = 'frecdigital:contact-draft';
+const RELOADED_AT_KEY = 'frecdigital:contact-reloaded-at';
+const DRAFT_FIELDS = ['fullName', 'email', 'company', 'country', 'service', 'message'];
+const STALE_DEPLOYMENT_ERROR = /Server Action|failed-to-find-server-action|was not found on the server/i;
+const RECOVERED_NOTICE =
+  'La web se acaba de actualizar y hemos recuperado lo que escribiste. Marca de nuevo la casilla de privacidad y pulsa «Enviar consulta».';
+
+function readStorage(key) {
+  try { return window.sessionStorage.getItem(key); } catch { return null; }
+}
+function writeStorage(key, value) {
+  try { window.sessionStorage.setItem(key, value); return true; } catch { return false; }
+}
+function removeStorage(key) {
+  try { window.sessionStorage.removeItem(key); } catch { /* sin almacenamiento: nada que borrar */ }
+}
+
+// Si el error viene de una página de una versión anterior, guarda lo escrito y recarga
+// (una sola vez cada 2 minutos, para no entrar en bucle). Devuelve true si recarga.
+function recoverFromStaleDeployment(error, data) {
+  if (!STALE_DEPLOYMENT_ERROR.test(error?.message || '')) return false;
+  const now = Date.now();
+  if (now - (Number(readStorage(RELOADED_AT_KEY)) || 0) < 2 * 60 * 1000) return false;
+  const values = Object.fromEntries(DRAFT_FIELDS.map((field) => [field, data[field] ?? '']));
+  const saved =
+    writeStorage(DRAFT_KEY, JSON.stringify({ at: now, values })) &&
+    writeStorage(RELOADED_AT_KEY, String(now));
+  if (!saved) return false;
+  window.location.reload();
+  return true;
+}
+
+// Borrador guardado antes de la recarga (si tiene menos de 10 minutos); se consume al leerlo.
+function takeRecentDraft() {
+  const raw = readStorage(DRAFT_KEY);
+  if (!raw) return null;
+  removeStorage(DRAFT_KEY);
+  try {
+    const draft = JSON.parse(raw);
+    return Date.now() - draft.at <= 10 * 60 * 1000 ? draft.values : null;
+  } catch {
+    return null;
+  }
+}
 const selectClassName =
   'w-full px-4 py-3 rounded-lg border-2 border-white/15 focus:border-[#00b4d8] focus:outline-none transition-all bg-white/8 backdrop-blur-md text-white placeholder-white/30 focus:bg-white/12 focus:shadow-lg focus:shadow-[#00b4d8]/20 appearance-none pr-10';
 
@@ -38,6 +88,8 @@ export default function ContactForm() {
     formState: { errors },
     reset,
     setValue,
+    setError,
+    clearErrors,
   } = useForm({
     resolver: zodResolver(contactFormSchema),
     defaultValues: { country: '', service: '', privacy: false, marketing: false, [HONEYPOT_FIELD]: '' },
@@ -55,12 +107,24 @@ export default function ContactForm() {
     if (country) setValue('country', country);
   }, [setValue]);
 
+  // Tras la recarga por versión nueva: devolver al formulario lo que el visitante escribió
+  useEffect(() => {
+    const values = takeRecentDraft();
+    if (!values) return;
+    for (const field of DRAFT_FIELDS) {
+      if (typeof values[field] === 'string') setValue(field, values[field]);
+    }
+    setError('root.recovered', { type: 'recovered', message: RECOVERED_NOTICE });
+    document.getElementById('contact')?.scrollIntoView({ block: 'start' });
+  }, [setValue, setError]);
+
   const contactInfo = [
     { icon: Mail, label: 'Email', value: company.email },
   ];
   
   const onSubmit = async (data) => {
   setSubmitStatus('loading');
+  clearErrors('root.recovered');
   try {
     const result = await handleContactForm(data);
     if (result.success) {
@@ -76,6 +140,8 @@ export default function ContactForm() {
       setSubmitMessage(result.message || GENERIC_ERROR);
     }
   } catch (error) {
+    // Página de una versión anterior de la web: se guarda lo escrito y se recarga
+    if (recoverFromStaleDeployment(error, data)) return;
     setSubmitStatus('error');
     setSubmitMessage(GENERIC_ERROR);
   }
@@ -305,6 +371,14 @@ export default function ContactForm() {
                     TODO(profesional): confirmar que basta con el enlace en el punto de recogida
                     (la AEPD recomienda además una primera capa informativa junto al formulario). */}
               </div>
+
+              {/* Aviso tras recuperar el borrador por una versión nueva de la web */}
+              {errors.root?.recovered && (
+                <div role="status" className="bg-amber-50 border-2 border-amber-200 rounded-lg p-4 flex items-start gap-3 shadow-lg">
+                  <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                  <p className="text-amber-900">{errors.root.recovered.message}</p>
+                </div>
+              )}
 
               {/* Submit Status Messages */}
               <AnimatePresence>
