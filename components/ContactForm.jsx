@@ -103,6 +103,7 @@ export default function ContactForm() {
     const service = services.find((s) => s.slug === slug);
     if (service) setValue('service', service.title);
     else if (slug === 'academias') setValue('service', 'Plataforma para academias');
+    else if (slug === 'crm') setValue('service', 'CRM FrecDigital');
     const country = { ecuador: 'Ecuador', espana: 'España' }[params.get('pais')];
     if (country) setValue('country', country);
   }, [setValue]);

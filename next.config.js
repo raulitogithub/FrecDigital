@@ -55,16 +55,16 @@ const nextConfig = {
           },
         ],
       },
-      // Cache para assets estáticos
-      {
-        source: '/images/:path*',
+      // Cache para assets estáticos (al cambiar un archivo, cambiar también su nombre)
+      ...['/images/:path*', '/videos/:path*'].map((source) => ({
+        source,
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable'
           },
         ],
-      },
+      })),
       // /_next/static/* no necesita cabecera propia: Next.js ya lo sirve como
       // "public, max-age=31536000, immutable" (y definirla genera un aviso en el build).
     ];

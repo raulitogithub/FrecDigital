@@ -30,6 +30,7 @@ ${siteMetadata.services.map((s) => `- [${s.name}](${url}/servicios/${s.slug}): $
 
 Soluciones en desarrollo o en demo (se pueden ver funcionando antes de contratar):
 
+- CRM FrecDigital (Atención y ventas, en demo): WhatsApp, chat web, email y formularios en una sola bandeja; un agente de IA con el conocimiento de la empresa responde a cualquier hora, cualifica al cliente, agenda la llamada y, si hace falta, pasa la conversación al equipo. Incluye panel de leads, embudo de ventas y tareas de seguimiento propuestas por la IA. Vídeo de presentación: ${url}/videos/crm/crm-frecdigital-v1.mp4
 - Verificación de contenedores y precintos (Logística, en demo): lee en las fotos de cada expedición los números de contenedor y precinto, los compara con los registrados y avisa si no coinciden antes de que salga el camión.
 - Plataforma para academias (Educación, acceso anticipado): para academias e institutos que quieren gestionar su día a día y atender a alumnos y familias con ayuda de la inteligencia artificial.
 - Agentes de IA para Dynamics 365 (Industria): consultas de ventas, stock o pedidos en lenguaje natural desde Teams o WhatsApp, y preparación de pedidos u ofertas en el ERP con aprobación humana.

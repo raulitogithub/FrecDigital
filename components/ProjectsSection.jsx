@@ -1,5 +1,47 @@
 import Link from 'next/link';
-import { Container, GraduationCap, Factory, ArrowRight } from 'lucide-react';
+import { Container, GraduationCap, Factory, ArrowRight, Check } from 'lucide-react';
+import JsonLd from '@/components/JsonLd';
+import { siteMetadata } from '@/lib/seo-metadata';
+
+// Proyecto destacado con vídeo. Los vídeos de la web van en public/videos/<proyecto>/
+// (el original sin comprimir, en media/, fuera de git). Si se cambia el vídeo,
+// subir la versión del nombre (v1 → v2): /videos/* se sirve con caché "immutable" de un año.
+const CRM_VIDEO = {
+  src: '/videos/crm/crm-frecdigital-v1.mp4',
+  poster: '/videos/crm/crm-frecdigital-v1-poster.webp',
+  captions: '/videos/crm/crm-frecdigital-v1.es.vtt',
+  uploadDate: '2026-11-20',
+  duration: 'PT46S',
+};
+
+const crmProject = {
+  title: 'CRM FrecDigital',
+  sector: 'Atención y ventas',
+  badge: 'En demo',
+  description:
+    'Tus clientes y tu agente de IA en un solo lugar. WhatsApp, chat web, email y formularios llegan a una sola bandeja, y el agente responde a cualquier hora, cualifica al cliente y agenda la llamada.',
+  features: [
+    'Una sola bandeja para todos los canales',
+    'Agente de IA con el conocimiento de tu empresa; si hace falta, pasa la conversación a tu equipo',
+    'Panel con leads, embudo de ventas y actividad de la IA',
+    'Tareas de seguimiento propuestas por la IA',
+    'Tú decides su conocimiento, sus canales y sus integraciones',
+  ],
+  href: '/?servicio=crm#contact',
+  linkLabel: 'Solicitar demo',
+};
+
+const crmVideoJsonLd = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'CRM FrecDigital: atención omnicanal con IA',
+  description: crmProject.description,
+  thumbnailUrl: `${siteMetadata.siteUrl}${CRM_VIDEO.poster}`,
+  contentUrl: `${siteMetadata.siteUrl}${CRM_VIDEO.src}`,
+  uploadDate: CRM_VIDEO.uploadDate,
+  duration: CRM_VIDEO.duration,
+  inLanguage: 'es',
+});
 
 // Componente de servidor: todo el texto va en el HTML inicial.
 // Sin cifras ni nombres de clientes: solo soluciones en desarrollo o en demo.
@@ -62,6 +104,59 @@ export default function ProjectsSection() {
             Soluciones que ya tenemos en desarrollo o en demo. Pídenos verlas funcionando.
           </p>
         </div>
+
+        <JsonLd data={crmVideoJsonLd()} />
+        <article
+          aria-labelledby="proyecto-crm"
+          className="max-w-5xl mx-auto mb-6 bg-white/80 rounded-2xl border border-[#b0cfe8] hover:border-[#00b4d8]/40 hover:shadow-xl hover:shadow-[#00b4d8]/20 transition-all duration-500 overflow-hidden lg:grid lg:grid-cols-5"
+        >
+          <div className="lg:col-span-3 bg-[#0a1628] flex items-center">
+            {/* preload="none": el vídeo (3 MB) solo se descarga si el visitante pulsa play */}
+            <video
+              controls
+              playsInline
+              preload="none"
+              poster={CRM_VIDEO.poster}
+              width={1920}
+              height={1080}
+              className="w-full h-auto aspect-video"
+              aria-label="Vídeo de presentación del CRM FrecDigital (46 segundos, con locución)"
+            >
+              <source src={CRM_VIDEO.src} type="video/mp4" />
+              <track kind="captions" src={CRM_VIDEO.captions} srcLang="es" label="Español" />
+              Tu navegador no puede reproducir el vídeo.{' '}
+              <a href={CRM_VIDEO.src}>Descárgalo aquí</a>.
+            </video>
+          </div>
+          <div className="lg:col-span-2 p-8 flex flex-col text-left">
+            <div className="flex flex-wrap gap-2 mb-4">
+              <span className="px-3 py-1 rounded-full bg-[#1a3a6b]/10 text-[#1a3a6b] text-xs font-semibold uppercase tracking-wider">
+                {crmProject.sector}
+              </span>
+              <span className="px-3 py-1 rounded-full bg-[#00b4d8]/15 text-[#0284a8] text-xs font-semibold uppercase tracking-wider">
+                {crmProject.badge}
+              </span>
+            </div>
+            <h3 id="proyecto-crm" className="text-2xl font-bold text-[#1a3a6b] mb-3 font-display">
+              {crmProject.title}
+            </h3>
+            <p className="text-sm text-[#4a6080] leading-relaxed mb-4">{crmProject.description}</p>
+            <ul className="space-y-2 mb-6">
+              {crmProject.features.map((feature) => (
+                <li key={feature} className="flex gap-2 text-sm text-[#4a6080]">
+                  <Check aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-[#00b4d8]" />
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={crmProject.href}
+              className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-[#0284a8] hover:text-[#1a3a6b] transition-colors"
+            >
+              {crmProject.linkLabel} <ArrowRight aria-hidden="true" size={16} />
+            </Link>
+          </div>
+        </article>
 
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {projects.map(({ icon: Icon, title, sector, badge, description, href, linkLabel }) => (

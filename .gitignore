@@ -7,3 +7,6 @@ node_modules
 dev.err
 dev.out
 *.log
+
+# Originales de vídeo sin comprimir (las versiones para la web van en public/videos/)
+/media/
