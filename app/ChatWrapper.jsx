@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 // Chat de la web: lo sirve el CRM (crm.frecdigital.com). Lo atiende el agente
 // del CRM y, cuando hace falta, una persona desde la bandeja. Se dibuja en su
 // propio Shadow DOM, así que no le afecta el CSS de la web.
+// Color e icono: los del antiguo FrecBot (el color definitivo lo manda el CRM).
 // El id de la cuenta es público (aparece en la página); no es un secreto.
 // Las variables solo sirven para probar la web contra un CRM local.
 const CRM_URL = process.env.NEXT_PUBLIC_CRM_URL || 'https://crm.frecdigital.com';
@@ -34,7 +35,8 @@ export default function ChatWrapper() {
       id="crm-chat-script"
       src={`${CRM_URL}/widget/v1.js`}
       data-cuenta={CUENTA_CHAT}
-      data-color="#1d4ed8"
+      data-color="#0891b2"
+      data-icono="/images/frecbot-ia.webp"
       strategy="afterInteractive"
       onLoad={() => mostrarChat(!ocultoActual.current)}
     />
