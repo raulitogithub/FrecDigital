@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Container, GraduationCap, Factory, ArrowRight, Check } from 'lucide-react';
 import JsonLd from '@/components/JsonLd';
+import ProjectVideo from '@/components/ProjectVideo';
 import { siteMetadata } from '@/lib/seo-metadata';
 
 // Proyecto destacado con vídeo. Los vídeos de la web van en public/videos/<proyecto>/
@@ -111,22 +112,13 @@ export default function ProjectsSection() {
           className="max-w-5xl mx-auto mb-6 bg-white/80 rounded-2xl border border-[#b0cfe8] hover:border-[#00b4d8]/40 hover:shadow-xl hover:shadow-[#00b4d8]/20 transition-all duration-500 overflow-hidden lg:grid lg:grid-cols-5"
         >
           <div className="lg:col-span-3 bg-[#0a1628] flex items-center">
-            {/* preload="none": el vídeo (3 MB) solo se descarga si el visitante pulsa play */}
-            <video
-              controls
-              playsInline
-              preload="none"
+            <ProjectVideo
+              src={CRM_VIDEO.src}
               poster={CRM_VIDEO.poster}
-              width={1920}
-              height={1080}
-              className="w-full h-auto aspect-video"
-              aria-label="Vídeo de presentación del CRM FrecDigital (46 segundos, con locución)"
-            >
-              <source src={CRM_VIDEO.src} type="video/mp4" />
-              <track kind="captions" src={CRM_VIDEO.captions} srcLang="es" label="Español" />
-              Tu navegador no puede reproducir el vídeo.{' '}
-              <a href={CRM_VIDEO.src}>Descárgalo aquí</a>.
-            </video>
+              captions={CRM_VIDEO.captions}
+              title="CRM FrecDigital"
+              label="Vídeo de presentación del CRM FrecDigital (46 segundos, con locución)"
+            />
           </div>
           <div className="lg:col-span-2 p-8 flex flex-col text-left">
             <div className="flex flex-wrap gap-2 mb-4">

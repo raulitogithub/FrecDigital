@@ -116,3 +116,10 @@ button {
 .animate-glow {
   animation: glow 3s ease-in-out infinite;
 }
+
+/* Vídeos que se amplían en una ventana propia (ProjectVideo): Chrome, Edge y Safari
+   dejan el botón de pantalla completa visible pero desactivado; se oculta para que
+   «Ampliar» sea la única forma de agrandarlo. */
+.video-sin-pantalla-completa::-webkit-media-controls-fullscreen-button {
+  display: none;
+}
