@@ -113,9 +113,11 @@ export default function ProjectsSection() {
         <JsonLd data={armVideoJsonLd()} />
         <article
           aria-labelledby="proyecto-arm"
-          className="max-w-5xl mx-auto mb-6 bg-white/80 rounded-2xl border border-[#b0cfe8] hover:border-[#00b4d8]/40 hover:shadow-xl hover:shadow-[#00b4d8]/20 transition-all duration-500 overflow-hidden lg:grid lg:grid-cols-5"
+          className="max-w-5xl mx-auto mb-6 bg-white/80 rounded-2xl border border-[#b0cfe8] hover:border-[#00b4d8]/40 hover:shadow-xl hover:shadow-[#00b4d8]/20 transition-all duration-500 overflow-hidden"
         >
-          <div className="lg:col-span-3 bg-[#0a1628] flex items-center">
+          {/* Vídeo a todo el ancho y el texto debajo: así el vídeo nunca queda
+              más bajo que el texto con franjas vacías arriba y abajo */}
+          <div className="bg-[#0a1628]">
             <ProjectVideo
               src={ARM_VIDEO.src}
               poster={ARM_VIDEO.poster}
@@ -124,7 +126,8 @@ export default function ProjectsSection() {
               label={`Vídeo de presentación de ${armProject.title} (${ARM_VIDEO.seconds} segundos, con locución)`}
             />
           </div>
-          <div className="lg:col-span-2 p-8 flex flex-col text-left">
+          <div className="p-8 lg:p-10 text-left md:grid md:grid-cols-2 md:gap-10">
+          <div className="flex flex-col">
             <div className="flex flex-wrap gap-2 mb-4">
               <span className="px-3 py-1 rounded-full bg-[#1a3a6b]/10 text-[#1a3a6b] text-xs font-semibold uppercase tracking-wider">
                 {armProject.sector}
@@ -137,21 +140,22 @@ export default function ProjectsSection() {
               {armProject.title}
             </h3>
             <p className="text-sm font-semibold text-[#0284a8] mb-3">{armProject.subtitle}</p>
-            <p className="text-sm text-[#4a6080] leading-relaxed mb-4">{armProject.description}</p>
-            <ul className="space-y-2 mb-6">
-              {armProject.features.map((feature) => (
-                <li key={feature} className="flex gap-2 text-sm text-[#4a6080]">
-                  <Check aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-[#00b4d8]" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="text-base text-[#4a6080] leading-relaxed mb-6">{armProject.description}</p>
             <Link
               href={armProject.href}
-              className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-[#0284a8] hover:text-[#1a3a6b] transition-colors"
+              className="mt-auto self-start inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#1a3a6b] text-white text-sm font-semibold hover:bg-[#00b4d8] transition-colors duration-300"
             >
               {armProject.linkLabel} <ArrowRight aria-hidden="true" size={16} />
             </Link>
+          </div>
+          <ul className="space-y-3 mt-8 md:mt-0">
+            {armProject.features.map((feature) => (
+              <li key={feature} className="flex gap-2 text-sm text-[#4a6080] leading-relaxed">
+                <Check aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-[#00b4d8]" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
           </div>
         </article>
 
