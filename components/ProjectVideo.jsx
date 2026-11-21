@@ -61,7 +61,7 @@ export default function ProjectVideo({ src, poster, captions, title, label }) {
     };
   }, [open]);
 
-  const tracks = <track kind="captions" src={captions} srcLang="es" label="Español" />;
+  const tracks = captions ? <track kind="captions" src={captions} srcLang="es" label="Español" /> : null;
 
   return (
     <>

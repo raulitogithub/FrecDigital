@@ -7,35 +7,39 @@ import { siteMetadata } from '@/lib/seo-metadata';
 // Proyecto destacado con vídeo. Los vídeos de la web van en public/videos/<proyecto>/
 // (el original sin comprimir, en media/, fuera de git). Si se cambia el vídeo,
 // subir la versión del nombre (v1 → v2): /videos/* se sirve con caché "immutable" de un año.
+// Versiones anteriores (crm-frecdigital-v1.*) se conservan en la carpeta.
 const CRM_VIDEO = {
-  src: '/videos/crm/crm-frecdigital-v1.mp4',
-  poster: '/videos/crm/crm-frecdigital-v1-poster.webp',
-  captions: '/videos/crm/crm-frecdigital-v1.es.vtt',
-  uploadDate: '2026-11-20',
-  duration: 'PT46S',
+  src: '/videos/crm/arm-frecdigital-v2.mp4',
+  poster: '/videos/crm/arm-frecdigital-v2-poster.webp',
+  captions: null, // TODO: subtítulos .vtt cuando esté el texto de la locución
+  uploadDate: '2026-11-22',
+  duration: 'PT59S',
+  seconds: 59,
 };
 
 const crmProject = {
-  title: 'CRM FrecDigital',
+  title: 'ARM FrecDigital',
+  subtitle: 'AI Relationship Management',
   sector: 'Atención y ventas',
   badge: 'En demo',
   description:
-    'Tus clientes y tu agente de IA en un solo lugar. WhatsApp, chat web, email y formularios llegan a una sola bandeja, y el agente responde a cualquier hora, cualifica al cliente y agenda la llamada.',
+    'La evolución del CRM: no solo guarda datos, trabaja por ti. Atiende a cualquier hora en WhatsApp, web y email, crea y califica cada lead por sí solo y te propone el siguiente paso y el mensaje. Tú solo apruebas y cierras.',
   features: [
-    'Una sola bandeja para todos los canales',
-    'Agente de IA con el conocimiento de tu empresa; si hace falta, pasa la conversación a tu equipo',
-    'Panel con leads, embudo de ventas y actividad de la IA',
-    'Tareas de seguimiento propuestas por la IA',
-    'Tú decides su conocimiento, sus canales y sus integraciones',
+    'Todo en una bandeja: WhatsApp, chat web, email y formularios, con quién lleva cada caso y qué falta',
+    'La IA conversa, califica y puntúa a cada cliente con el siguiente paso',
+    'Te propone la respuesta: la revisas, la editas si quieres y se envía con un clic',
+    'Tu negocio de un vistazo y un embudo de ventas siempre al día',
+    'Tareas que se crean solas desde la conversación',
+    'Tú decides cómo trabaja en cada canal: que responda sola o que proponga y apruebes tú',
   ],
-  href: '/?servicio=crm#contact',
+  href: '/?servicio=arm#contact',
   linkLabel: 'Solicitar demo',
 };
 
 const crmVideoJsonLd = () => ({
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
-  name: 'CRM FrecDigital: atención omnicanal con IA',
+  name: 'ARM FrecDigital: de CRM a AI Relationship Management',
   description: crmProject.description,
   thumbnailUrl: `${siteMetadata.siteUrl}${CRM_VIDEO.poster}`,
   contentUrl: `${siteMetadata.siteUrl}${CRM_VIDEO.src}`,
@@ -116,8 +120,8 @@ export default function ProjectsSection() {
               src={CRM_VIDEO.src}
               poster={CRM_VIDEO.poster}
               captions={CRM_VIDEO.captions}
-              title="CRM FrecDigital"
-              label="Vídeo de presentación del CRM FrecDigital (46 segundos, con locución)"
+              title={crmProject.title}
+              label={`Vídeo de presentación de ${crmProject.title} (${CRM_VIDEO.seconds} segundos, con locución)`}
             />
           </div>
           <div className="lg:col-span-2 p-8 flex flex-col text-left">
@@ -129,9 +133,10 @@ export default function ProjectsSection() {
                 {crmProject.badge}
               </span>
             </div>
-            <h3 id="proyecto-crm" className="text-2xl font-bold text-[#1a3a6b] mb-3 font-display">
+            <h3 id="proyecto-crm" className="text-2xl font-bold text-[#1a3a6b] mb-1 font-display">
               {crmProject.title}
             </h3>
+            <p className="text-sm font-semibold text-[#0284a8] mb-3">{crmProject.subtitle}</p>
             <p className="text-sm text-[#4a6080] leading-relaxed mb-4">{crmProject.description}</p>
             <ul className="space-y-2 mb-6">
               {crmProject.features.map((feature) => (
