@@ -30,7 +30,7 @@ ${siteMetadata.services.map((s) => `- [${s.name}](${url}/servicios/${s.slug}): $
 
 Soluciones en desarrollo o en demo (se pueden ver funcionando antes de contratar):
 
-- ARM FrecDigital (AI Relationship Management; atención y ventas, en demo): la evolución del CRM, que no solo guarda datos sino que trabaja. WhatsApp, chat web, email y formularios en una sola bandeja; la IA conversa, califica y puntúa a cada cliente, propone la respuesta y el siguiente paso, crea las tareas de seguimiento y mantiene el embudo al día. En cada canal se decide si responde sola o si propone y una persona aprueba. Vídeo de presentación: ${url}/videos/crm/arm-frecdigital-v2.mp4
+- ARM FrecDigital (AI Relationship Management; atención y ventas, en demo): la evolución del CRM, que no solo guarda datos sino que trabaja. WhatsApp, chat web, email y formularios en una sola bandeja; la IA conversa, califica y puntúa a cada cliente, propone la respuesta y el siguiente paso, crea las tareas de seguimiento y mantiene el embudo al día. En cada canal se decide si responde sola o si propone y una persona aprueba. Vídeo de presentación: ${url}/videos/arm/arm-frecdigital-v2.mp4
 - Verificación de contenedores y precintos (Logística, en demo): lee en las fotos de cada expedición los números de contenedor y precinto, los compara con los registrados y avisa si no coinciden antes de que salga el camión.
 - Plataforma para academias (Educación, acceso anticipado): para academias e institutos que quieren gestionar su día a día y atender a alumnos y familias con ayuda de la inteligencia artificial.
 - Agentes de IA para Dynamics 365 (Industria): consultas de ventas, stock o pedidos en lenguaje natural desde Teams o WhatsApp, y preparación de pedidos u ofertas en el ERP con aprobación humana.

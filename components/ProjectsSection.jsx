@@ -7,17 +7,17 @@ import { siteMetadata } from '@/lib/seo-metadata';
 // Proyecto destacado con vídeo. Los vídeos de la web van en public/videos/<proyecto>/
 // (el original sin comprimir, en media/, fuera de git). Si se cambia el vídeo,
 // subir la versión del nombre (v1 → v2): /videos/* se sirve con caché "immutable" de un año.
-// Versiones anteriores (crm-frecdigital-v1.*) se conservan en la carpeta.
-const CRM_VIDEO = {
-  src: '/videos/crm/arm-frecdigital-v2.mp4',
-  poster: '/videos/crm/arm-frecdigital-v2-poster.webp',
-  captions: null, // TODO: subtítulos .vtt cuando esté el texto de la locución
+// La versión anterior (crm-frecdigital-v1.*, cuando se llamaba CRM) se conserva en la carpeta.
+const ARM_VIDEO = {
+  src: '/videos/arm/arm-frecdigital-v2.mp4',
+  poster: '/videos/arm/arm-frecdigital-v2-poster.webp',
+  captions: '/videos/arm/arm-frecdigital-v2.es.vtt',
   uploadDate: '2026-11-22',
   duration: 'PT59S',
   seconds: 59,
 };
 
-const crmProject = {
+const armProject = {
   title: 'ARM FrecDigital',
   subtitle: 'AI Relationship Management',
   sector: 'Atención y ventas',
@@ -36,15 +36,15 @@ const crmProject = {
   linkLabel: 'Solicitar demo',
 };
 
-const crmVideoJsonLd = () => ({
+const armVideoJsonLd = () => ({
   '@context': 'https://schema.org',
   '@type': 'VideoObject',
   name: 'ARM FrecDigital: de CRM a AI Relationship Management',
-  description: crmProject.description,
-  thumbnailUrl: `${siteMetadata.siteUrl}${CRM_VIDEO.poster}`,
-  contentUrl: `${siteMetadata.siteUrl}${CRM_VIDEO.src}`,
-  uploadDate: CRM_VIDEO.uploadDate,
-  duration: CRM_VIDEO.duration,
+  description: armProject.description,
+  thumbnailUrl: `${siteMetadata.siteUrl}${ARM_VIDEO.poster}`,
+  contentUrl: `${siteMetadata.siteUrl}${ARM_VIDEO.src}`,
+  uploadDate: ARM_VIDEO.uploadDate,
+  duration: ARM_VIDEO.duration,
   inLanguage: 'es',
 });
 
@@ -110,36 +110,36 @@ export default function ProjectsSection() {
           </p>
         </div>
 
-        <JsonLd data={crmVideoJsonLd()} />
+        <JsonLd data={armVideoJsonLd()} />
         <article
-          aria-labelledby="proyecto-crm"
+          aria-labelledby="proyecto-arm"
           className="max-w-5xl mx-auto mb-6 bg-white/80 rounded-2xl border border-[#b0cfe8] hover:border-[#00b4d8]/40 hover:shadow-xl hover:shadow-[#00b4d8]/20 transition-all duration-500 overflow-hidden lg:grid lg:grid-cols-5"
         >
           <div className="lg:col-span-3 bg-[#0a1628] flex items-center">
             <ProjectVideo
-              src={CRM_VIDEO.src}
-              poster={CRM_VIDEO.poster}
-              captions={CRM_VIDEO.captions}
-              title={crmProject.title}
-              label={`Vídeo de presentación de ${crmProject.title} (${CRM_VIDEO.seconds} segundos, con locución)`}
+              src={ARM_VIDEO.src}
+              poster={ARM_VIDEO.poster}
+              captions={ARM_VIDEO.captions}
+              title={armProject.title}
+              label={`Vídeo de presentación de ${armProject.title} (${ARM_VIDEO.seconds} segundos, con locución)`}
             />
           </div>
           <div className="lg:col-span-2 p-8 flex flex-col text-left">
             <div className="flex flex-wrap gap-2 mb-4">
               <span className="px-3 py-1 rounded-full bg-[#1a3a6b]/10 text-[#1a3a6b] text-xs font-semibold uppercase tracking-wider">
-                {crmProject.sector}
+                {armProject.sector}
               </span>
               <span className="px-3 py-1 rounded-full bg-[#00b4d8]/15 text-[#0284a8] text-xs font-semibold uppercase tracking-wider">
-                {crmProject.badge}
+                {armProject.badge}
               </span>
             </div>
-            <h3 id="proyecto-crm" className="text-2xl font-bold text-[#1a3a6b] mb-1 font-display">
-              {crmProject.title}
+            <h3 id="proyecto-arm" className="text-2xl font-bold text-[#1a3a6b] mb-1 font-display">
+              {armProject.title}
             </h3>
-            <p className="text-sm font-semibold text-[#0284a8] mb-3">{crmProject.subtitle}</p>
-            <p className="text-sm text-[#4a6080] leading-relaxed mb-4">{crmProject.description}</p>
+            <p className="text-sm font-semibold text-[#0284a8] mb-3">{armProject.subtitle}</p>
+            <p className="text-sm text-[#4a6080] leading-relaxed mb-4">{armProject.description}</p>
             <ul className="space-y-2 mb-6">
-              {crmProject.features.map((feature) => (
+              {armProject.features.map((feature) => (
                 <li key={feature} className="flex gap-2 text-sm text-[#4a6080]">
                   <Check aria-hidden="true" className="w-4 h-4 mt-0.5 shrink-0 text-[#00b4d8]" />
                   <span>{feature}</span>
@@ -147,10 +147,10 @@ export default function ProjectsSection() {
               ))}
             </ul>
             <Link
-              href={crmProject.href}
+              href={armProject.href}
               className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-[#0284a8] hover:text-[#1a3a6b] transition-colors"
             >
-              {crmProject.linkLabel} <ArrowRight aria-hidden="true" size={16} />
+              {armProject.linkLabel} <ArrowRight aria-hidden="true" size={16} />
             </Link>
           </div>
         </article>
