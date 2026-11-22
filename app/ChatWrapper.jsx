@@ -4,13 +4,13 @@ import Script from 'next/script';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
-// Chat de la web: lo sirve el CRM (crm.frecdigital.com). Lo atiende el agente
+// Chat de la web: lo sirve el ARM (arm.frecdigital.com). Lo atiende el agente
 // del CRM y, cuando hace falta, una persona desde la bandeja. Se dibuja en su
 // propio Shadow DOM, así que no le afecta el CSS de la web.
 // Color e icono: los del antiguo FrecBot (el color definitivo lo manda el CRM).
 // El id de la cuenta es público (aparece en la página); no es un secreto.
 // Las variables solo sirven para probar la web contra un CRM local.
-const CRM_URL = process.env.NEXT_PUBLIC_CRM_URL || 'https://crm.frecdigital.com';
+const CRM_URL = process.env.NEXT_PUBLIC_CRM_URL || 'https://arm.frecdigital.com';
 const CUENTA_CHAT = process.env.NEXT_PUBLIC_CRM_CHAT_CUENTA || 'c50e9665-3d15-46ef-b797-c1a572004017';
 
 /** El widget se monta una sola vez en <body>: al navegar se muestra u oculta. */
