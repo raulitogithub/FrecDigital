@@ -13,10 +13,29 @@ import { useEffect, useRef } from 'react';
 const CRM_URL = process.env.NEXT_PUBLIC_CRM_URL || 'https://arm.frecdigital.com';
 const CUENTA_CHAT = process.env.NEXT_PUBLIC_CRM_CHAT_CUENTA || 'c50e9665-3d15-46ef-b797-c1a572004017';
 
+// El widget pone su botón a 20px del borde inferior, demasiado abajo. Su Shadow
+// DOM es abierto, así que la web le añade estas reglas para subir el botón y la
+// ventana del chat (:host les da más prioridad que las del widget). El botón de
+// WhatsApp (components/WhatsAppButton.jsx) va justo encima: si se cambia esto, moverlo también.
+const POSICION_CHAT = `
+:host .burbuja { bottom: calc(44px + env(safe-area-inset-bottom, 0px)); }
+:host .panel { bottom: calc(112px + env(safe-area-inset-bottom, 0px)); max-height: calc(100vh - 144px); }
+@media (max-width: 480px) {
+  :host .panel { bottom: calc(104px + env(safe-area-inset-bottom, 0px)); height: calc(100vh - 120px); }
+}`;
+
 /** El widget se monta una sola vez en <body>: al navegar se muestra u oculta. */
 function mostrarChat(visible) {
   const chat = document.getElementById('crm-chat');
-  if (chat) chat.style.display = visible ? '' : 'none';
+  if (!chat) return;
+  chat.style.display = visible ? '' : 'none';
+  const sombra = chat.shadowRoot;
+  if (sombra && !sombra.getElementById('posicion-web')) {
+    const estilo = document.createElement('style');
+    estilo.id = 'posicion-web';
+    estilo.textContent = POSICION_CHAT;
+    sombra.appendChild(estilo);
+  }
 }
 
 export default function ChatWrapper() {

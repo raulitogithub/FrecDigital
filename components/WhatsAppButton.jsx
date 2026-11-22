@@ -8,7 +8,8 @@ const WhatsAppButton = () => {
   const whatsappUrl = buildWhatsappUrl('es');
 
   return (
-    <div className="fixed bottom-24 right-6 z-50 group">
+    // Justo encima del botón del chat (su posición está en app/ChatWrapper.jsx)
+    <div className="fixed bottom-[calc(7.5rem_+_env(safe-area-inset-bottom,0px))] right-6 z-50 group">
       <motion.a
         href={whatsappUrl}
         target="_blank"
