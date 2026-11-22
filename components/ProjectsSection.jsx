@@ -123,6 +123,11 @@ export default function ProjectsSection() {
               poster={ARM_VIDEO.poster}
               captions={ARM_VIDEO.captions}
               title={armProject.title}
+              heading={
+                <>
+                  <span className="text-[#00b4d8]">ARM</span> FrecDigital
+                </>
+              }
               label={`Vídeo de presentación de ${armProject.title} (${ARM_VIDEO.seconds} segundos, con locución)`}
             />
           </div>

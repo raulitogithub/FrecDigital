@@ -1,13 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { Maximize2, X } from 'lucide-react';
 
 // Vídeo de un proyecto que, al ampliarlo, se abre en una ventana sobre la página
 // (no a pantalla completa). Usa <dialog> nativo: Esc, foco atrapado y fondo inerte
 // sin código extra. El vídeo ampliado continúa donde iba el pequeño, y al cerrar
 // el pequeño queda en el mismo punto.
-export default function ProjectVideo({ src, poster, captions, title, label }) {
+// heading: cabecera de la ventana con formato (por ejemplo, la marca en otro color); por defecto, title.
+export default function ProjectVideo({ src, poster, captions, title, heading, label }) {
   const inlineRef = useRef(null);
   const modalRef = useRef(null);
   const dialogRef = useRef(null);
@@ -107,7 +109,16 @@ export default function ProjectVideo({ src, poster, captions, title, label }) {
         className="m-auto w-[min(72rem,calc(100vw_-_2rem),calc((100dvh_-_7rem)*16/9_+_2.5rem))] max-w-none rounded-2xl bg-white p-0 shadow-2xl backdrop:bg-[#0a1628]/70 backdrop:backdrop-blur-sm"
       >
         <div className="flex items-center justify-between gap-4 px-5 py-3 sm:px-6">
-          <p className="truncate font-semibold text-[#1a3a6b] font-display">{title}</p>
+          <div className="flex min-w-0 items-center gap-3">
+            <Image
+              src="/images/logo1.webp"
+              alt="FrecDigital"
+              width={40}
+              height={40}
+              className="h-9 w-9 shrink-0 rounded-lg sm:h-10 sm:w-10"
+            />
+            <p className="truncate text-lg font-bold text-[#1a3a6b] font-display sm:text-xl">{heading ?? title}</p>
+          </div>
           <button
             type="button"
             onClick={closeModal}
