@@ -142,7 +142,7 @@ export default function ProjectsSection() {
               </span>
             </div>
             <h3 id="proyecto-arm" className="text-2xl font-bold text-[#1a3a6b] mb-1 font-display">
-              {armProject.title}
+              <span className="text-[#00b4d8]">ARM</span> FrecDigital
             </h3>
             <p className="text-sm font-semibold text-[#0284a8] mb-3">{armProject.subtitle}</p>
             <p className="text-base text-[#4a6080] leading-relaxed mb-6">{armProject.description}</p>
