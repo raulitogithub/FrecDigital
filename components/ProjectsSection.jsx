@@ -9,9 +9,9 @@ import { siteMetadata } from '@/lib/seo-metadata';
 // subir la versión del nombre (v1 → v2): /videos/* se sirve con caché "immutable" de un año.
 // La versión anterior (crm-frecdigital-v1.*, cuando se llamaba CRM) se conserva en la carpeta.
 const ARM_VIDEO = {
-  src: '/videos/arm/arm-frecdigital-v2.mp4',
-  poster: '/videos/arm/arm-frecdigital-v2-poster.webp',
-  captions: '/videos/arm/arm-frecdigital-v2.es.vtt',
+  src: '/videos/arm/arm-frecdigital-v3.mp4',
+  poster: '/videos/arm/arm-frecdigital-v3-poster.webp',
+  captions: '/videos/arm/arm-frecdigital-v3.es.vtt',
   uploadDate: '2026-11-22',
   duration: 'PT59S',
   seconds: 59,
