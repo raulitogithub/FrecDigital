@@ -18,10 +18,10 @@ const CUENTA_CHAT = process.env.NEXT_PUBLIC_CRM_CHAT_CUENTA || 'c50e9665-3d15-46
 // ventana del chat (:host les da más prioridad que las del widget). El botón de
 // WhatsApp (components/WhatsAppButton.jsx) va justo encima: si se cambia esto, moverlo también.
 const POSICION_CHAT = `
-:host .burbuja { bottom: calc(44px + env(safe-area-inset-bottom, 0px)); }
-:host .panel { bottom: calc(112px + env(safe-area-inset-bottom, 0px)); max-height: calc(100vh - 144px); }
+:host .burbuja { bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+:host .panel { bottom: calc(140px + env(safe-area-inset-bottom, 0px)); max-height: calc(100vh - 172px); }
 @media (max-width: 480px) {
-  :host .panel { bottom: calc(104px + env(safe-area-inset-bottom, 0px)); height: calc(100vh - 120px); }
+  :host .panel { bottom: calc(132px + env(safe-area-inset-bottom, 0px)); height: calc(100vh - 148px); }
 }`;
 
 /** El widget se monta una sola vez en <body>: al navegar se muestra u oculta. */
